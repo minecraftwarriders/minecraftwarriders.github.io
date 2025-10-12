@@ -1351,7 +1351,7 @@
                 <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px; text-align: center;">
                     <h2>🔗 Redirecting to Item Prices</h2>
                     <p style="font-size: 1.2em; margin-bottom: 20px;">For the complete and up-to-date item price list, visit:</p>
-                    <a href="https://minecraftwarriders.github.io/pages/items" target="_blank" style="color: #88ff88; font-size: 1.5em; text-decoration: none; border: 2px solid #88ff88; padding: 15px 30px; display: inline-block; margin: 20px; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#88ff88'; this.style.color='#000'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#88ff88'">
+                    <a href="items.html" style="color: #88ff88; font-size: 1.5em; text-decoration: none; border: 2px solid #88ff88; padding: 15px 30px; display: inline-block; margin: 20px; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#88ff88'; this.style.color='#000'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#88ff88'">
                         👉 VIEW ITEM PRICES 👈
                     </a>
                     <p>The item prices page shows live data with current buy/sell prices for all server items.</p>
@@ -1522,7 +1522,7 @@
                     
                     if (countdown <= 0) {
                         clearInterval(timer);
-                        window.open('https://minecraftwarriders.github.io/pages/items', '_blank');
+                        window.location.href = 'items.html';
                     }
                 }, 1000);
             }
