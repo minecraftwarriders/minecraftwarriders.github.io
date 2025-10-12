@@ -96,6 +96,39 @@
             font-weight: 600;
         }
 
+        .collapsible {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .collapsible.active {
+            max-height: 500px;
+        }
+
+        .section-toggle {
+            color: #666;
+            float: right;
+            font-size: 10px;
+        }
+
+        .sidebar h3 {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            border: 2px solid #555;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-size: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
         .content {
             margin-left: 380px;
             flex: 1;
@@ -376,27 +409,62 @@
 <body>
     <div class="main-container">
         <div class="sidebar">
-            <h3>📚 Navigation</h3>
-            <ul>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search items..." onkeyup="quickSearch(this.value)">
+            </div>
+
+            <h3 onclick="toggleSection('nav-main')">📚 Main Navigation <span class="section-toggle">▼</span></h3>
+            <ul id="nav-main" class="collapsible active">
                 <li><a href="wiki.html">🏠 Complete Wiki</a></li>
+                <li><a href="beginners.html">🎯 Beginner's Guide</a></li>
                 <li><a href="items.html" class="active">💰 Item Prices</a></li>
+                <li><a href="wiki.html#commands-all">⚡ All Commands</a></li>
             </ul>
-            
-            <h3>🔧 Quick Actions</h3>
-            <ul>
-                <li><a href="#" onclick="showAllItems()">📋 Show All Items</a></li>
-                <li><a href="#" onclick="showHighValue()">💎 High Value Items</a></li>
-                <li><a href="#" onclick="showRecent()">⏰ Recently Updated</a></li>
+
+            <h3 onclick="toggleSection('nav-essential')">🔧 Essential Plugins <span class="section-toggle">▼</span></h3>
+            <ul id="nav-essential" class="collapsible active">
+                <li><a href="wiki.html#essentials">EssentialsX</a></li>
+                <li><a href="wiki.html#economy">EconomyShopGUI</a></li>
+                <li><a href="wiki.html#autosell">AutoSellChests</a></li>
+                <li><a href="wiki.html#auraskills">AuraSkills</a></li>
             </ul>
-            
-            <h3>📊 Categories</h3>
-            <ul>
-                <li><a href="#" onclick="filterCategory('building')">🏗️ Building Materials</a></li>
-                <li><a href="#" onclick="filterCategory('tools')">🔧 Tools & Weapons</a></li>
-                <li><a href="#" onclick="filterCategory('food')">🍕 Food & Farming</a></li>
-                <li><a href="#" onclick="filterCategory('redstone')">⚡ Redstone & Tech</a></li>
-                <li><a href="#" onclick="filterCategory('decorative')">🎨 Decorative</a></li>
-                <li><a href="#" onclick="filterCategory('special')">✨ Special Items</a></li>
+
+            <h3 onclick="toggleSection('nav-economy')">💰 Economy & Trading <span class="section-toggle">▼</span></h3>
+            <ul id="nav-economy" class="collapsible">
+                <li><a href="wiki.html#auctionhouse">AuctionHouse</a></li>
+                <li><a href="wiki.html#bankplus">BankPlus</a></li>
+                <li><a href="wiki.html#tradeplus">TradePlus</a></li>
+            </ul>
+
+            <h3 onclick="toggleSection('nav-social')">👥 Social & Fun <span class="section-toggle">▼</span></h3>
+            <ul id="nav-social" class="collapsible">
+                <li><a href="wiki.html#marriage">MarriageMaster</a></li>
+                <li><a href="wiki.html#achievements">Achievements</a></li>
+                <li><a href="wiki.html#brewery">BreweryX</a></li>
+            </ul>
+
+            <h3 onclick="toggleSection('nav-building')">🏗️ Building & World <span class="section-toggle">▼</span></h3>
+            <ul id="nav-building" class="collapsible">
+                <li><a href="wiki.html#worldedit">WorldEdit</a></li>
+                <li><a href="wiki.html#bigdoors">BigDoors</a></li>
+                <li><a href="wiki.html#movecraft">Movecraft</a></li>
+                <li><a href="wiki.html#architecture">AnimatedArchitecture</a></li>
+            </ul>
+
+            <h3 onclick="toggleSection('nav-utility')">🛠️ Utilities & QoL <span class="section-toggle">▼</span></h3>
+            <ul id="nav-utility" class="collapsible">
+                <li><a href="wiki.html#graves">AxGraves</a></li>
+                <li><a href="wiki.html#shulkerpacks">ShulkerPacks</a></li>
+                <li><a href="wiki.html#enchants">Enchants²</a></li>
+            </ul>
+
+            <h3 onclick="toggleSection('nav-commands')">⚡ Commands by Category <span class="section-toggle">▼</span></h3>
+            <ul id="nav-commands" class="collapsible">
+                <li><a href="wiki.html#cmd-teleport">🌐 Teleportation</a></li>
+                <li><a href="wiki.html#cmd-economy">💰 Economy</a></li>
+                <li><a href="wiki.html#cmd-social">👥 Social</a></li>
+                <li><a href="wiki.html#cmd-building">🏗️ Building</a></li>
+                <li><a href="wiki.html#cmd-utility">🛠️ Utility</a></li>
             </ul>
         </div>
         
@@ -653,6 +721,36 @@
             currentPage = 1;
             renderItems();
             updatePagination();
+        }
+
+        // Toggle sidebar sections
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const header = section.previousElementSibling;
+            const toggle = header.querySelector('.section-toggle');
+            
+            if (section.classList.contains('active')) {
+                section.classList.remove('active');
+                toggle.textContent = '▶';
+            } else {
+                section.classList.add('active');
+                toggle.textContent = '▼';
+            }
+        }
+
+        // Quick search for sidebar
+        function quickSearch(query) {
+            const searchTerm = query.toLowerCase();
+            const navLinks = document.querySelectorAll('.sidebar a');
+            
+            navLinks.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    link.style.display = 'block';
+                } else {
+                    link.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
