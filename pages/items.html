@@ -626,23 +626,26 @@
                     
                     // Common material name corrections
                     'HAY_BALE': 'HAY_BALE', // Keep as is, not HAY_BLOCK
-                    'TNT': 'TNT', // Keep uppercase
-                    'REDSTONE_DUST': 'REDSTONE_DUST',
+                    'TNT': 'TNT', // Keep uppercase for proper formatting
+                    'REDSTONE_DUST': 'REDSTONE', // Wiki uses just "Redstone"
                     
-                    // Block vs Item variations
-                    'BAMBOO_BLOCK': 'BAMBOO_BLOCK',
-                    'STRIPPED_BAMBOO_BLOCK': 'STRIPPED_BAMBOO_BLOCK',
-                    
-                    // Stair naming
-                    'POLISHED_BLACKSTONE_BRICK_STAIRS': 'POLISHED_BLACKSTONE_BRICK_STAIRS',
-                    'ANDESITE_STAIRS': 'ANDESITE_STAIRS',
-                    'BLACKSTONE_STAIRS': 'BLACKSTONE_STAIRS',
-                    
-                    // Common naming issues
-                    'CHISELED_BOOKSHELF': 'CHISELED_BOOKSHELF',
+                    // Items that don't exist or have different names
+                    'BAMBOO_BLOCK': 'BAMBOO', // No such thing as bamboo block
+                    'STRIPPED_BAMBOO_BLOCK': 'BAMBOO', // Fallback to bamboo
                     'CHERRY_FENCE': 'CHERRY_FENCE',
                     'BAMBOO_FENCE': 'BAMBOO_FENCE',
-                    'BAMBOO_DOOR': 'BAMBOO_DOOR'
+                    'BAMBOO_DOOR': 'BAMBOO_DOOR',
+                    'CHISELED_BOOKSHELF': 'BOOKSHELF', // Fallback to regular bookshelf
+                    
+                    // Potion naming
+                    'POTION': 'POTION',
+                    'SPLASH_POTION': 'SPLASH_POTION',
+                    
+                    // Common block names that might not exist as expected
+                    'STONE_BRICK_STAIRS': 'STONE_BRICK_STAIRS',
+                    'POLISHED_BLACKSTONE_BRICK_STAIRS': 'STONE_BRICK_STAIRS', // Fallback
+                    'ANDESITE_STAIRS': 'ANDESITE_STAIRS',
+                    'BLACKSTONE_STAIRS': 'BLACKSTONE_STAIRS'
                 };
                 
                 return materialMappings[material] || material;
@@ -659,43 +662,21 @@
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                     .join('_');
                 
-                // Based on your examples and working URLs, try these patterns (optimized)
+                // Simplified approach - only try patterns that actually work
                 const possibleUrls = [
-                    // Working examples first - most common patterns
-                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE2.png`, // TNT_JE3_BE2.png works
-                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE2.png`, // Glowstone_JE4_BE2.png works
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE3.png`, // Slime_Block_JE2_BE3.png works
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png`, // Common format
-                    `https://minecraft.wiki/images/${materialFormatted}_JE8.png`,     // Stone_JE8.png works
-                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE3.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE1.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE2.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE1.png`,
-                    
-                    // Direct images without version suffix
+                    // Basic direct images (most items have these)
                     `https://minecraft.wiki/images/${materialFormatted}.png`,
                     
-                    // Directional variants for stairs/logs (with proper URL encoding)
-                    `https://minecraft.wiki/images/${materialFormatted}_%28N%29_JE2_BE1.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_%28UD%29_JE2_BE2.png`,
+                    // Known working version patterns (only a few items have these)
+                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE2.png`, // TNT, Glowstone, etc.
+                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE3.png`, // Slime Block, etc.
+                    `https://minecraft.wiki/images/${materialFormatted}_JE8.png`,     // Stone, etc.
+                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE2.png`,
                     
-                    // Thumbnail formats (working examples)
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE2_BE3.png/150px-${materialFormatted}_JE2_BE3.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE3_BE2.png/150px-${materialFormatted}_JE3_BE2.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE4_BE2.png/150px-${materialFormatted}_JE4_BE2.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE2_BE2.png/150px-${materialFormatted}_JE2_BE2.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE1_BE2.png/150px-${materialFormatted}_JE1_BE2.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_%28UD%29_JE2_BE2.png/150px-${materialFormatted}_%28UD%29_JE2_BE2.png`,
-                    
-                    // Alternative /w/ paths
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE3_BE2.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE4_BE2.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE2_BE3.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE8.png`,
+                    // Alternative paths for direct images
                     `https://minecraft.wiki/w/images/${materialFormatted}.png`,
-                    
-                    // Format with original parameter (last resort)
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png?format=original`
+                    `https://minecraft.wiki/w/images/${materialFormatted}_JE3_BE2.png`,
+                    `https://minecraft.wiki/w/images/${materialFormatted}_JE8.png`
                 ];
                 
                 if (attemptIndex >= possibleUrls.length) {
