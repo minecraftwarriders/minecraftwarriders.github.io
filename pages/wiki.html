@@ -4,6 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft War Riders - Complete Wiki</title>
+    
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="Minecraft War Riders - Complete Wiki">
+    <meta property="og:description" content="Complete guide to all plugins, commands, and features for Minecraft War Riders server">
+    <meta property="og:image" content="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
+    <meta property="og:url" content="https://minecraftwarriders.github.io/pages/wiki">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Minecraft War Riders - Complete Wiki">
+    <meta name="twitter:description" content="Complete guide to all plugins, commands, and features">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
     <style>
         * {
             margin: 0;
@@ -320,6 +336,21 @@
         .section li {
             margin-bottom: 8px;
         }
+        
+        .logo {
+            max-height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)) 
+                    drop-shadow(-1px -1px 2px rgba(255, 255, 255, 0.1));
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.7)) 
+                    drop-shadow(-2px -2px 3px rgba(255, 255, 255, 0.2));
+        }
 
         @media (max-width: 768px) {
             .content {
@@ -421,7 +452,7 @@
             <!-- HOME SECTION -->
             <div class="section active" id="home">
                 <div class="header">
-                    <img src="https://github.com/minecraftwarriders/minecraftwarriders.github.io/blob/main/assets/logo.png?raw=true" alt="Minecraft War Riders Logo" style="max-height: 80px; margin-bottom: 20px;">
+                    <img src="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png" alt="Minecraft War Riders Logo" class="logo">
                     <h1>⚔️ MINECRAFT WAR RIDERS WIKI ⚔️</h1>
                     <p>Complete guide to all plugins, commands, and features</p>
                 </div>
@@ -1320,10 +1351,11 @@
                 <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px; text-align: center;">
                     <h2>🔗 Redirecting to Item Prices</h2>
                     <p style="font-size: 1.2em; margin-bottom: 20px;">For the complete and up-to-date item price list, visit:</p>
-                    <a href="https://minecraftwarriders.github.io/pages/items" style="color: #88ff88; font-size: 1.5em; text-decoration: none; border: 2px solid #88ff88; padding: 15px 30px; display: inline-block; margin: 20px;">
+                    <a href="https://minecraftwarriders.github.io/pages/items" target="_blank" style="color: #88ff88; font-size: 1.5em; text-decoration: none; border: 2px solid #88ff88; padding: 15px 30px; display: inline-block; margin: 20px; border-radius: 8px; transition: all 0.3s;" onmouseover="this.style.backgroundColor='#88ff88'; this.style.color='#000'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='#88ff88'">
                         👉 VIEW ITEM PRICES 👈
                     </a>
                     <p>The item prices page shows live data with current buy/sell prices for all server items.</p>
+                    <p style="color: #aaa; margin-top: 15px;">Auto-redirecting in <span id="countdown">3</span> seconds...</p>
                 </div>
             </div>
 
@@ -1476,6 +1508,24 @@
             
             // Scroll to top of content
             document.querySelector('.content').scrollTop = 0;
+            
+            // Special handling for items section - auto redirect
+            if (sectionId === 'items') {
+                let countdown = 3;
+                const countdownElement = document.getElementById('countdown');
+                
+                const timer = setInterval(() => {
+                    countdown--;
+                    if (countdownElement) {
+                        countdownElement.textContent = countdown;
+                    }
+                    
+                    if (countdown <= 0) {
+                        clearInterval(timer);
+                        window.open('https://minecraftwarriders.github.io/pages/items', '_blank');
+                    }
+                }, 1000);
+            }
         }
 
         // Toggle sidebar sections
@@ -1516,10 +1566,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
