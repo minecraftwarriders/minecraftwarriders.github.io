@@ -259,10 +259,22 @@
             font-size: 18px;
             font-weight: bold;
             color: #ddd;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             font-family: 'Courier New', monospace;
             letter-spacing: 1px;
+        }
+        
+        .potion-types {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 15px;
+            padding: 5px 8px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .item-prices {
@@ -291,6 +303,14 @@
         .sell-price {
             color: #44ff44;
             border-color: #44ff44;
+        }
+        
+        .price-tag.unavailable {
+            color: #666;
+            border-color: #444;
+            background: #1a1a1a;
+            opacity: 0.7;
+            font-style: italic;
         }
 
         .loading-container {
@@ -589,8 +609,25 @@
 
             createItemCard(item) {
                 const materialName = item.material.toLowerCase().replace(/_/g, ' ');
-                const buyPrice = item.buy ? `$${item.buy}` : 'N/A';
-                const sellPrice = item.sell ? `$${item.sell}` : 'N/A';
+                
+                // Handle -1 values as unavailable
+                const buyPrice = item.buy === -1 ? 'Cannot Buy' : 
+                                item.buy ? `$${item.buy}` : 'N/A';
+                const sellPrice = item.sell === -1 ? 'Cannot Sell' : 
+                                 item.sell ? `$${item.sell}` : 'N/A';
+                
+                // Add special classes for unavailable prices
+                const buyClass = item.buy === -1 ? 'price-tag buy-price unavailable' : 'price-tag buy-price';
+                const sellClass = item.sell === -1 ? 'price-tag sell-price unavailable' : 'price-tag sell-price';
+                
+                // Handle potion types if they exist
+                let potionTypesHtml = '';
+                if (item.potiontypes && item.potiontypes.length > 0) {
+                    const potionTypes = item.potiontypes.map(type => 
+                        type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
+                    ).join(', ');
+                    potionTypesHtml = `<div class="potion-types">Types: ${potionTypes}</div>`;
+                }
 
                 return `
                     <div class="item-card">
@@ -598,13 +635,15 @@
                             <img style="display: none;" alt="${materialName}">
                         </div>
                         <div class="item-name">${materialName}</div>
+                        ${potionTypesHtml}
                         <div class="item-prices">
-                            <div class="price-tag buy-price">Buy: ${buyPrice}</div>
-                            <div class="price-tag sell-price">Sell: ${sellPrice}</div>
+                            <div class="${buyClass}">Buy: ${buyPrice}</div>
+                            <div class="${sellClass}">Sell: ${sellPrice}</div>
                         </div>
                     </div>
                 `;
             }
+
 
             loadItemImages() {
                 const imageContainers = document.querySelectorAll('.item-image[data-material]');
@@ -624,8 +663,13 @@
                     'AutoSellChest': 'CHEST',
                     'AUTOSELLCHEST': 'CHEST',
                     
+                    // Spawners - all spawner types use the same "spawner with fire" image
+                    'SPAWNER': 'SPAWNER_WITH_FIRE',
+                    'MOB_SPAWNER': 'SPAWNER_WITH_FIRE',
+                    'MONSTER_SPAWNER': 'SPAWNER_WITH_FIRE',
+                    
                     // Common material name corrections
-                    'HAY_BALE': 'HAY_BALE', // Keep as is, not HAY_BLOCK
+                    'HAY_BALE': 'HAY_BALE', // Keep as is - will be handled specially
                     'TNT': 'TNT', // Keep uppercase for proper formatting
                     'REDSTONE_DUST': 'REDSTONE', // Wiki uses just "Redstone"
                     
@@ -662,8 +706,8 @@
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                     .join('_');
                 
-                // Comprehensive list based on your examples and patterns that work
-                const possibleUrls = [
+                // Build comprehensive list based on your examples and patterns that work
+                let possibleUrls = [
                     // Basic direct images (most common)
                     `https://minecraft.wiki/images/${materialFormatted}.png`,
                     `https://minecraft.wiki/images/${materialFormatted}.gif`,
@@ -681,14 +725,37 @@
                     `https://minecraft.wiki/images/${materialFormatted}_JE4_BE2.png`,
                     `https://minecraft.wiki/images/${materialFormatted}_JE8.png`,
                     
-                    // Directional variants (from Hay Bale example)
-                    `https://minecraft.wiki/images/${materialFormatted}_%28UD%29_JE2_BE2.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_%28N%29_JE2_BE1.png`,
-                    
                     // Alternative /w/ paths
                     `https://minecraft.wiki/w/images/${materialFormatted}.png`,
                     `https://minecraft.wiki/w/images/${materialFormatted}.gif`
                 ];
+                
+                // Add special cases for specific items
+                if (materialFormatted === 'Hay_Bale') {
+                    possibleUrls.splice(4, 0, 
+                        // Insert Hay Bale specific URLs early in the list
+                        `https://minecraft.wiki/images/Hay_Bale_%28UD%29_JE2_BE2.png`,
+                        `https://minecraft.wiki/images/Hay_Bale_%28N%29_JE2_BE1.png`,
+                        `https://minecraft.wiki/images/Hay_Bale_%28S%29_JE2_BE1.png`,
+                        `https://minecraft.wiki/images/Hay_Bale_%28E%29_JE2_BE1.png`,
+                        `https://minecraft.wiki/images/Hay_Bale_%28W%29_JE2_BE1.png`
+                    );
+                } else if (materialFormatted === 'Spawner_With_Fire') {
+                    // Special handling for spawners - use the "spawner with fire" image
+                    possibleUrls = [
+                        `https://minecraft.wiki/images/Spawner_with_fire.png`,
+                        `https://minecraft.wiki/w/images/Spawner_with_fire.png`,
+                        `https://minecraft.wiki/images/Invicon_Spawner.png`,
+                        `https://minecraft.wiki/images/Spawner.png`,
+                        `https://minecraft.wiki/w/images/Spawner.png`
+                    ];
+                } else {
+                    // Add general directional variants for other items
+                    possibleUrls.push(
+                        `https://minecraft.wiki/images/${materialFormatted}_%28UD%29_JE2_BE2.png`,
+                        `https://minecraft.wiki/images/${materialFormatted}_%28N%29_JE2_BE1.png`
+                    );
+                }
                 
                 if (attemptIndex >= possibleUrls.length) {
                     // All attempts failed, show fallback
