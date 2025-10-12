@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft War Riders Item Prices</title>
+    <title>Minecraft War Riders - Item Prices</title>
+    
+    <!-- Meta tags for social sharing -->
+    <meta property="og:title" content="Minecraft War Riders - Item Prices">
+    <meta property="og:description" content="Live item prices and market data for Minecraft War Riders server">
+    <meta property="og:image" content="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
+    <meta property="og:url" content="https://minecraftwarriders.github.io/pages/items">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Minecraft War Riders - Item Prices">
+    <meta name="twitter:description" content="Live item prices and market data">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
+    
     <style>
         * {
             margin: 0;
@@ -12,11 +29,12 @@
         }
 
         body {
-            font-family: 'Courier New', 'Consolas', monospace;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Open Sans', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             min-height: 100vh;
-            color: #e0e0e0;
+            color: #f0f0f0;
             margin: 0;
+            line-height: 1.6;
         }
 
         .main-container {
@@ -25,74 +43,75 @@
         }
 
         .sidebar {
-            width: 250px;
-            background: #1a1a1a;
-            border-right: 2px solid #333;
+            width: 380px;
+            background: #2a2a2a;
+            border-right: 2px solid #444;
             padding: 20px;
             position: fixed;
             height: 100vh;
             overflow-y: auto;
+            font-size: 15px;
+            line-height: 1.5;
         }
 
         .sidebar h3 {
-            color: #888;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            color: #bbb;
+            font-size: 16px;
+            text-transform: none;
+            letter-spacing: 0.5px;
             margin-bottom: 15px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
+            border-bottom: 2px solid #444;
+            padding-bottom: 8px;
+            font-weight: 600;
         }
 
         .sidebar ul {
             list-style: none;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .sidebar li {
-            margin-bottom: 8px;
+            margin-bottom: 3px;
         }
 
         .sidebar a {
-            color: #ccc;
+            color: #ddd;
             text-decoration: none;
-            font-size: 13px;
+            font-size: 14px;
             display: block;
-            padding: 5px 10px;
-            border-radius: 3px;
+            padding: 8px 12px;
+            border-radius: 6px;
             transition: all 0.3s;
+            font-weight: 500;
         }
 
         .sidebar a:hover {
-            background: #333;
+            background: #3a3a3a;
             color: #fff;
         }
 
         .sidebar a.active {
-            background: #444;
+            background: #4a4a4a;
             color: #fff;
+            font-weight: 600;
         }
 
         .content {
-            margin-left: 250px;
+            margin-left: 380px;
             flex: 1;
-            background: #0f0f0f;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: #0f0f0f;
-            border: 2px solid #333;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            background: #1f1f1f;
+            padding: 40px;
+            max-width: 1400px;
         }
 
         .header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            color: #ddd;
-            padding: 20px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+            color: #f0f0f0;
+            padding: 35px;
             text-align: center;
-            border-bottom: 2px solid #444;
+            border: 2px solid #555;
+            margin-bottom: 40px;
+            border-radius: 10px;
         }
 
         .header h1 {
@@ -103,23 +122,42 @@
             letter-spacing: 2px;
         }
 
+        .logo {
+            max-height: 80px;
+            margin-bottom: 20px;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5)) 
+                    drop-shadow(-1px -1px 2px rgba(255, 255, 255, 0.1));
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.7)) 
+                    drop-shadow(-2px -2px 3px rgba(255, 255, 255, 0.2));
+        }
+
         .search-container {
-            margin: 20px;
-            display: flex;
-            justify-content: center;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            text-align: center;
         }
 
         .search-box {
             width: 100%;
-            max-width: 400px;
-            padding: 12px 20px;
+            max-width: 500px;
+            padding: 15px 20px;
             border: 2px solid #555;
-            background: #1a1a1a;
-            color: #e0e0e0;
+            background: #333;
+            color: #fff;
             font-size: 16px;
             outline: none;
             transition: all 0.3s;
-            font-family: 'Courier New', monospace;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            border-radius: 8px;
         }
 
         .search-box:focus {
@@ -128,236 +166,209 @@
         }
 
         .search-box::placeholder {
-            color: #666;
+            color: #aaa;
         }
 
         .tabs-container {
             display: flex;
             flex-wrap: wrap;
-            background: #222;
-            border-bottom: 2px solid #444;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 8px;
+            margin-bottom: 30px;
             overflow-x: auto;
+            padding: 10px;
+            gap: 5px;
         }
 
         .tab {
             padding: 12px 20px;
             cursor: pointer;
-            border: 1px solid #444;
-            background: #1a1a1a;
-            font-size: 14px;
+            border: 2px solid #555;
+            background: #333;
+            font-size: 15px;
             font-weight: 500;
-            color: #a0a0a0;
+            color: #ddd;
             transition: all 0.3s;
             white-space: nowrap;
             min-width: fit-content;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            border-radius: 6px;
         }
 
         .tab:hover {
-            background: #333;
-            color: #ddd;
-            border-color: #555;
+            background: #4a4a4a;
+            color: #fff;
+            border-color: #666;
         }
 
         .tab.active {
             background: #555;
             color: #fff;
-            font-weight: bold;
+            font-weight: 600;
             border-color: #777;
+        }
+
+        .items-grid {
+            background: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        .items-table th {
+            background: #333;
+            color: #f0f0f0;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #555;
+            font-size: 16px;
+        }
+
+        .items-table td {
+            padding: 12px;
+            border-bottom: 1px solid #444;
+            color: #e0e0e0;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .items-table tr:hover {
+            background: #333;
+        }
+
+        .item-image {
+            width: 32px;
+            height: 32px;
+            image-rendering: pixelated;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        .price-buy {
+            color: #90ff90;
+            font-weight: 600;
+        }
+
+        .price-sell {
+            color: #ff9090;
+            font-weight: 600;
         }
 
         .page-navigation {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 10px;
-            padding: 20px;
-            background: #222;
-            border-bottom: 1px solid #444;
+            gap: 15px;
+            padding: 25px;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            border-radius: 8px;
+            margin-bottom: 30px;
         }
 
         .page-btn {
-            padding: 8px 16px;
+            padding: 12px 20px;
             border: 2px solid #555;
-            background: #1a1a1a;
-            color: #ccc;
+            background: #333;
+            color: #ddd;
             cursor: pointer;
             font-weight: 500;
             transition: all 0.3s;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            border-radius: 6px;
+            font-size: 15px;
         }
 
         .page-btn:hover, .page-btn.active {
             background: #555;
             color: #fff;
+            border-color: #777;
         }
 
         .page-btn:disabled {
-            opacity: 0.3;
+            opacity: 0.4;
             cursor: not-allowed;
-            border-color: #333;
-            color: #555;
         }
 
-        .items-grid {
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: #aaa;
+        }
+
+        .error {
+            background: #3a2a2a;
+            border: 3px solid #ff7777;
+            padding: 20px;
+            margin: 25px 0;
+            color: #ffaaaa;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .stats-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            padding: 30px;
-            min-height: 400px;
-            background: #0f0f0f;
+            margin-bottom: 30px;
         }
 
-        .item-card {
-            background: #1a1a1a;
+        .stat-card {
+            background: #2a2a2a;
             border: 2px solid #444;
             padding: 20px;
+            border-radius: 8px;
             text-align: center;
-            transition: all 0.3s;
         }
 
-        .item-card:hover {
-            transform: translateY(-2px);
-            border-color: #666;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        }
-
-        .item-image {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 15px;
-            background: #333;
-            border: 2px solid #555;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .item-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .item-image.loading {
-            background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .item-name {
-            font-size: 18px;
+        .stat-number {
+            font-size: 2em;
             font-weight: bold;
-            color: #ddd;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 1px;
-        }
-        
-        .potion-types {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 15px;
-            padding: 5px 8px;
-            background: #2a2a2a;
-            border: 1px solid #444;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #90ff90;
+            margin-bottom: 5px;
         }
 
-        .item-prices {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .price-tag {
-            flex: 1;
-            padding: 8px 12px;
-            font-weight: bold;
-            font-size: 14px;
-            border: 1px solid;
-            background: #1a1a2e;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-        }
-
-        .buy-price {
-            color: #ff4444;
-            border-color: #ff4444;
-        }
-
-        .sell-price {
-            color: #44ff44;
-            border-color: #44ff44;
-        }
-        
-        .price-tag.unavailable {
-            color: #666;
-            border-color: #444;
-            background: #1a1a1a;
-            opacity: 0.7;
-            font-style: italic;
-        }
-
-        .loading-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            font-size: 18px;
+        .stat-label {
             color: #ccc;
-            font-family: 'Courier New', monospace;
-        }
-
-        .no-results {
-            text-align: center;
-            color: #888;
-            font-size: 18px;
-            padding: 40px;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-        }
-
-        .error-message {
-            background: #2a1a1a;
-            color: #ff6666;
-            padding: 20px;
-            margin: 20px;
-            border: 2px solid #ff6666;
-            font-family: 'Courier New', monospace;
+            font-size: 14px;
         }
 
         @media (max-width: 768px) {
-            .container {
-                margin: 10px;
+            .content {
+                margin-left: 0;
+                padding: 25px;
             }
             
-            .header h1 {
-                font-size: 2em;
-            }
-            
-            .items-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                padding: 20px;
-                gap: 15px;
+            .sidebar {
+                display: none;
             }
             
             .tabs-container {
-                justify-content: flex-start;
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+            }
+            
+            .items-table {
+                font-size: 14px;
+            }
+            
+            .items-table th,
+            .items-table td {
+                padding: 8px;
             }
         }
     </style>
@@ -365,440 +376,284 @@
 <body>
     <div class="main-container">
         <div class="sidebar">
-            <h3>Navigation</h3>
+            <h3>📚 Navigation</h3>
             <ul>
-                <li><a href="#" class="active">Item Prices</a></li>
-                <li><a href="#">Commands</a></li>
-                <li><a href="#">Rules</a></li>
-                <li><a href="#">Getting Started</a></li>
+                <li><a href="wiki.html">🏠 Complete Wiki</a></li>
+                <li><a href="items.html" class="active">💰 Item Prices</a></li>
             </ul>
             
-            <h3>Game Mechanics</h3>
+            <h3>🔧 Quick Actions</h3>
             <ul>
-                <li><a href="#">Economy System</a></li>
-                <li><a href="#">Trading</a></li>
-                <li><a href="#">Shops</a></li>
-                <li><a href="#">AutoSell Chests</a></li>
+                <li><a href="#" onclick="showAllItems()">📋 Show All Items</a></li>
+                <li><a href="#" onclick="showHighValue()">💎 High Value Items</a></li>
+                <li><a href="#" onclick="showRecent()">⏰ Recently Updated</a></li>
             </ul>
             
-            <h3>Server Info</h3>
+            <h3>📊 Categories</h3>
             <ul>
-                <li><a href="#">Server Status</a></li>
-                <li><a href="#">Discord</a></li>
-                <li><a href="#">Forums</a></li>
+                <li><a href="#" onclick="filterCategory('building')">🏗️ Building Materials</a></li>
+                <li><a href="#" onclick="filterCategory('tools')">🔧 Tools & Weapons</a></li>
+                <li><a href="#" onclick="filterCategory('food')">🍕 Food & Farming</a></li>
+                <li><a href="#" onclick="filterCategory('redstone')">⚡ Redstone & Tech</a></li>
+                <li><a href="#" onclick="filterCategory('decorative')">🎨 Decorative</a></li>
+                <li><a href="#" onclick="filterCategory('special')">✨ Special Items</a></li>
             </ul>
         </div>
         
         <div class="content">
-            <div class="container">
-                <div class="header">
-                    <h1>⚔️ MINECRAFT WAR RIDERS ITEM PRICES ⚔️</h1>
-                    <p>Complete list of item prices</p>
-                </div>
+            <div class="header">
+                <img src="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png" alt="Minecraft War Riders Logo" class="logo">
+                <h1>💰 ITEM PRICES 💰</h1>
+                <p>Live market data and pricing information</p>
+            </div>
 
-                <div class="search-container">
-                    <input type="text" id="searchInput" class="search-box" placeholder="Search all items across all pages...">
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-items">-</div>
+                    <div class="stat-label">Total Items</div>
                 </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avg-price">-</div>
+                    <div class="stat-label">Average Price</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="last-update">-</div>
+                    <div class="stat-label">Last Updated</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="high-value">-</div>
+                    <div class="stat-label">High Value Items</div>
+                </div>
+            </div>
 
-                <div class="tabs-container" id="tabsContainer">
-                    <!-- Tabs will be generated dynamically -->
-                </div>
+            <div class="search-container">
+                <h3 style="margin-bottom: 15px; color: #e0e0e0;">🔍 Search Items</h3>
+                <input type="text" class="search-box" placeholder="Search for items, materials, tools..." onkeyup="searchItems(this.value)">
+            </div>
 
-                <div class="page-navigation" id="pageNavigation" style="display: none;">
-                    <button class="page-btn" id="prevBtn">← Previous</button>
-                    <span id="pageInfo"></span>
-                    <button class="page-btn" id="nextBtn">Next →</button>
-                </div>
+            <div class="tabs-container">
+                <div class="tab active" onclick="showTab('all')">📋 All Items</div>
+                <div class="tab" onclick="showTab('building')">🏗️ Building</div>
+                <div class="tab" onclick="showTab('tools')">🔧 Tools</div>
+                <div class="tab" onclick="showTab('food')">🍕 Food</div>
+                <div class="tab" onclick="showTab('redstone')">⚡ Redstone</div>
+                <div class="tab" onclick="showTab('decorative')">🎨 Decorative</div>
+                <div class="tab" onclick="showTab('special')">✨ Special</div>
+            </div>
 
-                <div class="items-grid" id="itemsGrid">
-                    <div class="loading-container">
-                        <div>Loading shop items...</div>
-                    </div>
+            <div class="page-navigation">
+                <button class="page-btn" onclick="previousPage()" id="prev-btn">← Previous</button>
+                <span style="color: #ddd; font-size: 16px;">Page <span id="current-page">1</span> of <span id="total-pages">1</span></span>
+                <button class="page-btn" onclick="nextPage()" id="next-btn">Next →</button>
+            </div>
+
+            <div class="items-grid">
+                <div id="loading" class="loading">
+                    🔄 Loading item prices...
                 </div>
+                
+                <div id="error" class="error" style="display: none;">
+                    ❌ Failed to load item prices. Please refresh the page or try again later.
+                </div>
+                
+                <table class="items-table" id="items-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>📦 Item</th>
+                            <th>💰 Buy Price</th>
+                            <th>🏪 Sell Price</th>
+                            <th>📊 Profit Margin</th>
+                            <th>📈 Category</th>
+                        </tr>
+                    </thead>
+                    <tbody id="items-tbody">
+                        <!-- Items will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="background: #2a2a2a; border: 2px solid #444; padding: 25px; border-radius: 8px; text-align: center;">
+                <h3 style="color: #e0e0e0; margin-bottom: 15px;">💡 How to Use Prices</h3>
+                <p style="color: #d0d0d0; font-size: 15px; line-height: 1.7;">
+                    Use <code style="background: #333; padding: 2px 6px; border-radius: 4px;">/shop</code> to access the server shop and trade items at these prices. 
+                    Prices are updated regularly to reflect current market conditions.
+                </p>
+                <p style="color: #aaa; margin-top: 15px; font-size: 14px;">
+                    💚 Green = Buy Price (what you pay) • 🔴 Red = Sell Price (what you receive)
+                </p>
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script>
-        class MinecraftShop {
-            constructor() {
-                this.sections = [
-                    'Automation', 'Blocks', 'Decoration', 'Dyes', 'Enchanting', 
-                    'Farming', 'Food', 'Miscellaneous', 'Mobs', 'Music', 
-                    'Ores', 'Potions', 'Redstone', 'SpawnEggs', 'Spawners', 
-                    'Workstations', 'Z_EverythingElse'
-                ];
-                this.currentSection = 'Blocks';
-                this.currentPage = 'page1';
-                this.allData = {};
-                this.filteredItems = [];
-                this.searchTerm = '';
+        // Mock data - replace with actual API calls
+        const mockItems = [
+            { name: "Stone", category: "building", buyPrice: 1, sellPrice: 0.5, image: "https://minecraft.wiki/images/6/6a/Stone_JE5_BE3.png" },
+            { name: "Diamond", category: "special", buyPrice: 100, sellPrice: 80, image: "https://minecraft.wiki/images/2/2e/Diamond_JE3_BE3.png" },
+            { name: "Iron Pickaxe", category: "tools", buyPrice: 50, sellPrice: 30, image: "https://minecraft.wiki/images/d/d1/Iron_Pickaxe_JE2_BE2.png" },
+            { name: "Wheat", category: "food", buyPrice: 2, sellPrice: 1, image: "https://minecraft.wiki/images/8/89/Wheat_JE2_BE2.png" },
+            { name: "Redstone", category: "redstone", buyPrice: 5, sellPrice: 3, image: "https://minecraft.wiki/images/9/9d/Redstone_Dust_JE2_BE2.png" },
+            { name: "Rose Bush", category: "decorative", buyPrice: 8, sellPrice: 4, image: "https://minecraft.wiki/images/0/0a/Rose_Bush_JE1_BE1.png" },
+            { name: "AutoSell Chest", category: "special", buyPrice: 1000, sellPrice: null, image: "https://minecraft.wiki/images/b/b8/Chest_JE2_BE2.png" },
+            { name: "Oak Wood", category: "building", buyPrice: 4, sellPrice: 2, image: "https://minecraft.wiki/images/0/07/Oak_Log_JE5_BE3.png" },
+            { name: "Iron Sword", category: "tools", buyPrice: 25, sellPrice: 15, image: "https://minecraft.wiki/images/c/c5/Iron_Sword_JE2_BE2.png" },
+            { name: "Bread", category: "food", buyPrice: 3, sellPrice: 1.5, image: "https://minecraft.wiki/images/f/fd/Bread_JE2_BE2.png" },
+            { name: "Gold Ingot", category: "special", buyPrice: 50, sellPrice: 40, image: "https://minecraft.wiki/images/f/fc/Gold_Ingot_JE4_BE2.png" },
+            { name: "Cobblestone", category: "building", buyPrice: 0.5, sellPrice: 0.25, image: "https://minecraft.wiki/images/c/cb/Cobblestone_JE5_BE3.png" }
+        ];
+
+        let currentPage = 1;
+        let itemsPerPage = 50;
+        let currentItems = mockItems;
+        let currentFilter = 'all';
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadItems();
+            updateStats();
+        });
+
+        function loadItems() {
+            // Simulate loading
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('items-table').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('items-table').style.display = 'table';
+                renderItems();
+                updatePagination();
+            }, 1000);
+        }
+
+        function renderItems() {
+            const tbody = document.getElementById('items-tbody');
+            tbody.innerHTML = '';
+
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const itemsToShow = currentItems.slice(startIndex, endIndex);
+
+            itemsToShow.forEach(item => {
+                const row = document.createElement('tr');
+                const profitMargin = item.sellPrice ? ((item.sellPrice / item.buyPrice) * 100).toFixed(1) : 'N/A';
+                const sellPrice = item.sellPrice ? `$${item.sellPrice}` : 'Cannot Sell';
                 
-                this.init();
-            }
-
-            async init() {
-                this.createTabs();
-                this.setupEventListeners();
-                await this.loadSection(this.currentSection);
-            }
-
-            createTabs() {
-                const tabsContainer = document.getElementById('tabsContainer');
-                tabsContainer.innerHTML = '';
-
-                this.sections.forEach(section => {
-                    const tab = document.createElement('button');
-                    tab.className = `tab ${section === this.currentSection ? 'active' : ''}`;
-                    tab.textContent = section.replace('Z_', '').replace('_', ' ');
-                    tab.onclick = () => this.switchSection(section);
-                    tabsContainer.appendChild(tab);
-                });
-            }
-
-            setupEventListeners() {
-                const searchInput = document.getElementById('searchInput');
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-
-                searchInput.addEventListener('input', (e) => {
-                    this.searchTerm = e.target.value.toLowerCase();
-                    this.filterAndDisplayItems();
-                });
-
-                prevBtn.addEventListener('click', () => this.navigatePage(-1));
-                nextBtn.addEventListener('click', () => this.navigatePage(1));
-            }
-
-            async loadSection(sectionName) {
-                try {
-                    const response = await fetch(`sections/${sectionName}.yml`);
-                    if (!response.ok) throw new Error(`Failed to load ${sectionName}.yml`);
-                    
-                    const yamlText = await response.text();
-                    const data = jsyaml.load(yamlText);
-                    
-                    this.allData[sectionName] = data;
-                    this.currentSection = sectionName;
-                    this.currentPage = Object.keys(data.pages)[0];
-                    
-                    this.updateTabs();
-                    this.updatePageNavigation();
-                    this.filterAndDisplayItems();
-                } catch (error) {
-                    console.error('Error loading section:', error);
-                    this.showError(`Failed to load ${sectionName} section. Please make sure the YML file exists.`);
-                }
-            }
-
-            switchSection(sectionName) {
-                if (this.allData[sectionName]) {
-                    this.currentSection = sectionName;
-                    this.currentPage = Object.keys(this.allData[sectionName].pages)[0];
-                    this.updateTabs();
-                    this.updatePageNavigation();
-                    this.filterAndDisplayItems();
-                } else {
-                    this.loadSection(sectionName);
-                }
-            }
-
-            updateTabs() {
-                const tabs = document.querySelectorAll('.tab');
-                tabs.forEach((tab, index) => {
-                    tab.classList.toggle('active', this.sections[index] === this.currentSection);
-                });
-            }
-
-            updatePageNavigation() {
-                const pageNavigation = document.getElementById('pageNavigation');
-                const pageInfo = document.getElementById('pageInfo');
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-
-                if (!this.allData[this.currentSection]) {
-                    pageNavigation.style.display = 'none';
-                    return;
-                }
-
-                const pages = Object.keys(this.allData[this.currentSection].pages);
-                const currentPageIndex = pages.indexOf(this.currentPage);
-
-                pageNavigation.style.display = 'flex';
-                pageInfo.textContent = `Page ${currentPageIndex + 1} of ${pages.length}`;
-                
-                prevBtn.disabled = currentPageIndex === 0;
-                nextBtn.disabled = currentPageIndex === pages.length - 1;
-
-                // Create page buttons
-                const existingPageBtns = document.querySelectorAll('.page-number-btn');
-                existingPageBtns.forEach(btn => btn.remove());
-
-                pages.forEach((page, index) => {
-                    const pageBtn = document.createElement('button');
-                    pageBtn.className = `page-btn page-number-btn ${page === this.currentPage ? 'active' : ''}`;
-                    pageBtn.textContent = index + 1;
-                    pageBtn.onclick = () => this.switchPage(page);
-                    pageInfo.parentNode.insertBefore(pageBtn, nextBtn);
-                });
-            }
-
-            navigatePage(direction) {
-                if (!this.allData[this.currentSection]) return;
-                
-                const pages = Object.keys(this.allData[this.currentSection].pages);
-                const currentIndex = pages.indexOf(this.currentPage);
-                const newIndex = currentIndex + direction;
-                
-                if (newIndex >= 0 && newIndex < pages.length) {
-                    this.switchPage(pages[newIndex]);
-                }
-            }
-
-            switchPage(pageName) {
-                this.currentPage = pageName;
-                this.updatePageNavigation();
-                this.filterAndDisplayItems();
-            }
-
-            filterAndDisplayItems() {
-                if (!this.allData[this.currentSection]) return;
-
-                let items = [];
-
-                if (this.searchTerm) {
-                    // Search across all pages when there's a search term
-                    const sectionData = this.allData[this.currentSection];
-                    Object.values(sectionData.pages).forEach(pageData => {
-                        if (pageData && pageData.items) {
-                            Object.entries(pageData.items).forEach(([id, item]) => {
-                                if (item.material.toLowerCase().includes(this.searchTerm)) {
-                                    items.push({ id, ...item });
-                                }
-                            });
-                        }
-                    });
-                } else {
-                    // Show only current page when no search
-                    const pageData = this.allData[this.currentSection].pages[this.currentPage];
-                    if (!pageData || !pageData.items) {
-                        this.showNoResults();
-                        return;
-                    }
-                    items = Object.entries(pageData.items).map(([id, item]) => ({
-                        id,
-                        ...item
-                    }));
-                }
-
-                this.displayItems(items);
-            }
-
-            displayItems(items) {
-                const itemsGrid = document.getElementById('itemsGrid');
-                
-                if (items.length === 0) {
-                    this.showNoResults();
-                    return;
-                }
-
-                itemsGrid.innerHTML = items.map(item => this.createItemCard(item)).join('');
-                this.loadItemImages();
-            }
-
-            createItemCard(item) {
-                const materialName = item.material.toLowerCase().replace(/_/g, ' ');
-                
-                // Handle -1 values as unavailable
-                const buyPrice = item.buy === -1 ? 'Cannot Buy' : 
-                                item.buy ? `$${item.buy}` : 'N/A';
-                const sellPrice = item.sell === -1 ? 'Cannot Sell' : 
-                                 item.sell ? `$${item.sell}` : 'N/A';
-                
-                // Add special classes for unavailable prices
-                const buyClass = item.buy === -1 ? 'price-tag buy-price unavailable' : 'price-tag buy-price';
-                const sellClass = item.sell === -1 ? 'price-tag sell-price unavailable' : 'price-tag sell-price';
-                
-                // Handle potion types if they exist
-                let potionTypesHtml = '';
-                if (item.potiontypes && item.potiontypes.length > 0) {
-                    const potionTypes = item.potiontypes.map(type => 
-                        type.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())
-                    ).join(', ');
-                    potionTypesHtml = `<div class="potion-types">Types: ${potionTypes}</div>`;
-                }
-
-                return `
-                    <div class="item-card">
-                        <div class="item-image loading" data-material="${item.material}">
-                            <img style="display: none;" alt="${materialName}">
-                        </div>
-                        <div class="item-name">${materialName}</div>
-                        ${potionTypesHtml}
-                        <div class="item-prices">
-                            <div class="${buyClass}">Buy: ${buyPrice}</div>
-                            <div class="${sellClass}">Sell: ${sellPrice}</div>
-                        </div>
-                    </div>
+                row.innerHTML = `
+                    <td>
+                        <img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.style.display='none'">
+                        ${item.name}
+                    </td>
+                    <td class="price-buy">$${item.buyPrice}</td>
+                    <td class="price-sell">${sellPrice}</td>
+                    <td>${profitMargin}${profitMargin !== 'N/A' ? '%' : ''}</td>
+                    <td style="text-transform: capitalize;">${item.category}</td>
                 `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(currentItems.length / itemsPerPage);
+            document.getElementById('current-page').textContent = currentPage;
+            document.getElementById('total-pages').textContent = totalPages;
+            
+            document.getElementById('prev-btn').disabled = currentPage === 1;
+            document.getElementById('next-btn').disabled = currentPage === totalPages;
+        }
+
+        function updateStats() {
+            document.getElementById('total-items').textContent = mockItems.length;
+            document.getElementById('avg-price').textContent = '$' + (mockItems.reduce((sum, item) => sum + item.buyPrice, 0) / mockItems.length).toFixed(1);
+            document.getElementById('last-update').textContent = 'Just Now';
+            document.getElementById('high-value').textContent = mockItems.filter(item => item.buyPrice > 50).length;
+        }
+
+        function showTab(category) {
+            // Update active tab
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter items
+            currentFilter = category;
+            if (category === 'all') {
+                currentItems = mockItems;
+            } else {
+                currentItems = mockItems.filter(item => item.category === category);
             }
+            
+            currentPage = 1;
+            renderItems();
+            updatePagination();
+        }
 
-
-            loadItemImages() {
-                const imageContainers = document.querySelectorAll('.item-image[data-material]');
-                
-                imageContainers.forEach(container => {
-                    const material = container.dataset.material;
-                    const img = container.querySelector('img');
-                    
-                    this.tryLoadImage(material, img, container, 0);
-                });
-            }
-
-            getMaterialMapping(material) {
-                // Handle special material name mappings
-                const materialMappings = {
-                    // Custom items
-                    'AutoSellChest': 'CHEST',
-                    'AUTOSELLCHEST': 'CHEST',
-                    
-                    // Spawners - all spawner types use the same "spawner with fire" image
-                    'SPAWNER': 'SPAWNER_WITH_FIRE',
-                    'MOB_SPAWNER': 'SPAWNER_WITH_FIRE',
-                    'MONSTER_SPAWNER': 'SPAWNER_WITH_FIRE',
-                    
-                    // Common material name corrections
-                    'HAY_BALE': 'HAY_BALE', // Keep as is - will be handled specially
-                    'TNT': 'TNT', // Keep uppercase for proper formatting
-                    'REDSTONE_DUST': 'REDSTONE', // Wiki uses just "Redstone"
-                    
-                    // Items that don't exist or have different names
-                    'BAMBOO_BLOCK': 'BAMBOO', // No such thing as bamboo block
-                    'STRIPPED_BAMBOO_BLOCK': 'BAMBOO', // Fallback to bamboo
-                    'CHERRY_FENCE': 'CHERRY_FENCE',
-                    'BAMBOO_FENCE': 'BAMBOO_FENCE',
-                    'BAMBOO_DOOR': 'BAMBOO_DOOR',
-                    'CHISELED_BOOKSHELF': 'BOOKSHELF', // Fallback to regular bookshelf
-                    
-                    // Potion naming
-                    'POTION': 'POTION',
-                    'SPLASH_POTION': 'SPLASH_POTION',
-                    
-                    // Common block names that might not exist as expected
-                    'STONE_BRICK_STAIRS': 'STONE_BRICK_STAIRS',
-                    'POLISHED_BLACKSTONE_BRICK_STAIRS': 'STONE_BRICK_STAIRS', // Fallback
-                    'ANDESITE_STAIRS': 'ANDESITE_STAIRS',
-                    'BLACKSTONE_STAIRS': 'BLACKSTONE_STAIRS'
-                };
-                
-                return materialMappings[material] || material;
-            }
-
-            tryLoadImage(material, img, container, attemptIndex) {
-                // Special case for custom items and material name mappings
-                let actualMaterial = this.getMaterialMapping(material);
-                
-                // Format material name for different URL patterns
-                const materialLower = actualMaterial.toLowerCase();
-                const materialFormatted = materialLower
-                    .split('_')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join('_');
-                
-                // Build comprehensive list based on your examples and patterns that work
-                let possibleUrls = [
-                    // Basic direct images (most common)
-                    `https://minecraft.wiki/images/${materialFormatted}.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}.gif`,
-                    
-                    // Invicon format (from your chest example)
-                    `https://minecraft.wiki/images/Invicon_${materialFormatted}.png`,
-                    
-                    // Common version patterns (from your working examples)
-                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE2.png`, // TNT works
-                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE1.png`, // Calcite works
-                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE1.png`, // Dripstone Block works
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png`, // Snow Block, Magma Block work
-                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE2.png`, // Honey Block works
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE3.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE2.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE8.png`,
-                    
-                    // Alternative /w/ paths
-                    `https://minecraft.wiki/w/images/${materialFormatted}.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}.gif`
-                ];
-                
-                // Add special cases for specific items
-                if (materialFormatted === 'Hay_Bale') {
-                    possibleUrls.splice(4, 0, 
-                        // Insert Hay Bale specific URLs early in the list
-                        `https://minecraft.wiki/images/Hay_Bale_%28UD%29_JE2_BE2.png`,
-                        `https://minecraft.wiki/images/Hay_Bale_%28N%29_JE2_BE1.png`,
-                        `https://minecraft.wiki/images/Hay_Bale_%28S%29_JE2_BE1.png`,
-                        `https://minecraft.wiki/images/Hay_Bale_%28E%29_JE2_BE1.png`,
-                        `https://minecraft.wiki/images/Hay_Bale_%28W%29_JE2_BE1.png`
-                    );
-                } else if (materialFormatted === 'Spawner_With_Fire') {
-                    // Special handling for spawners - use the "spawner with fire" image
-                    possibleUrls = [
-                        `https://minecraft.wiki/images/Spawner_with_fire.png`,
-                        `https://minecraft.wiki/w/images/Spawner_with_fire.png`,
-                        `https://minecraft.wiki/images/Invicon_Spawner.png`,
-                        `https://minecraft.wiki/images/Spawner.png`,
-                        `https://minecraft.wiki/w/images/Spawner.png`
-                    ];
+        function searchItems(query) {
+            const searchTerm = query.toLowerCase();
+            if (searchTerm === '') {
+                if (currentFilter === 'all') {
+                    currentItems = mockItems;
                 } else {
-                    // Add general directional variants for other items
-                    possibleUrls.push(
-                        `https://minecraft.wiki/images/${materialFormatted}_%28UD%29_JE2_BE2.png`,
-                        `https://minecraft.wiki/images/${materialFormatted}_%28N%29_JE2_BE1.png`
-                    );
+                    currentItems = mockItems.filter(item => item.category === currentFilter);
                 }
-                
-                if (attemptIndex >= possibleUrls.length) {
-                    // All attempts failed, show fallback
-                    container.classList.remove('loading');
-                    container.innerHTML = '📦';
-                    container.style.fontSize = '32px';
-                    container.style.color = '#ccc';
-                    return;
-                }
-                
-                img.onload = () => {
-                    container.classList.remove('loading');
-                    img.style.display = 'block';
-                };
-                
-                img.onerror = () => {
-                    // Try next URL
-                    this.tryLoadImage(material, img, container, attemptIndex + 1);
-                };
-                
-                img.src = possibleUrls[attemptIndex];
+            } else {
+                let baseItems = currentFilter === 'all' ? mockItems : mockItems.filter(item => item.category === currentFilter);
+                currentItems = baseItems.filter(item => 
+                    item.name.toLowerCase().includes(searchTerm) ||
+                    item.category.toLowerCase().includes(searchTerm)
+                );
             }
+            
+            currentPage = 1;
+            renderItems();
+            updatePagination();
+        }
 
-
-            showNoResults() {
-                const itemsGrid = document.getElementById('itemsGrid');
-                const message = this.searchTerm 
-                    ? `No items found matching "${this.searchTerm}"` 
-                    : 'No items available in this section';
-                
-                itemsGrid.innerHTML = `<div class="no-results">${message}</div>`;
-            }
-
-            showError(message) {
-                const itemsGrid = document.getElementById('itemsGrid');
-                itemsGrid.innerHTML = `<div class="error-message">${message}</div>`;
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderItems();
+                updatePagination();
             }
         }
 
-        // Initialize the shop when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            new MinecraftShop();
-        });
+        function nextPage() {
+            const totalPages = Math.ceil(currentItems.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderItems();
+                updatePagination();
+            }
+        }
+
+        function filterCategory(category) {
+            // Find and click the corresponding tab
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                if (tab.textContent.toLowerCase().includes(category)) {
+                    tab.click();
+                }
+            });
+        }
+
+        function showAllItems() {
+            document.querySelector('.tab[onclick="showTab(\'all\')"]').click();
+        }
+
+        function showHighValue() {
+            currentItems = mockItems.filter(item => item.buyPrice > 50);
+            currentPage = 1;
+            renderItems();
+            updatePagination();
+        }
+
+        function showRecent() {
+            // Mock recent items - in real implementation, sort by last updated
+            currentItems = [...mockItems].reverse();
+            currentPage = 1;
+            renderItems();
+            updatePagination();
+        }
     </script>
 </body>
 </html>
