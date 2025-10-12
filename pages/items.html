@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Warriors Shop</title>
+    <title>Minecraft War Riders Item Prices</title>
     <style>
         * {
             margin: 0;
@@ -12,32 +12,36 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Courier New', 'Consolas', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
             min-height: 100vh;
             padding: 20px;
+            color: #e0e0e0;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            background: #0f0f23;
+            border: 2px solid #16213e;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
             overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #00ffff;
             padding: 20px;
             text-align: center;
+            border-bottom: 2px solid #00ffff;
         }
 
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 0 0 10px #00ffff;
+            font-weight: bold;
+            letter-spacing: 2px;
         }
 
         .search-container {
@@ -50,47 +54,59 @@
             width: 100%;
             max-width: 400px;
             padding: 12px 20px;
-            border: 2px solid #ddd;
-            border-radius: 25px;
+            border: 2px solid #00ffff;
+            background: #1a1a2e;
+            color: #e0e0e0;
             font-size: 16px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s;
+            font-family: 'Courier New', monospace;
         }
 
         .search-box:focus {
-            border-color: #4CAF50;
+            border-color: #00ff88;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .search-box::placeholder {
+            color: #666;
         }
 
         .tabs-container {
             display: flex;
             flex-wrap: wrap;
-            background: #f5f5f5;
-            border-bottom: 3px solid #4CAF50;
+            background: #16213e;
+            border-bottom: 2px solid #00ffff;
             overflow-x: auto;
         }
 
         .tab {
             padding: 12px 20px;
             cursor: pointer;
-            border: none;
-            background: transparent;
+            border: 1px solid #2a3f5f;
+            background: #1a1a2e;
             font-size: 14px;
             font-weight: 500;
-            color: #666;
+            color: #a0a0a0;
             transition: all 0.3s;
             white-space: nowrap;
             min-width: fit-content;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .tab:hover {
-            background: rgba(76, 175, 80, 0.1);
-            color: #4CAF50;
+            background: #2a3f5f;
+            color: #00ffff;
+            border-color: #00ffff;
         }
 
         .tab.active {
-            background: #4CAF50;
-            color: white;
+            background: #00ffff;
+            color: #0a0a0a;
             font-weight: bold;
+            border-color: #00ffff;
         }
 
         .page-navigation {
@@ -99,29 +115,33 @@
             align-items: center;
             gap: 10px;
             padding: 20px;
-            background: #fafafa;
-            border-bottom: 1px solid #eee;
+            background: #16213e;
+            border-bottom: 1px solid #2a3f5f;
         }
 
         .page-btn {
             padding: 8px 16px;
-            border: 2px solid #4CAF50;
-            background: white;
-            color: #4CAF50;
-            border-radius: 20px;
+            border: 2px solid #00ffff;
+            background: #1a1a2e;
+            color: #00ffff;
             cursor: pointer;
             font-weight: 500;
             transition: all 0.3s;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .page-btn:hover, .page-btn.active {
-            background: #4CAF50;
-            color: white;
+            background: #00ffff;
+            color: #0a0a0a;
         }
 
         .page-btn:disabled {
-            opacity: 0.5;
+            opacity: 0.3;
             cursor: not-allowed;
+            border-color: #555;
+            color: #555;
         }
 
         .items-grid {
@@ -130,30 +150,29 @@
             gap: 20px;
             padding: 30px;
             min-height: 400px;
+            background: #0f0f23;
         }
 
         .item-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            background: #1a1a2e;
+            border: 2px solid #2a3f5f;
             padding: 20px;
             text-align: center;
             transition: all 0.3s;
-            border: 2px solid transparent;
         }
 
         .item-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            border-color: #4CAF50;
+            transform: translateY(-2px);
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
         }
 
         .item-image {
             width: 64px;
             height: 64px;
             margin: 0 auto 15px;
-            background: #f0f0f0;
-            border-radius: 8px;
+            background: #2a3f5f;
+            border: 2px solid #00ffff;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -167,7 +186,7 @@
         }
 
         .item-image.loading {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background: linear-gradient(90deg, #2a3f5f 25%, #3a4f6f 50%, #2a3f5f 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
         }
@@ -180,33 +199,39 @@
         .item-name {
             font-size: 18px;
             font-weight: bold;
-            color: #333;
+            color: #00ffff;
             margin-bottom: 15px;
-            text-transform: capitalize;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
         }
 
         .item-prices {
             display: flex;
             justify-content: space-between;
             gap: 10px;
+            margin-top: 15px;
         }
 
         .price-tag {
             flex: 1;
             padding: 8px 12px;
-            border-radius: 20px;
             font-weight: bold;
             font-size: 14px;
+            border: 1px solid;
+            background: #1a1a2e;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
         }
 
         .buy-price {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white;
+            color: #ff4444;
+            border-color: #ff4444;
         }
 
         .sell-price {
-            background: linear-gradient(135deg, #4ecdc4, #44a08d);
-            color: white;
+            color: #44ff44;
+            border-color: #44ff44;
         }
 
         .loading-container {
@@ -215,29 +240,31 @@
             align-items: center;
             height: 200px;
             font-size: 18px;
-            color: #666;
+            color: #00ffff;
+            font-family: 'Courier New', monospace;
         }
 
         .no-results {
             text-align: center;
-            color: #666;
+            color: #888;
             font-size: 18px;
             padding: 40px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
         }
 
         .error-message {
-            background: #ffebee;
-            color: #c62828;
+            background: #2a1f1f;
+            color: #ff4444;
             padding: 20px;
             margin: 20px;
-            border-radius: 8px;
-            border-left: 4px solid #c62828;
+            border: 2px solid #ff4444;
+            font-family: 'Courier New', monospace;
         }
 
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
-                border-radius: 10px;
             }
             
             .header h1 {
@@ -259,12 +286,12 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🗡️ Minecraft Warriors Shop 🛡️</h1>
-            <p>Browse items from the in-game shop</p>
+            <h1>⚔️ MINECRAFT WAR RIDERS ITEM PRICES ⚔️</h1>
+            <p>Complete list of item prices</p>
         </div>
 
         <div class="search-container">
-            <input type="text" id="searchInput" class="search-box" placeholder="Search for items...">
+            <input type="text" id="searchInput" class="search-box" placeholder="Search all items across all pages...">
         </div>
 
         <div class="tabs-container" id="tabsContainer">
@@ -430,21 +457,31 @@
             filterAndDisplayItems() {
                 if (!this.allData[this.currentSection]) return;
 
-                const pageData = this.allData[this.currentSection].pages[this.currentPage];
-                if (!pageData || !pageData.items) {
-                    this.showNoResults();
-                    return;
-                }
-
-                let items = Object.entries(pageData.items).map(([id, item]) => ({
-                    id,
-                    ...item
-                }));
+                let items = [];
 
                 if (this.searchTerm) {
-                    items = items.filter(item => 
-                        item.material.toLowerCase().includes(this.searchTerm)
-                    );
+                    // Search across all pages when there's a search term
+                    const sectionData = this.allData[this.currentSection];
+                    Object.values(sectionData.pages).forEach(pageData => {
+                        if (pageData && pageData.items) {
+                            Object.entries(pageData.items).forEach(([id, item]) => {
+                                if (item.material.toLowerCase().includes(this.searchTerm)) {
+                                    items.push({ id, ...item });
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    // Show only current page when no search
+                    const pageData = this.allData[this.currentSection].pages[this.currentPage];
+                    if (!pageData || !pageData.items) {
+                        this.showNoResults();
+                        return;
+                    }
+                    items = Object.entries(pageData.items).map(([id, item]) => ({
+                        id,
+                        ...item
+                    }));
                 }
 
                 this.displayItems(items);
@@ -488,34 +525,53 @@
                     const material = container.dataset.material;
                     const img = container.querySelector('img');
                     
-                    // Try to load image from Minecraft Wiki
-                    const imageUrl = this.getMinecraftImageUrl(material);
-                    
-                    img.onload = () => {
-                        container.classList.remove('loading');
-                        img.style.display = 'block';
-                    };
-                    
-                    img.onerror = () => {
-                        container.classList.remove('loading');
-                        container.innerHTML = '📦';
-                        container.style.fontSize = '32px';
-                        container.style.color = '#666';
-                    };
-                    
-                    img.src = imageUrl;
+                    this.tryLoadImage(material, img, container, 0);
                 });
             }
 
-            getMinecraftImageUrl(material) {
-                // Convert material name to the format used by Minecraft Wiki
-                const formattedName = material.toLowerCase()
-                    .replace(/_/g, '_')
-                    .replace(/^(.)/g, (match) => match.toUpperCase())
-                    .replace(/_(.)/g, (match, p1) => '_' + p1.toUpperCase());
+            tryLoadImage(material, img, container, attemptIndex) {
+                // Special case for custom items
+                let actualMaterial = material;
+                if (material === 'AutoSellChest' || material === 'AUTOSELLCHEST') {
+                    actualMaterial = 'CHEST';
+                }
                 
-                return `https://minecraft.wiki/images/thumb/1/1a/${formattedName}.png/150px-${formattedName}.png`;
+                const formattedName = actualMaterial.toLowerCase()
+                    .split('_')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join('_');
+                
+                const possibleUrls = [
+                    `https://minecraft.wiki/images/${formattedName}.png`,
+                    `https://minecraft.wiki/w/images/thumb/a/a0/${formattedName}.png/150px-${formattedName}.png`,
+                    `https://minecraft.wiki/w/images/thumb/1/1a/${formattedName}.png/150px-${formattedName}.png`,
+                    `https://minecraft.wiki/w/images/thumb/0/00/${formattedName}.png/150px-${formattedName}.png`,
+                    `https://minecraft.wiki/w/images/thumb/2/2a/${formattedName}.png/150px-${formattedName}.png`,
+                    `https://minecraft.wiki/w/images/${formattedName}.png`
+                ];
+                
+                if (attemptIndex >= possibleUrls.length) {
+                    // All attempts failed, show fallback
+                    container.classList.remove('loading');
+                    container.innerHTML = '📦';
+                    container.style.fontSize = '32px';
+                    container.style.color = '#00ffff';
+                    return;
+                }
+                
+                img.onload = () => {
+                    container.classList.remove('loading');
+                    img.style.display = 'block';
+                };
+                
+                img.onerror = () => {
+                    // Try next URL
+                    this.tryLoadImage(material, img, container, attemptIndex + 1);
+                };
+                
+                img.src = possibleUrls[attemptIndex];
             }
+
 
             showNoResults() {
                 const itemsGrid = document.getElementById('itemsGrid');
