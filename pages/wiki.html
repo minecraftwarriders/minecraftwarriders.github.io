@@ -12,11 +12,12 @@
         }
 
         body {
-            font-family: 'Courier New', 'Consolas', monospace;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Open Sans', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
             min-height: 100vh;
-            color: #e0e0e0;
+            color: #f0f0f0;
             margin: 0;
+            line-height: 1.6;
         }
 
         .main-container {
@@ -25,30 +26,32 @@
         }
 
         .sidebar {
-            width: 320px;
-            background: #1a1a1a;
-            border-right: 2px solid #333;
-            padding: 15px;
+            width: 380px;
+            background: #2a2a2a;
+            border-right: 2px solid #444;
+            padding: 20px;
             position: fixed;
             height: 100vh;
             overflow-y: auto;
-            font-size: 12px;
+            font-size: 15px;
+            line-height: 1.5;
         }
 
         .sidebar h3 {
-            color: #888;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 5px;
+            color: #bbb;
+            font-size: 16px;
+            text-transform: none;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #444;
+            padding-bottom: 8px;
             cursor: pointer;
             transition: color 0.3s;
+            font-weight: 600;
         }
 
         .sidebar h3:hover {
-            color: #aaa;
+            color: #ddd;
         }
 
         .sidebar ul {
@@ -61,23 +64,25 @@
         }
 
         .sidebar a {
-            color: #ccc;
+            color: #ddd;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 14px;
             display: block;
-            padding: 3px 8px;
-            border-radius: 3px;
+            padding: 8px 12px;
+            border-radius: 6px;
             transition: all 0.3s;
+            font-weight: 500;
         }
 
         .sidebar a:hover {
-            background: #333;
+            background: #3a3a3a;
             color: #fff;
         }
 
         .sidebar a.active {
-            background: #444;
+            background: #4a4a4a;
             color: #fff;
+            font-weight: 600;
         }
 
         .collapsible {
@@ -97,20 +102,21 @@
         }
 
         .content {
-            margin-left: 320px;
+            margin-left: 380px;
             flex: 1;
-            background: #0f0f0f;
+            background: #1f1f1f;
             padding: 40px;
             max-width: 1400px;
         }
 
         .header {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-            color: #ddd;
-            padding: 30px;
+            background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%);
+            color: #f0f0f0;
+            padding: 35px;
             text-align: center;
-            border: 2px solid #444;
+            border: 2px solid #555;
             margin-bottom: 40px;
+            border-radius: 10px;
         }
 
         .header h1 {
@@ -122,11 +128,12 @@
         }
 
         .section {
-            background: #1a1a1a;
-            border: 2px solid #333;
-            padding: 30px;
+            background: #2a2a2a;
+            border: 2px solid #444;
+            padding: 35px;
             margin-bottom: 30px;
             display: none;
+            border-radius: 8px;
         }
 
         .section.active {
@@ -134,75 +141,93 @@
         }
 
         .section h2 {
-            color: #ddd;
-            font-size: 1.6em;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
+            color: #f0f0f0;
+            font-size: 1.8em;
+            margin-bottom: 25px;
+            text-transform: none;
+            letter-spacing: 0.5px;
+            border-bottom: 3px solid #444;
+            padding-bottom: 12px;
+            font-weight: 600;
         }
 
         .section h3 {
-            color: #ccc;
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            margin-top: 25px;
+            color: #e0e0e0;
+            font-size: 1.4em;
+            margin-bottom: 18px;
+            margin-top: 30px;
+            font-weight: 600;
         }
 
         .section p {
-            color: #aaa;
-            line-height: 1.7;
-            margin-bottom: 15px;
+            color: #d0d0d0;
+            line-height: 1.8;
+            margin-bottom: 18px;
+            font-size: 16px;
         }
 
         .command-list {
-            background: #222;
-            border: 1px solid #444;
-            padding: 20px;
-            margin: 20px 0;
+            background: #333;
+            border: 2px solid #555;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 8px;
         }
 
         .command {
             display: flex;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             align-items: flex-start;
+            padding: 8px 0;
         }
 
         .command-syntax {
-            color: #88ff88;
-            font-weight: bold;
-            min-width: 250px;
-            margin-right: 20px;
+            color: #90ff90;
+            font-weight: 600;
+            font-size: 16px;
+            min-width: 280px;
+            margin-right: 25px;
+            font-family: 'Courier New', monospace;
         }
 
         .command-description {
-            color: #ccc;
+            color: #e0e0e0;
             flex: 1;
+            font-size: 15px;
+            line-height: 1.5;
         }
 
         .important {
-            background: #2a1a1a;
-            border: 2px solid #ff6666;
-            padding: 15px;
-            margin: 20px 0;
-            color: #ff9999;
+            background: #3a2a2a;
+            border: 3px solid #ff7777;
+            padding: 20px;
+            margin: 25px 0;
+            color: #ffaaaa;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         .tip {
-            background: #1a2a1a;
-            border: 2px solid #66ff66;
-            padding: 15px;
-            margin: 20px 0;
-            color: #99ff99;
+            background: #2a3a2a;
+            border: 3px solid #77ff77;
+            padding: 20px;
+            margin: 25px 0;
+            color: #aaffaa;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         .warning {
-            background: #2a2a1a;
-            border: 2px solid #ffaa66;
-            padding: 15px;
-            margin: 20px 0;
-            color: #ffcc99;
+            background: #3a3a2a;
+            border: 3px solid #ffbb77;
+            padding: 20px;
+            margin: 25px 0;
+            color: #ffddaa;
+            border-radius: 8px;
+            font-size: 15px;
+            line-height: 1.6;
         }
 
         .plugin-grid {
@@ -277,18 +302,29 @@
 
         .search-input {
             width: 100%;
-            padding: 10px;
-            background: #222;
-            border: 1px solid #444;
+            padding: 12px;
+            background: #333;
+            border: 2px solid #555;
             color: #fff;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-size: 15px;
+            border-radius: 6px;
+        }
+
+        .section ul {
+            color: #d0d0d0;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+        
+        .section li {
+            margin-bottom: 8px;
         }
 
         @media (max-width: 768px) {
             .content {
                 margin-left: 0;
-                padding: 20px;
+                padding: 25px;
             }
             
             .sidebar {
@@ -300,12 +336,21 @@
             }
             
             .command-syntax {
-                margin-bottom: 10px;
+                margin-bottom: 12px;
                 min-width: auto;
+                font-size: 15px;
             }
 
             .plugin-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .section h2 {
+                font-size: 1.6em;
             }
         }
     </style>
@@ -380,7 +425,7 @@
                     <p>Complete guide to all plugins, commands, and features</p>
                 </div>
 
-                <div style="background: #1a1a1a; border: 2px solid #333; padding: 30px; margin-bottom: 30px;">
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
                     <h2>🚀 Quick Start</h2>
                     <p>Welcome to Minecraft War Riders! This comprehensive wiki contains everything you need to know about our server.</p>
                     
@@ -424,7 +469,7 @@
                     <p>Everything you need to know to get started</p>
                 </div>
 
-                <div style="background: #1a1a1a; border: 2px solid #333; padding: 30px; margin-bottom: 30px;">
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
                     <h2>🚀 Getting Started</h2>
                     <p>Welcome to Minecraft War Riders! This server has many custom features and plugins to enhance your gameplay experience.</p>
                     
@@ -489,7 +534,7 @@
                     <p>Core server commands and essential functionality</p>
                 </div>
 
-                <div style="background: #1a1a1a; border: 2px solid #333; padding: 30px; margin-bottom: 30px;">
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
                     <h2>🌐 Teleportation Commands</h2>
                     <div class="command-list">
                         <div class="command">
@@ -619,7 +664,7 @@
                     <p>Comprehensive skill system with leveling and abilities</p>
                 </div>
 
-                <div style="background: #1a1a1a; border: 2px solid #333; padding: 30px; margin-bottom: 30px;">
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
                     <h2>📊 Skill Commands</h2>
                     <div class="command-list">
                         <div class="command">
@@ -641,7 +686,7 @@
                     </div>
 
                     <h2>🏆 Main Skills</h2>
-                    <ul style="color: #aaa; line-height: 1.7; margin-left: 20px;">
+                    <ul style="color: #d0d0d0; line-height: 1.8; margin-left: 20px; font-size: 15px;">
                         <li><strong>Mining:</strong> Level up by mining blocks and ores - increases mining speed and luck</li>
                         <li><strong>Farming:</strong> Grow and harvest crops to gain experience - bonus crop drops</li>
                         <li><strong>Fighting:</strong> Battle mobs and players to increase combat skills - more damage</li>
@@ -667,7 +712,7 @@
                     <p>Main server shop with categorized items</p>
                 </div>
 
-                <div style="background: #1a1a1a; border: 2px solid #333; padding: 30px; margin-bottom: 30px;">
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
                     <h2>🛒 Shop Commands</h2>
                     <p>EconomyShopGUI provides the main server shop system with categorized menus for all items including AutoSell chests.</p>
                     <div class="command-list">
@@ -686,7 +731,7 @@
                     </div>
 
                     <h2>📋 Shop Categories</h2>
-                    <ul style="color: #aaa; line-height: 1.7; margin-left: 20px;">
+                    <ul style="color: #d0d0d0; line-height: 1.8; margin-left: 20px; font-size: 15px;">
                         <li><strong>Building Blocks:</strong> Stone, wood, concrete, and construction materials</li>
                         <li><strong>Tools & Weapons:</strong> Swords, pickaxes, axes, and other tools</li>
                         <li><strong>Food & Farming:</strong> Crops, seeds, and food items</li>
@@ -708,7 +753,7 @@
                     <p>Automated selling system for farms and resource gathering</p>
                 </div>
 
-                <div style="background: #1a1a1a; border: 2px solid #333; padding: 30px; margin-bottom: 30px;">
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
                     <h2>📋 Overview</h2>
                     <p>AutoSellChests are special chests that automatically sell any items you put inside them. Perfect for farms and mining!</p>
                     
@@ -733,7 +778,7 @@
                     </div>
 
                     <h2>💡 Best Uses</h2>
-                    <ul style="color: #aaa; line-height: 1.7; margin-left: 20px;">
+                    <ul style="color: #d0d0d0; line-height: 1.8; margin-left: 20px; font-size: 15px;">
                         <li><strong>Crop Farms:</strong> Wheat, carrots, potatoes auto-selling</li>
                         <li><strong>Tree Farms:</strong> Wood and saplings processing</li>
                         <li><strong>Mining:</strong> Cobblestone and ore disposal</li>
@@ -753,7 +798,7 @@
                     <p>Complete list of every command on the server</p>
                 </div>
 
-                <div style="background: #1a1a1a; border: 2px solid #333; padding: 30px; margin-bottom: 30px;">
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
                     <h2>🌐 Teleportation & Movement</h2>
                     <div class="command-list">
                         <div class="command"><div class="command-syntax">/spawn</div><div class="command-description">Teleport to spawn</div></div>
@@ -833,8 +878,605 @@
                 </div>
             </div>
 
-            <!-- Additional plugin sections would continue here... -->
-            <!-- I'll add the remaining sections to complete the comprehensive wiki -->
+            <!-- AUCTIONHOUSE SECTION -->
+            <div class="section" id="auctionhouse">
+                <div class="header">
+                    <h1>🏦 AUCTIONHOUSE 🏦</h1>
+                    <p>Player-to-player trading marketplace</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>💰 Auction Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/ah</div>
+                            <div class="command-description">Open the auction house GUI</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/ah sell [price]</div>
+                            <div class="command-description">List the item in your hand for auction</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/ah selling</div>
+                            <div class="command-description">View your items currently for sale</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/ah sold</div>
+                            <div class="command-description">View your recently sold items</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/ah expired</div>
+                            <div class="command-description">View expired auction listings</div>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💸 Pro Tip:</strong> Check similar items before setting your price to stay competitive in the marketplace!
+                    </div>
+                </div>
+            </div>
+
+            <!-- BANKPLUS SECTION -->
+            <div class="section" id="bankplus">
+                <div class="header">
+                    <h1>🏦 BANKPLUS 🏦</h1>
+                    <p>Advanced banking system with interest and loans</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>🏦 Banking Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/bank</div>
+                            <div class="command-description">Open the main bank GUI</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/bank deposit [amount]</div>
+                            <div class="command-description">Deposit money into your bank account</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/bank withdraw [amount]</div>
+                            <div class="command-description">Withdraw money from your bank account</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/bank balance</div>
+                            <div class="command-description">Check your bank account balance</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/bank interest</div>
+                            <div class="command-description">View interest information</div>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💹 Interest Benefits:</strong> Money in the bank earns interest over time - a great way to grow your wealth passively!
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRADEPLUS SECTION -->
+            <div class="section" id="tradeplus">
+                <div class="header">
+                    <h1>🤝 TRADEPLUS 🤝</h1>
+                    <p>Secure player-to-player trading system</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>🔄 Trading Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/trade [player]</div>
+                            <div class="command-description">Send a trade request to another player</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/trade accept</div>
+                            <div class="command-description">Accept an incoming trade request</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/trade deny</div>
+                            <div class="command-description">Deny a trade request</div>
+                        </div>
+                    </div>
+
+                    <div class="important">
+                        <strong>⚠️ Safe Trading:</strong> Always double-check items and amounts before confirming trades. Trades cannot be undone!
+                    </div>
+                </div>
+            </div>
+
+            <!-- MARRIAGE SECTION -->
+            <div class="section" id="marriage">
+                <div class="header">
+                    <h1>💒 MARRIAGEMASTER 💒</h1>
+                    <p>Marriage system with special perks and commands</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>💍 Marriage Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/marry [player]</div>
+                            <div class="command-description">Propose marriage to another player</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/marry accept</div>
+                            <div class="command-description">Accept a marriage proposal</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/marry deny</div>
+                            <div class="command-description">Deny a marriage proposal</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/marry tp</div>
+                            <div class="command-description">Teleport to your spouse</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/marry chat</div>
+                            <div class="command-description">Toggle private chat with your spouse</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/marry divorce</div>
+                            <div class="command-description">End your marriage</div>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>💕 Marriage Perks:</strong> Married players get special teleportation abilities and private chat channels!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACHIEVEMENTS SECTION -->
+            <div class="section" id="achievements">
+                <div class="header">
+                    <h1>🏆 ACHIEVEMENTS 🏆</h1>
+                    <p>Extensive achievement system with rewards</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>🏅 Achievement Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/aach</div>
+                            <div class="command-description">Open achievements menu</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/aach list</div>
+                            <div class="command-description">List all available achievements</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/aach top</div>
+                            <div class="command-description">View top achievement earners</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/aach stats</div>
+                            <div class="command-description">View your achievement statistics</div>
+                        </div>
+                    </div>
+
+                    <h2>🎯 Achievement Categories</h2>
+                    <ul style="color: #d0d0d0; line-height: 1.8; margin-left: 20px; font-size: 15px;">
+                        <li><strong>Mining:</strong> Achievements for mining blocks and finding rare ores</li>
+                        <li><strong>Building:</strong> Rewards for placing blocks and creating structures</li>
+                        <li><strong>Combat:</strong> Fighting mobs and players</li>
+                        <li><strong>Exploration:</strong> Discovering new areas and biomes</li>
+                        <li><strong>Social:</strong> Interacting with other players</li>
+                        <li><strong>Economy:</strong> Trading and earning money</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- BREWERY SECTION -->
+            <div class="section" id="brewery">
+                <div class="header">
+                    <h1>🍺 BREWERYX 🍺</h1>
+                    <p>Advanced brewing system for custom alcoholic drinks</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>🍻 Brewing Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/brewery</div>
+                            <div class="command-description">Main brewery information and help</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/brew info</div>
+                            <div class="command-description">Get info about the drink you're holding</div>
+                        </div>
+                    </div>
+
+                    <h2>🍾 How Brewing Works</h2>
+                    <div class="steps">
+                        <div class="step">
+                            <strong>Ferment:</strong> Place ingredients in cauldrons with water over fire
+                        </div>
+                        <div class="step">
+                            <strong>Distill:</strong> Put fermented drinks in brewing stands
+                        </div>
+                        <div class="step">
+                            <strong>Age:</strong> Store drinks in barrels to improve quality and effects
+                        </div>
+                    </div>
+
+                    <div class="warning">
+                        <strong>⚠️ Drinking Effects:</strong> Alcoholic drinks can cause various effects including nausea, blindness, or beneficial buffs depending on quality!
+                    </div>
+                </div>
+            </div>
+
+            <!-- WORLDEDIT SECTION -->
+            <div class="section" id="worldedit">
+                <div class="header">
+                    <h1>🌍 WORLDEDIT 🌍</h1>
+                    <p>Powerful world editing tool (Admin Only)</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <div class="important">
+                        <strong>🛡️ Admin Only:</strong> WorldEdit commands require administrator permissions and are not available to regular players.
+                    </div>
+
+                    <h2>⚙️ Basic WorldEdit Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">//wand</div>
+                            <div class="command-description">Get the WorldEdit selection wand</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">//set [block]</div>
+                            <div class="command-description">Fill selection with specified block</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">//copy</div>
+                            <div class="command-description">Copy the selected area</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">//paste</div>
+                            <div class="command-description">Paste the copied area</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">//undo</div>
+                            <div class="command-description">Undo the last WorldEdit action</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BIGDOORS SECTION -->
+            <div class="section" id="bigdoors">
+                <div class="header">
+                    <h1>🚪 BIGDOORS 🚪</h1>
+                    <p>Create massive animated doors and gates</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>🏠 Door Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/bigdoors</div>
+                            <div class="command-description">Main BigDoors menu and information</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/bd create</div>
+                            <div class="command-description">Create a new big door</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/bd delete</div>
+                            <div class="command-description">Delete a big door</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/bd menu</div>
+                            <div class="command-description">Open door management GUI</div>
+                        </div>
+                    </div>
+
+                    <div class="tip">
+                        <strong>🏰 Perfect for:</strong> Castle gates, hangar doors, drawbridges, and any large entrance that needs dramatic opening animations!
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOVECRAFT SECTION -->
+            <div class="section" id="movecraft">
+                <div class="header">
+                    <h1>✈️ MOVECRAFT ✈️</h1>
+                    <p>Build and pilot ships, airships, and vehicles</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>🚢 Movecraft Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/movecraft</div>
+                            <div class="command-description">Main Movecraft information</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/pilot</div>
+                            <div class="command-description">Pilot a craft you're standing on</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/release</div>
+                            <div class="command-description">Stop piloting your current craft</div>
+                        </div>
+                    </div>
+
+                    <div class="important">
+                        <strong>🚀 Coming Soon:</strong> Movecraft will have extensive expansion in the future with more craft types and advanced features!
+                    </div>
+
+                    <h2>⛵ Craft Types</h2>
+                    <ul style="color: #d0d0d0; line-height: 1.8; margin-left: 20px; font-size: 15px;">
+                        <li><strong>Ships:</strong> Naval vessels for ocean exploration</li>
+                        <li><strong>Airships:</strong> Flying craft for aerial adventures</li>
+                        <li><strong>Submarines:</strong> Underwater exploration vehicles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ARCHITECTURE SECTION -->
+            <div class="section" id="architecture">
+                <div class="header">
+                    <h1>🏗️ ANIMATED ARCHITECTURE 🏗️</h1>
+                    <p>Create complex animated structures and mechanisms</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>🏢 Architecture Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/aa</div>
+                            <div class="command-description">Main Animated Architecture menu</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/aa create</div>
+                            <div class="command-description">Create a new animated structure</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/aa tool</div>
+                            <div class="command-description">Get the architecture tool</div>
+                        </div>
+                    </div>
+
+                    <h2>🔩 Structure Types</h2>
+                    <ul style="color: #d0d0d0; line-height: 1.8; margin-left: 20px; font-size: 15px;">
+                        <li><strong>Bridges:</strong> Retractable and rotating bridges</li>
+                        <li><strong>Portcullises:</strong> Medieval-style gates</li>
+                        <li><strong>Drawbridges:</strong> Castle entrance mechanisms</li>
+                        <li><strong>Sliding Doors:</strong> Modern automatic doors</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- GRAVES SECTION -->
+            <div class="section" id="graves">
+                <div class="header">
+                    <h1>⚰️ AXGRAVES ⚰️</h1>
+                    <p>Protect your items when you die with graves</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>🪦 Grave Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/graves</div>
+                            <div class="command-description">View your active graves</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/graves list</div>
+                            <div class="command-description">List all your graves with locations</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/graves teleport [id]</div>
+                            <div class="command-description">Teleport to a specific grave</div>
+                        </div>
+                    </div>
+
+                    <h2>🛡️ How Graves Work</h2>
+                    <p>When you die, a grave is automatically created at your death location containing all your items. Only you can access your graves, keeping your items safe from other players.</p>
+
+                    <div class="tip">
+                        <strong>⏰ Time Limit:</strong> Graves last for a limited time, so make sure to collect your items before they expire!
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHULKERPACKS SECTION -->
+            <div class="section" id="shulkerpacks">
+                <div class="header">
+                    <h1>🎒 SHULKERPACKS 🎒</h1>
+                    <p>Open shulker boxes directly from your inventory</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>📦 How to Use</h2>
+                    <p>ShulkerPacks allows you to right-click shulker boxes in your inventory to open them without placing them down. This makes portable storage much more convenient!</p>
+
+                    <h2>🎯 Benefits</h2>
+                    <ul style="color: #d0d0d0; line-height: 1.8; margin-left: 20px; font-size: 15px;">
+                        <li><strong>Convenience:</strong> No need to place and break shulker boxes</li>
+                        <li><strong>Speed:</strong> Quick access to stored items</li>
+                        <li><strong>Organization:</strong> Better inventory management</li>
+                        <li><strong>Portability:</strong> True portable storage solution</li>
+                    </ul>
+
+                    <div class="tip">
+                        <strong>📦 Pro Tip:</strong> Color-code your shulker boxes and name them to easily organize different item categories!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENCHANTS SECTION -->
+            <div class="section" id="enchants">
+                <div class="header">
+                    <h1>✨ ENCHANTS² ✨</h1>
+                    <p>Custom enchantments with unique effects and abilities</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <h2>📜 Enchant Commands</h2>
+                    <div class="command-list">
+                        <div class="command">
+                            <div class="command-syntax">/enchants</div>
+                            <div class="command-description">View all available custom enchantments</div>
+                        </div>
+                        <div class="command">
+                            <div class="command-syntax">/tinkerer</div>
+                            <div class="command-description">Open the enchantment upgrading menu</div>
+                        </div>
+                    </div>
+
+                    <h2>⚔️ Enchantment Categories</h2>
+                    <ul style="color: #d0d0d0; line-height: 1.8; margin-left: 20px; font-size: 15px;">
+                        <li><strong>Weapon Enchants:</strong> Enhanced damage, life steal, poison effects</li>
+                        <li><strong>Tool Enchants:</strong> Auto-smelt, vein mining, increased durability</li>
+                        <li><strong>Armor Enchants:</strong> Speed boosts, damage reduction, special abilities</li>
+                        <li><strong>Bow Enchants:</strong> Multi-shot, explosive arrows, piercing</li>
+                    </ul>
+
+                    <div class="important">
+                        <strong>⚡ Power Levels:</strong> Custom enchantments often have multiple levels with increasingly powerful effects!
+                    </div>
+                </div>
+            </div>
+
+            <!-- ITEMS REDIRECT SECTION -->
+            <div class="section" id="items">
+                <div class="header">
+                    <h1>💰 ITEM PRICES 💰</h1>
+                    <p>Complete list of server item prices</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px; text-align: center;">
+                    <h2>🔗 Redirecting to Item Prices</h2>
+                    <p style="font-size: 1.2em; margin-bottom: 20px;">For the complete and up-to-date item price list, visit:</p>
+                    <a href="https://minecraftwarriders.github.io/pages/items" style="color: #88ff88; font-size: 1.5em; text-decoration: none; border: 2px solid #88ff88; padding: 15px 30px; display: inline-block; margin: 20px;">
+                        👉 VIEW ITEM PRICES 👈
+                    </a>
+                    <p>The item prices page shows live data with current buy/sell prices for all server items.</p>
+                </div>
+            </div>
+
+            <!-- COMMAND CATEGORY SECTIONS -->
+            <div class="section" id="cmd-teleport">
+                <div class="header">
+                    <h1>🌐 TELEPORTATION COMMANDS 🌐</h1>
+                    <p>All commands related to movement and teleportation</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <div class="command-list">
+                        <div class="command"><div class="command-syntax">/spawn</div><div class="command-description">Teleport to spawn</div></div>
+                        <div class="command"><div class="command-syntax">/home [name]</div><div class="command-description">Go to home</div></div>
+                        <div class="command"><div class="command-syntax">/sethome [name]</div><div class="command-description">Set home</div></div>
+                        <div class="command"><div class="command-syntax">/delhome [name]</div><div class="command-description">Delete home</div></div>
+                        <div class="command"><div class="command-syntax">/homes</div><div class="command-description">List homes</div></div>
+                        <div class="command"><div class="command-syntax">/warp [name]</div><div class="command-description">Go to warp</div></div>
+                        <div class="command"><div class="command-syntax">/warps</div><div class="command-description">List warps</div></div>
+                        <div class="command"><div class="command-syntax">/tpa [player]</div><div class="command-description">Request teleport to player</div></div>
+                        <div class="command"><div class="command-syntax">/tpahere [player]</div><div class="command-description">Request player teleport to you</div></div>
+                        <div class="command"><div class="command-syntax">/tpaccept</div><div class="command-description">Accept teleport request</div></div>
+                        <div class="command"><div class="command-syntax">/tpdeny</div><div class="command-description">Deny teleport request</div></div>
+                        <div class="command"><div class="command-syntax">/back</div><div class="command-description">Return to last location</div></div>
+                        <div class="command"><div class="command-syntax">/top</div><div class="command-description">Go to highest block</div></div>
+                        <div class="command"><div class="command-syntax">/marry tp</div><div class="command-description">Teleport to spouse</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="cmd-economy">
+                <div class="header">
+                    <h1>💰 ECONOMY COMMANDS 💰</h1>
+                    <p>All commands related to money, trading, and economy</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <div class="command-list">
+                        <div class="command"><div class="command-syntax">/balance</div><div class="command-description">Check money balance</div></div>
+                        <div class="command"><div class="command-syntax">/pay [player] [amount]</div><div class="command-description">Send money to player</div></div>
+                        <div class="command"><div class="command-syntax">/baltop</div><div class="command-description">Richest players list</div></div>
+                        <div class="command"><div class="command-syntax">/shop</div><div class="command-description">Open server shop</div></div>
+                        <div class="command"><div class="command-syntax">/sell [item|hand|all]</div><div class="command-description">Sell items to server</div></div>
+                        <div class="command"><div class="command-syntax">/worth [item]</div><div class="command-description">Check item value</div></div>
+                        <div class="command"><div class="command-syntax">/ah</div><div class="command-description">Open auction house</div></div>
+                        <div class="command"><div class="command-syntax">/ah sell [price]</div><div class="command-description">List item for auction</div></div>
+                        <div class="command"><div class="command-syntax">/trade [player]</div><div class="command-description">Request trade with player</div></div>
+                        <div class="command"><div class="command-syntax">/bank</div><div class="command-description">Open bank GUI</div></div>
+                        <div class="command"><div class="command-syntax">/bank deposit [amount]</div><div class="command-description">Deposit money</div></div>
+                        <div class="command"><div class="command-syntax">/bank withdraw [amount]</div><div class="command-description">Withdraw money</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="cmd-social">
+                <div class="header">
+                    <h1>👥 SOCIAL COMMANDS 👥</h1>
+                    <p>All commands for communication and social interaction</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <div class="command-list">
+                        <div class="command"><div class="command-syntax">/msg [player] [message]</div><div class="command-description">Private message</div></div>
+                        <div class="command"><div class="command-syntax">/r [message]</div><div class="command-description">Reply to last message</div></div>
+                        <div class="command"><div class="command-syntax">/mail send [player] [msg]</div><div class="command-description">Send mail</div></div>
+                        <div class="command"><div class="command-syntax">/mail read</div><div class="command-description">Read mail</div></div>
+                        <div class="command"><div class="command-syntax">/ignore [player]</div><div class="command-description">Ignore player</div></div>
+                        <div class="command"><div class="command-syntax">/list</div><div class="command-description">Online players</div></div>
+                        <div class="command"><div class="command-syntax">/marry [player]</div><div class="command-description">Propose marriage</div></div>
+                        <div class="command"><div class="command-syntax">/marry accept</div><div class="command-description">Accept proposal</div></div>
+                        <div class="command"><div class="command-syntax">/marry chat</div><div class="command-description">Private spouse chat</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="cmd-building">
+                <div class="header">
+                    <h1>🏗️ BUILDING COMMANDS 🏗️</h1>
+                    <p>All commands related to building and world modification</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <div class="command-list">
+                        <div class="command"><div class="command-syntax">//wand</div><div class="command-description">Get WorldEdit wand (Admin)</div></div>
+                        <div class="command"><div class="command-syntax">//set [block]</div><div class="command-description">Fill selection (Admin)</div></div>
+                        <div class="command"><div class="command-syntax">//copy</div><div class="command-description">Copy selection (Admin)</div></div>
+                        <div class="command"><div class="command-syntax">//paste</div><div class="command-description">Paste clipboard (Admin)</div></div>
+                        <div class="command"><div class="command-syntax">//undo</div><div class="command-description">Undo last action (Admin)</div></div>
+                        <div class="command"><div class="command-syntax">/bigdoors</div><div class="command-description">BigDoors menu</div></div>
+                        <div class="command"><div class="command-syntax">/bd create</div><div class="command-description">Create big door</div></div>
+                        <div class="command"><div class="command-syntax">/movecraft</div><div class="command-description">Movecraft info</div></div>
+                        <div class="command"><div class="command-syntax">/pilot</div><div class="command-description">Pilot craft</div></div>
+                        <div class="command"><div class="command-syntax">/aa</div><div class="command-description">Animated Architecture</div></div>
+                    </div>
+
+                    <div class="important">
+                        <strong>🛡️ Note:</strong> WorldEdit commands require admin permissions and are not available to regular players.
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="cmd-utility">
+                <div class="header">
+                    <h1>🛠️ UTILITY COMMANDS 🛠️</h1>
+                    <p>All utility and miscellaneous commands</p>
+                </div>
+
+                <div style="background: #2a2a2a; border: 2px solid #444; padding: 35px; margin-bottom: 30px; border-radius: 8px;">
+                    <div class="command-list">
+                        <div class="command"><div class="command-syntax">/rules</div><div class="command-description">Server rules</div></div>
+                        <div class="command"><div class="command-syntax">/disposal</div><div class="command-description">Open trash can</div></div>
+                        <div class="command"><div class="command-syntax">/recipe [item]</div><div class="command-description">Show crafting recipe</div></div>
+                        <div class="command"><div class="command-syntax">/time</div><div class="command-description">Check server time</div></div>
+                        <div class="command"><div class="command-syntax">/weather</div><div class="command-description">Check weather</div></div>
+                        <div class="command"><div class="command-syntax">/ping</div><div class="command-description">Check connection ping</div></div>
+                        <div class="command"><div class="command-syntax">/graves</div><div class="command-description">Manage death graves</div></div>
+                        <div class="command"><div class="command-syntax">/brewery</div><div class="command-description">Brewing information</div></div>
+                        <div class="command"><div class="command-syntax">/skills</div><div class="command-description">Open skills menu</div></div>
+                        <div class="command"><div class="command-syntax">/aach</div><div class="command-description">Open achievements</div></div>
+                        <div class="command"><div class="command-syntax">/enchants</div><div class="command-description">View custom enchantments</div></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
