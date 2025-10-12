@@ -662,21 +662,32 @@
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                     .join('_');
                 
-                // Simplified approach - only try patterns that actually work
+                // Comprehensive list based on your examples and patterns that work
                 const possibleUrls = [
-                    // Basic direct images (most items have these)
+                    // Basic direct images (most common)
                     `https://minecraft.wiki/images/${materialFormatted}.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}.gif`,
                     
-                    // Known working version patterns (only a few items have these)
-                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE2.png`, // TNT, Glowstone, etc.
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE3.png`, // Slime Block, etc.
-                    `https://minecraft.wiki/images/${materialFormatted}_JE8.png`,     // Stone, etc.
+                    // Invicon format (from your chest example)
+                    `https://minecraft.wiki/images/Invicon_${materialFormatted}.png`,
+                    
+                    // Common version patterns (from your working examples)
+                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE2.png`, // TNT works
+                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE1.png`, // Calcite works
+                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE1.png`, // Dripstone Block works
+                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png`, // Snow Block, Magma Block work
+                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE2.png`, // Honey Block works
+                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE3.png`,
                     `https://minecraft.wiki/images/${materialFormatted}_JE4_BE2.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}_JE8.png`,
                     
-                    // Alternative paths for direct images
+                    // Directional variants (from Hay Bale example)
+                    `https://minecraft.wiki/images/${materialFormatted}_%28UD%29_JE2_BE2.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}_%28N%29_JE2_BE1.png`,
+                    
+                    // Alternative /w/ paths
                     `https://minecraft.wiki/w/images/${materialFormatted}.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE3_BE2.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE8.png`
+                    `https://minecraft.wiki/w/images/${materialFormatted}.gif`
                 ];
                 
                 if (attemptIndex >= possibleUrls.length) {
