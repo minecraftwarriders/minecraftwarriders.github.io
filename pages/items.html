@@ -633,18 +633,39 @@
                 
                 // Based on your examples, try these URL patterns
                 const possibleUrls = [
-                    // Direct images format: https://minecraft.wiki/images/Diamond_JE3_BE3.png
+                    // Direct images format with version suffixes
+                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE1.png`,
                     `https://minecraft.wiki/images/${materialFormatted}_JE3_BE3.png`,
                     `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE2.png`,
                     `https://minecraft.wiki/images/${materialFormatted}_JE1_BE1.png`,
+                    
+                    // Format with original parameter
+                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png?format=original`,
+                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE3.png?format=original`,
+                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE2.png?format=original`,
+                    
+                    // Direct images without version suffix
                     `https://minecraft.wiki/images/${materialFormatted}.png`,
-                    // Thumbnail format: /images/thumb/Redstone_Dust_JE2_BE2.png/150px-Redstone_Dust_JE2_BE2.png
+                    `https://minecraft.wiki/images/${materialFormatted}.png?format=original`,
+                    
+                    // Thumbnail format: /images/thumb/Honey_Block_JE1_BE2.png/150px-Honey_Block_JE1_BE2.png
+                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE4_BE1.png/150px-${materialFormatted}_JE4_BE1.png`,
                     `https://minecraft.wiki/images/thumb/${materialFormatted}_JE2_BE2.png/150px-${materialFormatted}_JE2_BE2.png`,
                     `https://minecraft.wiki/images/thumb/${materialFormatted}_JE3_BE3.png/150px-${materialFormatted}_JE3_BE3.png`,
+                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE1_BE2.png/150px-${materialFormatted}_JE1_BE2.png`,
                     `https://minecraft.wiki/images/thumb/${materialFormatted}.png/150px-${materialFormatted}.png`,
-                    // Alternative paths
+                    
+                    // Alternative w/ paths
                     `https://minecraft.wiki/w/images/${materialFormatted}_JE2_BE2.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}.png`
+                    `https://minecraft.wiki/w/images/${materialFormatted}_JE3_BE3.png`,
+                    `https://minecraft.wiki/w/images/${materialFormatted}_JE1_BE2.png`,
+                    `https://minecraft.wiki/w/images/${materialFormatted}.png`,
+                    
+                    // Wikia/Gamepedia fallback (legacy)
+                    `https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/56/${materialFormatted}_JE4_BE1.png`,
+                    `https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/56/${materialFormatted}_JE2_BE2.png`,
+                    `https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/56/${materialFormatted}.png`
                 ];
                 
                 if (attemptIndex >= possibleUrls.length) {
