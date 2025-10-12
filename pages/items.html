@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Server Shop</title>
+    <title>Minecraft Warriors Shop</title>
     <style>
         * {
             margin: 0;
@@ -19,373 +19,523 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
         }
 
-        h1 {
-            color: #333;
+        .header {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 2.5em;
         }
 
-        .controls {
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .search-container {
+            margin: 20px;
             display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            align-items: center;
+            justify-content: center;
         }
 
         .search-box {
-            flex: 1;
-            min-width: 250px;
-            padding: 12px 16px;
+            width: 100%;
+            max-width: 400px;
+            padding: 12px 20px;
             border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1em;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
             transition: border-color 0.3s;
         }
 
         .search-box:focus {
-            outline: none;
-            border-color: #667eea;
+            border-color: #4CAF50;
         }
 
-        .section-tabs {
+        .tabs-container {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-        }
-
-        .section-btn {
-            padding: 10px 20px;
-            background: #f0f0f0;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.95em;
-            white-space: nowrap;
-            transition: all 0.3s;
-        }
-
-        .section-btn:hover {
-            background: #e0e0e0;
-        }
-
-        .section-btn.active {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .page-controls {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            align-items: center;
             flex-wrap: wrap;
+            background: #f5f5f5;
+            border-bottom: 3px solid #4CAF50;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+            white-space: nowrap;
+            min-width: fit-content;
+        }
+
+        .tab:hover {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4CAF50;
+        }
+
+        .tab.active {
+            background: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        .page-navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 20px;
+            background: #fafafa;
+            border-bottom: 1px solid #eee;
         }
 
         .page-btn {
-            padding: 8px 15px;
-            background: #f0f0f0;
-            border: 2px solid #ddd;
-            border-radius: 6px;
+            padding: 8px 16px;
+            border: 2px solid #4CAF50;
+            background: white;
+            color: #4CAF50;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-weight: 500;
             transition: all 0.3s;
         }
 
-        .page-btn:hover {
-            background: #e0e0e0;
-        }
-
-        .page-btn.active {
-            background: #667eea;
+        .page-btn:hover, .page-btn.active {
+            background: #4CAF50;
             color: white;
-            border-color: #667eea;
         }
 
-        .page-info {
-            font-size: 0.9em;
-            color: #666;
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            padding: 30px;
+            min-height: 400px;
         }
 
         .item-card {
-            background: #f9f9f9;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            padding: 15px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             text-align: center;
             transition: all 0.3s;
-            cursor: pointer;
+            border: 2px solid transparent;
         }
 
         .item-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            border-color: #667eea;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-color: #4CAF50;
         }
 
         .item-image {
-            height: 120px;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 15px;
+            background: #f0f0f0;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 12px;
-            background: #f0f0f0;
-            border-radius: 8px;
             overflow: hidden;
         }
 
         .item-image img {
-            max-height: 100%;
-            max-width: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
         }
 
+        .item-image.loading {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
         .item-name {
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: bold;
             color: #333;
-            margin-bottom: 10px;
-            font-size: 0.95em;
-            word-wrap: break-word;
+            margin-bottom: 15px;
+            text-transform: capitalize;
         }
 
         .item-prices {
             display: flex;
-            flex-direction: column;
-            gap: 6px;
+            justify-content: space-between;
+            gap: 10px;
         }
 
-        .price {
-            font-size: 0.85em;
-            padding: 6px 8px;
-            border-radius: 6px;
-            font-weight: 500;
+        .price-tag {
+            flex: 1;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
         }
 
         .buy-price {
-            background: #e3f2fd;
-            color: #1976d2;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
         }
 
         .sell-price {
-            background: #f3e5f5;
-            color: #7b1fa2;
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
         }
 
-        .no-items {
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            font-size: 18px;
+            color: #666;
+        }
+
+        .no-results {
             text-align: center;
+            color: #666;
+            font-size: 18px;
             padding: 40px;
-            color: #999;
-            font-size: 1.1em;
         }
 
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #667eea;
-            font-size: 1.1em;
-        }
-
-        .error {
-            text-align: center;
-            padding: 20px;
-            color: #d32f2f;
-            font-size: 1em;
+        .error-message {
             background: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            margin: 20px;
             border-radius: 8px;
+            border-left: 4px solid #c62828;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .items-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                padding: 20px;
+                gap: 15px;
+            }
+            
+            .tabs-container {
+                justify-content: flex-start;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Shop</h1>
-
-        <div class="controls">
-            <input type="text" class="search-box" id="searchInput" placeholder="Search items...">
+        <div class="header">
+            <h1>🗡️ Minecraft Warriors Shop 🛡️</h1>
+            <p>Browse items from the in-game shop</p>
         </div>
 
-        <div class="section-tabs" id="sectionTabs"></div>
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-box" placeholder="Search for items...">
+        </div>
 
-        <div class="page-controls" id="pageControls"></div>
+        <div class="tabs-container" id="tabsContainer">
+            <!-- Tabs will be generated dynamically -->
+        </div>
 
-        <div class="items-grid" id="itemsGrid"></div>
+        <div class="page-navigation" id="pageNavigation" style="display: none;">
+            <button class="page-btn" id="prevBtn">← Previous</button>
+            <span id="pageInfo"></span>
+            <button class="page-btn" id="nextBtn">Next →</button>
+        </div>
+
+        <div class="items-grid" id="itemsGrid">
+            <div class="loading-container">
+                <div>Loading shop items...</div>
+            </div>
+        </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <script>
-        const sections = [
-            'Automation', 'Blocks', 'Decoration', 'Dyes', 'Enchanting', 'Farming',
-            'Food', 'Miscellaneous', 'Mobs', 'Music', 'Ores', 'Potions',
-            'Redstone', 'SpawnEggs', 'Spawners', 'Workstations', 'Z_EverythingElse'
-        ];
+        class MinecraftShop {
+            constructor() {
+                this.sections = [
+                    'Automation', 'Blocks', 'Decoration', 'Dyes', 'Enchanting', 
+                    'Farming', 'Food', 'Miscellaneous', 'Mobs', 'Music', 
+                    'Ores', 'Potions', 'Redstone', 'SpawnEggs', 'Spawners', 
+                    'Workstations', 'Z_EverythingElse'
+                ];
+                this.currentSection = 'Blocks';
+                this.currentPage = 'page1';
+                this.allData = {};
+                this.filteredItems = [];
+                this.searchTerm = '';
+                
+                this.init();
+            }
 
-        let allData = {};
-        let currentSection = sections[0];
-        let currentPage = 'page1';
-        let searchQuery = '';
+            async init() {
+                this.createTabs();
+                this.setupEventListeners();
+                await this.loadSection(this.currentSection);
+            }
 
-        const searchInput = document.getElementById('searchInput');
-        const sectionTabs = document.getElementById('sectionTabs');
-        const pageControls = document.getElementById('pageControls');
-        const itemsGrid = document.getElementById('itemsGrid');
+            createTabs() {
+                const tabsContainer = document.getElementById('tabsContainer');
+                tabsContainer.innerHTML = '';
 
-        // Load all YAML files
-        async function loadAllSections() {
-            try {
-                itemsGrid.innerHTML = '<div class="loading">Loading shop data...</div>';
-                console.log('Starting to load sections...');
+                this.sections.forEach(section => {
+                    const tab = document.createElement('button');
+                    tab.className = `tab ${section === this.currentSection ? 'active' : ''}`;
+                    tab.textContent = section.replace('Z_', '').replace('_', ' ');
+                    tab.onclick = () => this.switchSection(section);
+                    tabsContainer.appendChild(tab);
+                });
+            }
 
-                for (const section of sections) {
-                    try {
-                        const path = `sections/${section}.yml`;
-                        console.log(`Fetching: ${path}`);
-                        
-                        const response = await fetch(path);
-                        console.log(`${section}.yml - Status: ${response.status}`);
-                        
-                        if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                        
-                        const text = await response.text();
-                        console.log(`${section}.yml - Loaded successfully, ${text.length} bytes`);
-                        
-                        const data = jsYaml.load(text);
-                        allData[section] = data.pages || {};
-                    } catch (error) {
-                        console.error(`Error loading ${section}:`, error);
-                        allData[section] = {};
-                    }
+            setupEventListeners() {
+                const searchInput = document.getElementById('searchInput');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
+                searchInput.addEventListener('input', (e) => {
+                    this.searchTerm = e.target.value.toLowerCase();
+                    this.filterAndDisplayItems();
+                });
+
+                prevBtn.addEventListener('click', () => this.navigatePage(-1));
+                nextBtn.addEventListener('click', () => this.navigatePage(1));
+            }
+
+            async loadSection(sectionName) {
+                try {
+                    const response = await fetch(`sections/${sectionName}.yml`);
+                    if (!response.ok) throw new Error(`Failed to load ${sectionName}.yml`);
+                    
+                    const yamlText = await response.text();
+                    const data = jsyaml.load(yamlText);
+                    
+                    this.allData[sectionName] = data;
+                    this.currentSection = sectionName;
+                    this.currentPage = Object.keys(data.pages)[0];
+                    
+                    this.updateTabs();
+                    this.updatePageNavigation();
+                    this.filterAndDisplayItems();
+                } catch (error) {
+                    console.error('Error loading section:', error);
+                    this.showError(`Failed to load ${sectionName} section. Please make sure the YML file exists.`);
+                }
+            }
+
+            switchSection(sectionName) {
+                if (this.allData[sectionName]) {
+                    this.currentSection = sectionName;
+                    this.currentPage = Object.keys(this.allData[sectionName].pages)[0];
+                    this.updateTabs();
+                    this.updatePageNavigation();
+                    this.filterAndDisplayItems();
+                } else {
+                    this.loadSection(sectionName);
+                }
+            }
+
+            updateTabs() {
+                const tabs = document.querySelectorAll('.tab');
+                tabs.forEach((tab, index) => {
+                    tab.classList.toggle('active', this.sections[index] === this.currentSection);
+                });
+            }
+
+            updatePageNavigation() {
+                const pageNavigation = document.getElementById('pageNavigation');
+                const pageInfo = document.getElementById('pageInfo');
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+
+                if (!this.allData[this.currentSection]) {
+                    pageNavigation.style.display = 'none';
+                    return;
                 }
 
-                console.log('All sections loaded. Data:', allData);
-                initializePage();
-            } catch (error) {
-                itemsGrid.innerHTML = `<div class="error">Error loading shop data. Check console for details.</div>`;
-                console.error('Fatal error:', error);
-            }
-        }
+                const pages = Object.keys(this.allData[this.currentSection].pages);
+                const currentPageIndex = pages.indexOf(this.currentPage);
 
-        function initializePage() {
-            renderSectionTabs();
-            updatePageControls();
-            renderItems();
-        }
+                pageNavigation.style.display = 'flex';
+                pageInfo.textContent = `Page ${currentPageIndex + 1} of ${pages.length}`;
+                
+                prevBtn.disabled = currentPageIndex === 0;
+                nextBtn.disabled = currentPageIndex === pages.length - 1;
 
-        function renderSectionTabs() {
-            sectionTabs.innerHTML = '';
-            sections.forEach(section => {
-                const btn = document.createElement('button');
-                btn.className = `section-btn ${section === currentSection ? 'active' : ''}`;
-                btn.textContent = section;
-                btn.onclick = () => {
-                    currentSection = section;
-                    currentPage = 'page1';
-                    searchQuery = '';
-                    searchInput.value = '';
-                    renderSectionTabs();
-                    updatePageControls();
-                    renderItems();
-                };
-                sectionTabs.appendChild(btn);
-            });
-        }
+                // Create page buttons
+                const existingPageBtns = document.querySelectorAll('.page-number-btn');
+                existingPageBtns.forEach(btn => btn.remove());
 
-        function updatePageControls() {
-            pageControls.innerHTML = '';
-            const pages = Object.keys(allData[currentSection] || {}).sort();
-
-            if (pages.length === 0) {
-                pageControls.innerHTML = '<div class="page-info">No pages available</div>';
-                return;
+                pages.forEach((page, index) => {
+                    const pageBtn = document.createElement('button');
+                    pageBtn.className = `page-btn page-number-btn ${page === this.currentPage ? 'active' : ''}`;
+                    pageBtn.textContent = index + 1;
+                    pageBtn.onclick = () => this.switchPage(page);
+                    pageInfo.parentNode.insertBefore(pageBtn, nextBtn);
+                });
             }
 
-            const pageLabel = document.createElement('div');
-            pageLabel.className = 'page-info';
-            pageLabel.textContent = 'Pages:';
-            pageControls.appendChild(pageLabel);
-
-            pages.forEach(page => {
-                const btn = document.createElement('button');
-                btn.className = `page-btn ${page === currentPage ? 'active' : ''}`;
-                btn.textContent = page;
-                btn.onclick = () => {
-                    currentPage = page;
-                    searchQuery = '';
-                    searchInput.value = '';
-                    updatePageControls();
-                    renderItems();
-                };
-                pageControls.appendChild(btn);
-            });
-        }
-
-        function getItemImage(material) {
-            const formatted = material.toLowerCase().replace(/_/g, ' ');
-            return `https://minecraft.wiki/images/Invicon_${material}.png`;
-        }
-
-        function renderItems() {
-            itemsGrid.innerHTML = '';
-
-            const sectionData = allData[currentSection] || {};
-            const pageData = sectionData[currentPage] || { items: {} };
-            let items = pageData.items || {};
-
-            if (searchQuery.trim()) {
-                const query = searchQuery.toLowerCase();
-                items = Object.fromEntries(
-                    Object.entries(items).filter(([_, item]) =>
-                        item.material.toLowerCase().includes(query)
-                    )
-                );
+            navigatePage(direction) {
+                if (!this.allData[this.currentSection]) return;
+                
+                const pages = Object.keys(this.allData[this.currentSection].pages);
+                const currentIndex = pages.indexOf(this.currentPage);
+                const newIndex = currentIndex + direction;
+                
+                if (newIndex >= 0 && newIndex < pages.length) {
+                    this.switchPage(pages[newIndex]);
+                }
             }
 
-            if (Object.keys(items).length === 0) {
-                itemsGrid.innerHTML = '<div class="no-items">No items found</div>';
-                return;
+            switchPage(pageName) {
+                this.currentPage = pageName;
+                this.updatePageNavigation();
+                this.filterAndDisplayItems();
             }
 
-            Object.entries(items).forEach(([slot, item]) => {
-                const card = document.createElement('div');
-                card.className = 'item-card';
+            filterAndDisplayItems() {
+                if (!this.allData[this.currentSection]) return;
 
-                const imageName = item.material.charAt(0).toUpperCase() + item.material.slice(1).toLowerCase();
-                const imageUrl = getItemImage(item.material);
+                const pageData = this.allData[this.currentSection].pages[this.currentPage];
+                if (!pageData || !pageData.items) {
+                    this.showNoResults();
+                    return;
+                }
 
-                card.innerHTML = `
-                    <div class="item-image">
-                        <img src="${imageUrl}" alt="${item.material}" onerror="this.style.display='none'">
-                    </div>
-                    <div class="item-name">${item.material}</div>
-                    <div class="item-prices">
-                        <div class="price buy-price">Buy: ${item.buy.toFixed(2)}</div>
-                        <div class="price sell-price">Sell: ${item.sell.toFixed(2)}</div>
+                let items = Object.entries(pageData.items).map(([id, item]) => ({
+                    id,
+                    ...item
+                }));
+
+                if (this.searchTerm) {
+                    items = items.filter(item => 
+                        item.material.toLowerCase().includes(this.searchTerm)
+                    );
+                }
+
+                this.displayItems(items);
+            }
+
+            displayItems(items) {
+                const itemsGrid = document.getElementById('itemsGrid');
+                
+                if (items.length === 0) {
+                    this.showNoResults();
+                    return;
+                }
+
+                itemsGrid.innerHTML = items.map(item => this.createItemCard(item)).join('');
+                this.loadItemImages();
+            }
+
+            createItemCard(item) {
+                const materialName = item.material.toLowerCase().replace(/_/g, ' ');
+                const buyPrice = item.buy ? `$${item.buy}` : 'N/A';
+                const sellPrice = item.sell ? `$${item.sell}` : 'N/A';
+
+                return `
+                    <div class="item-card">
+                        <div class="item-image loading" data-material="${item.material}">
+                            <img style="display: none;" alt="${materialName}">
+                        </div>
+                        <div class="item-name">${materialName}</div>
+                        <div class="item-prices">
+                            <div class="price-tag buy-price">Buy: ${buyPrice}</div>
+                            <div class="price-tag sell-price">Sell: ${sellPrice}</div>
+                        </div>
                     </div>
                 `;
+            }
 
-                itemsGrid.appendChild(card);
-            });
+            loadItemImages() {
+                const imageContainers = document.querySelectorAll('.item-image[data-material]');
+                
+                imageContainers.forEach(container => {
+                    const material = container.dataset.material;
+                    const img = container.querySelector('img');
+                    
+                    // Try to load image from Minecraft Wiki
+                    const imageUrl = this.getMinecraftImageUrl(material);
+                    
+                    img.onload = () => {
+                        container.classList.remove('loading');
+                        img.style.display = 'block';
+                    };
+                    
+                    img.onerror = () => {
+                        container.classList.remove('loading');
+                        container.innerHTML = '📦';
+                        container.style.fontSize = '32px';
+                        container.style.color = '#666';
+                    };
+                    
+                    img.src = imageUrl;
+                });
+            }
+
+            getMinecraftImageUrl(material) {
+                // Convert material name to the format used by Minecraft Wiki
+                const formattedName = material.toLowerCase()
+                    .replace(/_/g, '_')
+                    .replace(/^(.)/g, (match) => match.toUpperCase())
+                    .replace(/_(.)/g, (match, p1) => '_' + p1.toUpperCase());
+                
+                return `https://minecraft.wiki/images/thumb/1/1a/${formattedName}.png/150px-${formattedName}.png`;
+            }
+
+            showNoResults() {
+                const itemsGrid = document.getElementById('itemsGrid');
+                const message = this.searchTerm 
+                    ? `No items found matching "${this.searchTerm}"` 
+                    : 'No items available in this section';
+                
+                itemsGrid.innerHTML = `<div class="no-results">${message}</div>`;
+            }
+
+            showError(message) {
+                const itemsGrid = document.getElementById('itemsGrid');
+                itemsGrid.innerHTML = `<div class="error-message">${message}</div>`;
+            }
         }
 
-        searchInput.addEventListener('input', (e) => {
-            searchQuery = e.target.value;
-            renderItems();
+        // Initialize the shop when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new MinecraftShop();
         });
-
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    </script>
+</body>
+</html>
