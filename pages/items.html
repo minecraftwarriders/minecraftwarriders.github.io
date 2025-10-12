@@ -13,33 +13,92 @@
 
         body {
             font-family: 'Courier New', 'Consolas', monospace;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             min-height: 100vh;
-            padding: 20px;
             color: #e0e0e0;
+            margin: 0;
+        }
+
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #1a1a1a;
+            border-right: 2px solid #333;
+            padding: 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar h3 {
+            color: #888;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .sidebar li {
+            margin-bottom: 8px;
+        }
+
+        .sidebar a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 13px;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: #333;
+            color: #fff;
+        }
+
+        .sidebar a.active {
+            background: #444;
+            color: #fff;
+        }
+
+        .content {
+            margin-left: 250px;
+            flex: 1;
+            background: #0f0f0f;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: #0f0f23;
-            border: 2px solid #16213e;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
-            overflow: hidden;
+            background: #0f0f0f;
+            border: 2px solid #333;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
         }
 
         .header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #00ffff;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: #ddd;
             padding: 20px;
             text-align: center;
-            border-bottom: 2px solid #00ffff;
+            border-bottom: 2px solid #444;
         }
 
         .header h1 {
             font-size: 2.5em;
             margin-bottom: 10px;
-            text-shadow: 0 0 10px #00ffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
             font-weight: bold;
             letter-spacing: 2px;
         }
@@ -54,8 +113,8 @@
             width: 100%;
             max-width: 400px;
             padding: 12px 20px;
-            border: 2px solid #00ffff;
-            background: #1a1a2e;
+            border: 2px solid #555;
+            background: #1a1a1a;
             color: #e0e0e0;
             font-size: 16px;
             outline: none;
@@ -64,8 +123,8 @@
         }
 
         .search-box:focus {
-            border-color: #00ff88;
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+            border-color: #777;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
         .search-box::placeholder {
@@ -75,16 +134,16 @@
         .tabs-container {
             display: flex;
             flex-wrap: wrap;
-            background: #16213e;
-            border-bottom: 2px solid #00ffff;
+            background: #222;
+            border-bottom: 2px solid #444;
             overflow-x: auto;
         }
 
         .tab {
             padding: 12px 20px;
             cursor: pointer;
-            border: 1px solid #2a3f5f;
-            background: #1a1a2e;
+            border: 1px solid #444;
+            background: #1a1a1a;
             font-size: 14px;
             font-weight: 500;
             color: #a0a0a0;
@@ -97,16 +156,16 @@
         }
 
         .tab:hover {
-            background: #2a3f5f;
-            color: #00ffff;
-            border-color: #00ffff;
+            background: #333;
+            color: #ddd;
+            border-color: #555;
         }
 
         .tab.active {
-            background: #00ffff;
-            color: #0a0a0a;
+            background: #555;
+            color: #fff;
             font-weight: bold;
-            border-color: #00ffff;
+            border-color: #777;
         }
 
         .page-navigation {
@@ -115,15 +174,15 @@
             align-items: center;
             gap: 10px;
             padding: 20px;
-            background: #16213e;
-            border-bottom: 1px solid #2a3f5f;
+            background: #222;
+            border-bottom: 1px solid #444;
         }
 
         .page-btn {
             padding: 8px 16px;
-            border: 2px solid #00ffff;
-            background: #1a1a2e;
-            color: #00ffff;
+            border: 2px solid #555;
+            background: #1a1a1a;
+            color: #ccc;
             cursor: pointer;
             font-weight: 500;
             transition: all 0.3s;
@@ -133,14 +192,14 @@
         }
 
         .page-btn:hover, .page-btn.active {
-            background: #00ffff;
-            color: #0a0a0a;
+            background: #555;
+            color: #fff;
         }
 
         .page-btn:disabled {
             opacity: 0.3;
             cursor: not-allowed;
-            border-color: #555;
+            border-color: #333;
             color: #555;
         }
 
@@ -150,12 +209,12 @@
             gap: 20px;
             padding: 30px;
             min-height: 400px;
-            background: #0f0f23;
+            background: #0f0f0f;
         }
 
         .item-card {
-            background: #1a1a2e;
-            border: 2px solid #2a3f5f;
+            background: #1a1a1a;
+            border: 2px solid #444;
             padding: 20px;
             text-align: center;
             transition: all 0.3s;
@@ -163,16 +222,16 @@
 
         .item-card:hover {
             transform: translateY(-2px);
-            border-color: #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            border-color: #666;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         .item-image {
             width: 64px;
             height: 64px;
             margin: 0 auto 15px;
-            background: #2a3f5f;
-            border: 2px solid #00ffff;
+            background: #333;
+            border: 2px solid #555;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -186,7 +245,7 @@
         }
 
         .item-image.loading {
-            background: linear-gradient(90deg, #2a3f5f 25%, #3a4f6f 50%, #2a3f5f 75%);
+            background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
             background-size: 200% 100%;
             animation: loading 1.5s infinite;
         }
@@ -199,7 +258,7 @@
         .item-name {
             font-size: 18px;
             font-weight: bold;
-            color: #00ffff;
+            color: #ddd;
             margin-bottom: 15px;
             text-transform: uppercase;
             font-family: 'Courier New', monospace;
@@ -240,7 +299,7 @@
             align-items: center;
             height: 200px;
             font-size: 18px;
-            color: #00ffff;
+            color: #ccc;
             font-family: 'Courier New', monospace;
         }
 
@@ -254,11 +313,11 @@
         }
 
         .error-message {
-            background: #2a1f1f;
-            color: #ff4444;
+            background: #2a1a1a;
+            color: #ff6666;
             padding: 20px;
             margin: 20px;
-            border: 2px solid #ff4444;
+            border: 2px solid #ff6666;
             font-family: 'Courier New', monospace;
         }
 
@@ -284,29 +343,58 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>⚔️ MINECRAFT WAR RIDERS ITEM PRICES ⚔️</h1>
-            <p>Complete list of item prices</p>
+    <div class="main-container">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="#" class="active">Item Prices</a></li>
+                <li><a href="#">Commands</a></li>
+                <li><a href="#">Rules</a></li>
+                <li><a href="#">Getting Started</a></li>
+            </ul>
+            
+            <h3>Game Mechanics</h3>
+            <ul>
+                <li><a href="#">Economy System</a></li>
+                <li><a href="#">Trading</a></li>
+                <li><a href="#">Shops</a></li>
+                <li><a href="#">AutoSell Chests</a></li>
+            </ul>
+            
+            <h3>Server Info</h3>
+            <ul>
+                <li><a href="#">Server Status</a></li>
+                <li><a href="#">Discord</a></li>
+                <li><a href="#">Forums</a></li>
+            </ul>
         </div>
+        
+        <div class="content">
+            <div class="container">
+                <div class="header">
+                    <h1>⚔️ MINECRAFT WAR RIDERS ITEM PRICES ⚔️</h1>
+                    <p>Complete list of item prices</p>
+                </div>
 
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-box" placeholder="Search all items across all pages...">
-        </div>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-box" placeholder="Search all items across all pages...">
+                </div>
 
-        <div class="tabs-container" id="tabsContainer">
-            <!-- Tabs will be generated dynamically -->
-        </div>
+                <div class="tabs-container" id="tabsContainer">
+                    <!-- Tabs will be generated dynamically -->
+                </div>
 
-        <div class="page-navigation" id="pageNavigation" style="display: none;">
-            <button class="page-btn" id="prevBtn">← Previous</button>
-            <span id="pageInfo"></span>
-            <button class="page-btn" id="nextBtn">Next →</button>
-        </div>
+                <div class="page-navigation" id="pageNavigation" style="display: none;">
+                    <button class="page-btn" id="prevBtn">← Previous</button>
+                    <span id="pageInfo"></span>
+                    <button class="page-btn" id="nextBtn">Next →</button>
+                </div>
 
-        <div class="items-grid" id="itemsGrid">
-            <div class="loading-container">
-                <div>Loading shop items...</div>
+                <div class="items-grid" id="itemsGrid">
+                    <div class="loading-container">
+                        <div>Loading shop items...</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -536,18 +624,27 @@
                     actualMaterial = 'CHEST';
                 }
                 
-                const formattedName = actualMaterial.toLowerCase()
+                // Format material name for different URL patterns
+                const materialLower = actualMaterial.toLowerCase();
+                const materialFormatted = materialLower
                     .split('_')
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                     .join('_');
                 
+                // Based on your examples, try these URL patterns
                 const possibleUrls = [
-                    `https://minecraft.wiki/images/${formattedName}.png`,
-                    `https://minecraft.wiki/w/images/thumb/a/a0/${formattedName}.png/150px-${formattedName}.png`,
-                    `https://minecraft.wiki/w/images/thumb/1/1a/${formattedName}.png/150px-${formattedName}.png`,
-                    `https://minecraft.wiki/w/images/thumb/0/00/${formattedName}.png/150px-${formattedName}.png`,
-                    `https://minecraft.wiki/w/images/thumb/2/2a/${formattedName}.png/150px-${formattedName}.png`,
-                    `https://minecraft.wiki/w/images/${formattedName}.png`
+                    // Direct images format: https://minecraft.wiki/images/Diamond_JE3_BE3.png
+                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE3.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE1.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}.png`,
+                    // Thumbnail format: /images/thumb/Redstone_Dust_JE2_BE2.png/150px-Redstone_Dust_JE2_BE2.png
+                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE2_BE2.png/150px-${materialFormatted}_JE2_BE2.png`,
+                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE3_BE3.png/150px-${materialFormatted}_JE3_BE3.png`,
+                    `https://minecraft.wiki/images/thumb/${materialFormatted}.png/150px-${materialFormatted}.png`,
+                    // Alternative paths
+                    `https://minecraft.wiki/w/images/${materialFormatted}_JE2_BE2.png`,
+                    `https://minecraft.wiki/w/images/${materialFormatted}.png`
                 ];
                 
                 if (attemptIndex >= possibleUrls.length) {
@@ -555,7 +652,7 @@
                     container.classList.remove('loading');
                     container.innerHTML = '📦';
                     container.style.fontSize = '32px';
-                    container.style.color = '#00ffff';
+                    container.style.color = '#ccc';
                     return;
                 }
                 
