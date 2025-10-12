@@ -617,12 +617,40 @@
                 });
             }
 
+            getMaterialMapping(material) {
+                // Handle special material name mappings
+                const materialMappings = {
+                    // Custom items
+                    'AutoSellChest': 'CHEST',
+                    'AUTOSELLCHEST': 'CHEST',
+                    
+                    // Common material name corrections
+                    'HAY_BALE': 'HAY_BALE', // Keep as is, not HAY_BLOCK
+                    'TNT': 'TNT', // Keep uppercase
+                    'REDSTONE_DUST': 'REDSTONE_DUST',
+                    
+                    // Block vs Item variations
+                    'BAMBOO_BLOCK': 'BAMBOO_BLOCK',
+                    'STRIPPED_BAMBOO_BLOCK': 'STRIPPED_BAMBOO_BLOCK',
+                    
+                    // Stair naming
+                    'POLISHED_BLACKSTONE_BRICK_STAIRS': 'POLISHED_BLACKSTONE_BRICK_STAIRS',
+                    'ANDESITE_STAIRS': 'ANDESITE_STAIRS',
+                    'BLACKSTONE_STAIRS': 'BLACKSTONE_STAIRS',
+                    
+                    // Common naming issues
+                    'CHISELED_BOOKSHELF': 'CHISELED_BOOKSHELF',
+                    'CHERRY_FENCE': 'CHERRY_FENCE',
+                    'BAMBOO_FENCE': 'BAMBOO_FENCE',
+                    'BAMBOO_DOOR': 'BAMBOO_DOOR'
+                };
+                
+                return materialMappings[material] || material;
+            }
+
             tryLoadImage(material, img, container, attemptIndex) {
-                // Special case for custom items
-                let actualMaterial = material;
-                if (material === 'AutoSellChest' || material === 'AUTOSELLCHEST') {
-                    actualMaterial = 'CHEST';
-                }
+                // Special case for custom items and material name mappings
+                let actualMaterial = this.getMaterialMapping(material);
                 
                 // Format material name for different URL patterns
                 const materialLower = actualMaterial.toLowerCase();
@@ -631,66 +659,43 @@
                     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
                     .join('_');
                 
-                // Based on your examples, try these URL patterns
+                // Based on your examples and working URLs, try these patterns (optimized)
                 const possibleUrls = [
-                    // Direct images format with version suffixes (most common first)
-                    `https://minecraft.wiki/images/${materialFormatted}_JE8.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE2.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE1.png`,
+                    // Working examples first - most common patterns
+                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE2.png`, // TNT_JE3_BE2.png works
+                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE2.png`, // Glowstone_JE4_BE2.png works
+                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE3.png`, // Slime_Block_JE2_BE3.png works
+                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png`, // Common format
+                    `https://minecraft.wiki/images/${materialFormatted}_JE8.png`,     // Stone_JE8.png works
                     `https://minecraft.wiki/images/${materialFormatted}_JE3_BE3.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE2.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE3.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE1.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}_JE4_BE1.png`,
                     `https://minecraft.wiki/images/${materialFormatted}_JE1_BE2.png`,
                     `https://minecraft.wiki/images/${materialFormatted}_JE1_BE1.png`,
                     
-                    // Directional variants (N), (UD), etc.
-                    `https://minecraft.wiki/images/${materialFormatted}_%28N%29_JE2_BE1.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_%28UD%29_JE2_BE2.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_%28S%29_JE2_BE1.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_%28E%29_JE2_BE1.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}_%28W%29_JE2_BE1.png`,
-                    
-                    // Format with original parameter
-                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png?format=original`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE3_BE3.png?format=original`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE1_BE2.png?format=original`,
-                    `https://minecraft.wiki/images/${materialFormatted}_JE8.png?format=original`,
-                    
                     // Direct images without version suffix
                     `https://minecraft.wiki/images/${materialFormatted}.png`,
-                    `https://minecraft.wiki/images/${materialFormatted}.png?format=original`,
                     
-                    // Thumbnail formats with version suffixes
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE8.png/150px-${materialFormatted}_JE8.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE4_BE2.png/150px-${materialFormatted}_JE4_BE2.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE4_BE1.png/150px-${materialFormatted}_JE4_BE1.png`,
+                    // Directional variants for stairs/logs (with proper URL encoding)
+                    `https://minecraft.wiki/images/${materialFormatted}_%28N%29_JE2_BE1.png`,
+                    `https://minecraft.wiki/images/${materialFormatted}_%28UD%29_JE2_BE2.png`,
+                    
+                    // Thumbnail formats (working examples)
                     `https://minecraft.wiki/images/thumb/${materialFormatted}_JE2_BE3.png/150px-${materialFormatted}_JE2_BE3.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE2_BE2.png/150px-${materialFormatted}_JE2_BE2.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE3_BE3.png/150px-${materialFormatted}_JE3_BE3.png`,
                     `https://minecraft.wiki/images/thumb/${materialFormatted}_JE3_BE2.png/150px-${materialFormatted}_JE3_BE2.png`,
+                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE4_BE2.png/150px-${materialFormatted}_JE4_BE2.png`,
+                    `https://minecraft.wiki/images/thumb/${materialFormatted}_JE2_BE2.png/150px-${materialFormatted}_JE2_BE2.png`,
                     `https://minecraft.wiki/images/thumb/${materialFormatted}_JE1_BE2.png/150px-${materialFormatted}_JE1_BE2.png`,
-                    
-                    // Thumbnail with directional variants
                     `https://minecraft.wiki/images/thumb/${materialFormatted}_%28UD%29_JE2_BE2.png/150px-${materialFormatted}_%28UD%29_JE2_BE2.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}_%28N%29_JE2_BE1.png/150px-${materialFormatted}_%28N%29_JE2_BE1.png`,
-                    `https://minecraft.wiki/images/thumb/${materialFormatted}.png/150px-${materialFormatted}.png`,
                     
-                    // Alternative w/ paths with more version variants
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE8.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE4_BE2.png`,
+                    // Alternative /w/ paths
                     `https://minecraft.wiki/w/images/${materialFormatted}_JE3_BE2.png`,
+                    `https://minecraft.wiki/w/images/${materialFormatted}_JE4_BE2.png`,
                     `https://minecraft.wiki/w/images/${materialFormatted}_JE2_BE3.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE2_BE2.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE3_BE3.png`,
-                    `https://minecraft.wiki/w/images/${materialFormatted}_JE1_BE2.png`,
+                    `https://minecraft.wiki/w/images/${materialFormatted}_JE8.png`,
                     `https://minecraft.wiki/w/images/${materialFormatted}.png`,
                     
-                    // Wikia/Gamepedia fallback (legacy)
-                    `https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/56/${materialFormatted}_JE4_BE1.png`,
-                    `https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/56/${materialFormatted}_JE2_BE2.png`,
-                    `https://static.wikia.nocookie.net/minecraft_gamepedia/images/5/56/${materialFormatted}.png`
+                    // Format with original parameter (last resort)
+                    `https://minecraft.wiki/images/${materialFormatted}_JE2_BE2.png?format=original`
                 ];
                 
                 if (attemptIndex >= possibleUrls.length) {
