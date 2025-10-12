@@ -11,7 +11,7 @@ pages:
         buy: 1
         sell: 0.25
       '3':
-        material: HAY_BLOCK
+        material: HAY_BALE
         buy: 47.25
         sell: 11.82
       '4':
