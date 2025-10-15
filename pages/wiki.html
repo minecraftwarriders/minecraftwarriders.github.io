@@ -25,10 +25,8 @@
     <style>
         /* Wiki-specific styles */
         .wiki-layout {
-            display: grid;
-            grid-template-columns: 350px 1fr;
+            display: flex;
             min-height: 100vh;
-            gap: 2rem;
             padding-top: 80px;
         }
 
@@ -36,17 +34,18 @@
             position: fixed;
             top: 80px;
             left: 0;
-            width: 350px;
+            width: 320px;
             height: calc(100vh - 80px);
-            padding: var(--space-6);
+            padding: var(--space-4);
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border-right: 1px solid var(--glass-border);
             overflow-y: auto;
+            z-index: 10;
         }
 
         .sidebar::-webkit-scrollbar {
-            width: 8px;
+            width: 6px;
         }
 
         .sidebar::-webkit-scrollbar-track {
@@ -157,9 +156,33 @@
         }
 
         .main-content {
-            margin-left: 370px;
+            margin-left: 320px;
             padding: var(--space-6);
-            max-width: calc(100vw - 420px);
+            flex: 1;
+            min-width: 0;
+            max-width: none;
+        }
+        
+        /* Better content width management */
+        .section-card {
+            max-width: 1200px;
+            margin: 0 auto var(--space-6);
+        }
+        
+        /* Improve feature grid for wider screens */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-4);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Better command grid layout */
+        .command-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-4);
         }
 
         .content-section {
@@ -478,11 +501,44 @@
             font-weight: 500;
         }
         
+        /* Desktop enhancements for wide screens */
+        @media (min-width: 1400px) {
+            .main-content {
+                padding: var(--space-8) var(--space-12);
+            }
+            
+            .feature-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .command-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .hero-section {
+                padding: var(--space-16) 0;
+            }
+        }
+        
+        @media (min-width: 1800px) {
+            .section-card {
+                max-width: 1400px;
+            }
+            
+            .feature-grid {
+                max-width: 1400px;
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .command-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
         /* Mobile Responsive Design */
         @media (max-width: 1024px) {
             .wiki-layout {
-                grid-template-columns: 1fr;
-                gap: 0;
+                flex-direction: column;
             }
             
             .sidebar {
@@ -494,12 +550,20 @@
                 border-right: none;
                 border-bottom: 1px solid var(--glass-border);
                 padding: var(--space-4);
+                z-index: auto;
             }
             
             .main-content {
                 margin-left: 0;
                 padding: var(--space-4);
-                max-width: 100%;
+            }
+            
+            .section-card {
+                max-width: none;
+            }
+            
+            .feature-grid {
+                max-width: none;
             }
         }
         
