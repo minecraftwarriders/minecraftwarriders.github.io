@@ -185,8 +185,13 @@ class ItemDataLoader {
             }
             
             const yamlText = await response.text();
+            console.log(`${category} YAML length:`, yamlText.length);
+            
             const data = SimpleYAMLParser.parse(yamlText);
+            console.log(`${category} parsed data:`, data);
+            
             const items = this.processYAMLData(data, category.toLowerCase());
+            console.log(`${category} processed items:`, items.length);
             
             this.cache.set(category, items);
             return items;
