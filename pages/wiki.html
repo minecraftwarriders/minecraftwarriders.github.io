@@ -451,20 +451,167 @@
         .scroll-to-top.visible {
             display: flex;
         }
+        
+        /* Image Placeholder Styles */
+        .image-placeholder {
+            background: var(--dark-glass-bg);
+            border: 2px dashed var(--glass-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-8);
+            text-align: center;
+            color: var(--primary-500);
+            margin: var(--space-4) 0;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .image-placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-2);
+        }
+        
+        .image-placeholder-text {
+            font-size: var(--text-sm);
+            font-weight: 500;
+        }
+        
+        /* Mobile Responsive Design */
+        @media (max-width: 1024px) {
+            .wiki-layout {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                top: 0;
+                left: 0;
+                border-right: none;
+                border-bottom: 1px solid var(--glass-border);
+                padding: var(--space-4);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: var(--space-4);
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .wiki-layout {
+                padding-top: 70px;
+            }
+            
+            .sidebar {
+                max-height: 300px;
+                overflow-y: auto;
+            }
+            
+            .nav-section-header {
+                font-size: var(--text-sm);
+                padding: var(--space-2);
+            }
+            
+            .nav-link {
+                padding: var(--space-2) var(--space-3);
+                font-size: var(--text-xs);
+            }
+            
+            .hero-title {
+                font-size: var(--text-3xl);
+            }
+            
+            .hero-description {
+                font-size: var(--text-base);
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+            }
+            
+            .command-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .quick-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .image-placeholder {
+                min-height: 150px;
+                padding: var(--space-6);
+            }
+            
+            .image-placeholder-icon {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-content {
+                padding: var(--space-3);
+            }
+            
+            .sidebar {
+                padding: var(--space-3);
+            }
+            
+            .section-card {
+                padding: var(--space-4);
+            }
+            
+            .hero-title {
+                font-size: var(--text-2xl);
+            }
+            
+            .section-card-title {
+                font-size: var(--text-xl);
+            }
+            
+            .image-placeholder {
+                min-height: 120px;
+                padding: var(--space-4);
+            }
+            
+            .image-placeholder-icon {
+                font-size: 1.5rem;
+            }
+            
+            .image-placeholder-text {
+                font-size: var(--text-xs);
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">
-                <img src="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png" alt="Logo">
-                <span>War Riders</span>
-            </a>
-            <div class="flex items-center gap-6">
-                <a href="../index.html" class="nav-link">Home</a>
-                <a href="wiki.html" class="nav-link active">Wiki</a>
-                <a href="items.html" class="nav-link">Items</a>
+            <div class="nav-brand">
+                <img src="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png" alt="War Riders Logo" class="nav-logo">
+                <span class="nav-title">War Riders</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="wiki.html" class="active">Wiki</a></li>
+                <li><a href="items.html">Items</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
@@ -977,7 +1124,192 @@
                 </div>
             </section>
 
-            <!-- Additional sections would go here following the same pattern -->
+            <!-- Banking Section -->
+            <section class="content-section" id="bankplus">
+                <div class="breadcrumb">
+                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
+                    <span class="breadcrumb-separator">›</span>
+                    <span>Banking</span>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <div class="section-card-icon">🏦</div>
+                        <h1 class="section-card-title">Banking System</h1>
+                    </div>
+                    
+                    <p>Manage your wealth with our comprehensive banking system. Store money securely, earn interest, and manage transactions with ease.</p>
+                    
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🏦</div>
+                        <div class="image-placeholder-text">Banking GUI Screenshot</div>
+                    </div>
+
+                    <h3>💰 Banking Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card">
+                            <div class="command-syntax">/bank balance</div>
+                            <div class="command-description">Check your current bank balance</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/bank deposit &lt;amount&gt;</div>
+                            <div class="command-description">Deposit money into your bank account</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/bank withdraw &lt;amount&gt;</div>
+                            <div class="command-description">Withdraw money from your bank account</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/bank interest</div>
+                            <div class="command-description">Check your current interest rate and next payout</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/bank history</div>
+                            <div class="command-description">View your transaction history</div>
+                        </div>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">⌨️</div>
+                        <div class="image-placeholder-text">Command Usage Examples</div>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">💡 Banking Tips</div>
+                        Keep most of your money in the bank to earn interest. Only withdraw what you need for immediate purchases. Your banked money is protected even if you die!
+                    </div>
+                </div>
+            </section>
+
+            <!-- Trading Section -->
+            <section class="content-section" id="tradeplus">
+                <div class="breadcrumb">
+                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
+                    <span class="breadcrumb-separator">›</span>
+                    <span>Trading</span>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <div class="section-card-icon">🛒</div>
+                        <h1 class="section-card-title">Trading System</h1>
+                    </div>
+                    
+                    <p>Buy and sell items with other players through our comprehensive trading system. Manage shops, auctions, and direct player trades.</p>
+                    
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🏪</div>
+                        <div class="image-placeholder-text">Trading Hub Screenshot</div>
+                    </div>
+
+                    <h3>🏪 Shop Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card">
+                            <div class="command-syntax">/shop create</div>
+                            <div class="command-description">Create a new shop at your location</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/shop info</div>
+                            <div class="command-description">Get information about a shop</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/shop remove</div>
+                            <div class="command-description">Remove your shop</div>
+                        </div>
+                    </div>
+
+                    <h3>🤝 Trading Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card">
+                            <div class="command-syntax">/trade &lt;player&gt;</div>
+                            <div class="command-description">Send a trade request to another player</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/trade accept</div>
+                            <div class="command-description">Accept an incoming trade request</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/trade decline</div>
+                            <div class="command-description">Decline a trade request</div>
+                        </div>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">📊</div>
+                        <div class="image-placeholder-text">Market Trends Graph</div>
+                    </div>
+
+                    <div class="info-box tip">
+                        <div class="info-box-title">💡 Trading Tips</div>
+                        Research market prices before making trades. Always use secure trading windows for valuable items. Check the <a href="items.html" style="color: var(--accent-400);">Items page</a> for current market prices.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Auction House Section -->
+            <section class="content-section" id="auctionhouse">
+                <div class="breadcrumb">
+                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
+                    <span class="breadcrumb-separator">›</span>
+                    <span>Auction House</span>
+                </div>
+
+                <div class="section-card">
+                    <div class="section-card-header">
+                        <div class="section-card-icon">🏛️</div>
+                        <h1 class="section-card-title">Auction House</h1>
+                    </div>
+                    
+                    <p>Buy and sell rare items through competitive bidding. Find unique treasures and make profitable deals in our dynamic auction system.</p>
+                    
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🏛️</div>
+                        <div class="image-placeholder-text">Auction House GUI Screenshot</div>
+                    </div>
+
+                    <h3>🏛️ Basic Commands</h3>
+                    <div class="command-grid">
+                        <div class="command-card">
+                            <div class="command-syntax">/auction help</div>
+                            <div class="command-description">Display all auction commands and help information</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/auction browse</div>
+                            <div class="command-description">Browse all current auctions</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/auction info [id]</div>
+                            <div class="command-description">Get detailed information about a specific auction</div>
+                        </div>
+                    </div>
+
+                    <h3>💰 Bidding & Selling</h3>
+                    <div class="command-grid">
+                        <div class="command-card">
+                            <div class="command-syntax">/auction bid &lt;amount&gt; [id]</div>
+                            <div class="command-description">Place a bid on an auction</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/auction start &lt;startprice&gt;</div>
+                            <div class="command-description">Start an auction with the item in your hand</div>
+                        </div>
+                        <div class="command-card">
+                            <div class="command-syntax">/auction mybids</div>
+                            <div class="command-description">View all your current bids</div>
+                        </div>
+                    </div>
+
+                    <div class="image-placeholder">
+                        <div class="image-placeholder-icon">🎬</div>
+                        <div class="image-placeholder-text">Auction Process Step-by-Step Guide</div>
+                    </div>
+
+                    <div class="info-box important">
+                        <div class="info-box-title">⚠️ Important Rules</div>
+                        Auctions cannot be canceled once bidding starts. Payment is automatically processed when auctions end. Items and money are held in escrow during auctions.
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -1078,15 +1410,51 @@
             }
         }
 
+        // Mobile navigation functionality
+        function setupMobileNavigation() {
+            const mobileToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (mobileToggle && navLinks) {
+                mobileToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    mobileToggle.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on links (mobile)
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('active');
+                        mobileToggle.classList.remove('active');
+                    });
+                });
+            }
+        }
+        
+        // Handle URL hash changes
+        function handleHashChange() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            }
+        }
+        
         // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
             setupSearch();
+            setupMobileNavigation();
             
             window.addEventListener('scroll', handleNavbarScroll);
             window.addEventListener('scroll', handleScrollToTop);
+            window.addEventListener('hashchange', handleHashChange);
             
-            // Show home section by default
-            showSection('home');
+            // Handle initial hash or show home section
+            const initialHash = window.location.hash.substring(1);
+            if (initialHash && document.getElementById(initialHash)) {
+                showSection(initialHash);
+            } else {
+                showSection('home');
+            }
         });
     </script>
 </body>
