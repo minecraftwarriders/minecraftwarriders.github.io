@@ -514,12 +514,21 @@ class ToastManager {
         container.id = 'toast-container';
         container.style.cssText = `
             position: fixed;
-            top: var(--space-4);
-            right: var(--space-4);
-            z-index: var(--z-toast);
+            top: var(--space-4, 1rem);
+            right: var(--space-4, 1rem);
+            z-index: 9999;
             pointer-events: none;
         `;
-        document.body.appendChild(container);
+        
+        // Wait for body to be available
+        if (document.body) {
+            document.body.appendChild(container);
+        } else {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.body.appendChild(container);
+            });
+        }
+        
         return container;
     }
 
@@ -585,8 +594,14 @@ window.SearchUtils = SearchUtils;
 window.StorageUtils = StorageUtils;
 window.ToastManager = ToastManager;
 
-// Initialize global toast manager
-window.toast = new ToastManager();
+// Initialize global toast manager when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        window.toast = new ToastManager();
+    });
+} else {
+    window.toast = new ToastManager();
+}
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
