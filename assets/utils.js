@@ -3,25 +3,77 @@
  * Production-grade JavaScript utilities for the website
  */
 
-// YAML Parser (Simple implementation for our use case)
+// YAML Parser (Simple line-by-line implementation)
 class SimpleYAMLParser {
     static parse(yamlString) {
         try {
-            // Simple regex-based parser for your specific YAML structure
+            const lines = yamlString.split('\n');
             const result = { pages: {} };
+            let currentPage = null;
+            let currentItem = null;
+            let currentItemId = null;
+            let inItems = false;
+            let currentArray = null;
+            let currentArrayKey = null;
             
-            // Find pages section
-            const pageMatches = yamlString.match(/pages:\s*\n([\s\S]*)/)?.[1] || '';
-            
-            // Find page sections (page1, page2, etc.)
-            const pageRegex = /(\s*)(\w+):\s*\n([\s\S]*?)(?=\n\s*\w+:|$)/g;
-            let pageMatch;
-            
-            while ((pageMatch = pageRegex.exec(pageMatches)) !== null) {
-                const pageName = pageMatch[2];
-                const pageContent = pageMatch[3];
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const trimmed = line.trim();
                 
-                result.pages[pageName] = this.parsePage(pageContent);
+                if (!trimmed || trimmed.startsWith('#')) continue;
+                
+                // Check indentation level
+                const indent = line.length - line.trimStart().length;
+                
+                if (indent === 0 && trimmed === 'pages:') {
+                    // Start of pages section
+                    continue;
+                } else if (indent === 2 && trimmed.endsWith(':') && !trimmed.includes(' ')) {
+                    // New page (page1:, page2:, etc.)
+                    const pageName = trimmed.slice(0, -1);
+                    currentPage = { items: {} };
+                    result.pages[pageName] = currentPage;
+                    inItems = false;
+                    currentItem = null;
+                    currentItemId = null;
+                } else if (indent === 4 && trimmed === 'items:') {
+                    // Items section within a page
+                    inItems = true;
+                    currentArray = null;
+                } else if (indent === 4 && trimmed.startsWith('gui-rows:') && currentPage) {
+                    // GUI rows property
+                    const value = trimmed.split(':')[1].trim();
+                    currentPage['gui-rows'] = parseInt(value);
+                } else if (indent === 6 && trimmed.match(/^'\d+':/)) {
+                    // New item ('1':, '2':, etc.)
+                    currentItemId = trimmed.match(/^'(\d+)':/)[1];
+                    currentItem = {};
+                    if (currentPage && currentPage.items) {
+                        currentPage.items[currentItemId] = currentItem;
+                    }
+                    currentArray = null;
+                } else if (indent === 8 && currentItem && trimmed.includes(':')) {
+                    // Item property
+                    const colonIndex = trimmed.indexOf(':');
+                    const key = trimmed.substring(0, colonIndex).trim();
+                    const value = trimmed.substring(colonIndex + 1).trim();
+                    
+                    if (value === '') {
+                        // Start of array (like lore:)
+                        currentItem[key] = [];
+                        currentArray = currentItem[key];
+                        currentArrayKey = key;
+                    } else {
+                        // Simple value
+                        currentItem[key] = this.parseValue(value);
+                        currentArray = null;
+                        currentArrayKey = null;
+                    }
+                } else if (indent === 8 && trimmed.startsWith('- ') && currentArray) {
+                    // Array item
+                    const value = trimmed.substring(2).trim();
+                    currentArray.push(this.parseValue(value));
+                }
             }
             
             return result;
@@ -29,68 +81,6 @@ class SimpleYAMLParser {
             console.error('YAML parsing error:', error);
             return { pages: {} };
         }
-    }
-    
-    static parsePage(pageContent) {
-        const page = { items: {} };
-        
-        // Extract gui-rows if present
-        const guiRowsMatch = pageContent.match(/gui-rows:\s*(\d+)/);
-        if (guiRowsMatch) {
-            page['gui-rows'] = parseInt(guiRowsMatch[1]);
-        }
-        
-        // Find items section
-        const itemsMatch = pageContent.match(/items:\s*\n([\s\S]*)/)?.[1] || '';
-        
-        // Find individual items ('1':, '2':, etc.)
-        const itemRegex = /(\s*)'(\d+)':\s*\n([\s\S]*?)(?=\n\s*'\d+':|$)/g;
-        let itemMatch;
-        
-        while ((itemMatch = itemRegex.exec(itemsMatch)) !== null) {
-            const itemId = itemMatch[2];
-            const itemContent = itemMatch[3];
-            
-            page.items[itemId] = this.parseItem(itemContent);
-        }
-        
-        return page;
-    }
-    
-    static parseItem(itemContent) {
-        const item = {};
-        const lines = itemContent.split('\n');
-        let currentArray = null;
-        let currentArrayKey = null;
-        
-        for (const line of lines) {
-            const trimmed = line.trim();
-            if (!trimmed || trimmed.startsWith('#')) continue;
-            
-            if (trimmed.startsWith('- ')) {
-                // Array item
-                const value = trimmed.substring(2).trim();
-                if (currentArray) {
-                    currentArray.push(this.parseValue(value));
-                }
-            } else if (trimmed.includes(':')) {
-                const [key, value] = trimmed.split(':', 2).map(s => s.trim());
-                
-                if (value === '') {
-                    // Start of array
-                    item[key] = [];
-                    currentArray = item[key];
-                    currentArrayKey = key;
-                } else {
-                    // Simple value
-                    item[key] = this.parseValue(value);
-                    currentArray = null;
-                    currentArrayKey = null;
-                }
-            }
-        }
-        
-        return item;
     }
     
     static parseValue(value) {
@@ -108,11 +98,6 @@ class SimpleYAMLParser {
         // Parse booleans
         if (value.toLowerCase() === 'true') return true;
         if (value.toLowerCase() === 'false') return false;
-        
-        // Parse arrays (simple implementation)
-        if (value.startsWith('[') && value.endsWith(']')) {
-            return value.slice(1, -1).split(',').map(v => this.parseValue(v.trim()));
-        }
         
         return value;
     }
