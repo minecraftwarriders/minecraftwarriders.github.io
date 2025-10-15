@@ -73,8 +73,9 @@ class ItemDataLoader {
     constructor() {
         this.cache = new Map();
         this.categories = [
-            'Automation', 'Blocks', 'Food', 'Farming', 'Ores', 
-            'Potions', 'Redstone', 'SpawnEggs', 'Spawners', 
+            'Automation', 'Blocks', 'Decoration', 'Dyes', 'Enchanting', 
+            'Farming', 'Food', 'Miscellaneous', 'Mobs', 'Music', 
+            'Ores', 'Potions', 'Redstone', 'SpawnEggs', 'Spawners', 
             'Workstations', 'Z_EverythingElse'
         ];
         this.itemIcons = new Map([
@@ -86,7 +87,19 @@ class ItemDataLoader {
             ['BEEF', '🥩'], ['PORKCHOP', '🥓'], ['CHICKEN', '🍗'],
             ['IRON_PICKAXE', '⛏️'], ['IRON_SWORD', '⚔️'], ['IRON_AXE', '🪓'],
             ['BOW', '🏹'], ['ARROW', '➡️'], ['COAL', '⚫'],
-            ['REDSTONE', '🔴'], ['LAPIS_LAZULI', '🔵'], ['GLOWSTONE_DUST', '✨']
+            ['REDSTONE', '🔴'], ['LAPIS_LAZULI', '🔵'], ['GLOWSTONE_DUST', '✨'],
+            // Decoration items
+            ['CHAIN', '⛓️'], ['FLOWER_POT', '🪴'], ['ITEM_FRAME', '🖼️'],
+            ['PAINTING', '🎨'], ['ARMOR_STAND', '🚶'], ['BANNER', '🏴'],
+            // Food items
+            ['COOKED_BEEF', '🍖'], ['COOKED_CHICKEN', '🍗'], ['COOKED_SALMON', '🍣'],
+            ['COOKIE', '🍪'], ['CAKE', '🎂'], ['PUMPKIN_PIE', '🥧'],
+            // Blocks
+            ['COBBLESTONE', '🪨'], ['DIRT', '🟫'], ['GRASS_BLOCK', '🟩'],
+            ['SAND', '🟨'], ['GRAVEL', '⚫'], ['WOOD_PLANKS', '🟫'],
+            // Ores
+            ['COAL_ORE', '⚫'], ['IRON_ORE', '🔸'], ['GOLD_ORE', '🟨'],
+            ['DIAMOND_ORE', '💎'], ['EMERALD_ORE', '💚'], ['REDSTONE_ORE', '🔴']
         ]);
     }
 
@@ -112,7 +125,7 @@ class ItemDataLoader {
         }
 
         try {
-            const response = await fetch(`sections/${category}.yml`);
+            const response = await fetch(`pages/sections/${category}.yml`);
             if (!response.ok) {
                 throw new Error(`Failed to load ${category}: ${response.status}`);
             }

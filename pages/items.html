@@ -22,6 +22,9 @@
     <!-- Shared CSS -->
     <link rel="stylesheet" href="../assets/styles.css">
     
+    <!-- Utilities -->
+    <script src="../assets/utils.js"></script>
+    
     <style>
         /* Items page specific styles */
         .items-header {
@@ -502,10 +505,21 @@
                 <option value="">All Categories</option>
                 <option value="automation">Automation</option>
                 <option value="blocks">Blocks</option>
-                <option value="food">Food</option>
+                <option value="decoration">Decoration</option>
+                <option value="dyes">Dyes</option>
+                <option value="enchanting">Enchanting</option>
                 <option value="farming">Farming</option>
+                <option value="food">Food</option>
+                <option value="miscellaneous">Miscellaneous</option>
+                <option value="mobs">Mobs</option>
+                <option value="music">Music</option>
                 <option value="ores">Ores</option>
-                <option value="tools">Tools</option>
+                <option value="potions">Potions</option>
+                <option value="redstone">Redstone</option>
+                <option value="spawneggs">Spawn Eggs</option>
+                <option value="spawners">Spawners</option>
+                <option value="workstations">Workstations</option>
+                <option value="z_everythingelse">Everything Else</option>
             </select>
 
             <select class="sort-select" id="sortSelect">
@@ -554,50 +568,8 @@
     </div>
 
     <script>
-        // Sample item data structure - in a real implementation, this would be loaded from your YAML files
-        const sampleItems = [
-            {
-                material: 'CHEST',
-                name: 'Sell Chest',
-                category: 'automation',
-                buy: 10000,
-                sell: -1,
-                special: true,
-                icon: '📦'
-            },
-            {
-                material: 'DIAMOND',
-                name: 'Diamond',
-                category: 'ores',
-                buy: 100,
-                sell: 25,
-                icon: '💎'
-            },
-            {
-                material: 'IRON_INGOT',
-                name: 'Iron Ingot',
-                category: 'ores',
-                buy: 10,
-                sell: 2.5,
-                icon: '🔸'
-            },
-            {
-                material: 'BREAD',
-                name: 'Bread',
-                category: 'food',
-                buy: 15.75,
-                sell: 3.94,
-                icon: '🍞'
-            },
-            {
-                material: 'STONE',
-                name: 'Stone',
-                category: 'blocks',
-                buy: 0.72,
-                sell: 0.18,
-                icon: '🪨'
-            }
-        ];
+        // Item data loader instance
+        const itemLoader = new ItemDataLoader();
 
         // State management
         let currentItems = [];
@@ -617,11 +589,8 @@
                 // Show loading state
                 showLoading(true);
                 
-                // In a real implementation, you would fetch from your YAML files
-                // For demo purposes, we'll use the sample data
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate loading
-                
-                currentItems = sampleItems;
+                // Load items from YAML files
+                currentItems = await itemLoader.loadAllItems();
                 filteredItems = [...currentItems];
                 
                 renderItems();
@@ -629,9 +598,25 @@
                 generateCategoryChips();
                 
                 showLoading(false);
+                
+                // Show success message
+                if (window.toast) {
+                    window.toast.show(`Loaded ${currentItems.length} items successfully!`, 'success', 3000);
+                }
             } catch (error) {
                 console.error('Error loading items:', error);
                 showLoading(false);
+                
+                // Show error and use fallback data
+                if (window.toast) {
+                    window.toast.show('Failed to load item data. Using fallback data.', 'warning');
+                }
+                
+                currentItems = itemLoader.getFallbackItems();
+                filteredItems = [...currentItems];
+                renderItems();
+                updateItemsCount();
+                generateCategoryChips();
             }
         }
 
