@@ -204,13 +204,23 @@ class ItemDataLoader {
     processYAMLData(data, category) {
         const items = [];
         
+        console.log(`Processing ${category} - data.pages:`, data.pages);
+        
         if (data.pages) {
             for (const pageKey in data.pages) {
                 const page = data.pages[pageKey];
+                console.log(`${category} page ${pageKey}:`, page);
+                console.log(`${category} page ${pageKey} has items:`, !!page.items);
+                
                 if (page.items) {
+                    console.log(`${category} page ${pageKey} items keys:`, Object.keys(page.items));
+                    
                     for (const itemKey in page.items) {
                         const item = page.items[itemKey];
+                        console.log(`${category} item ${itemKey}:`, item);
+                        
                         if (item.material) {
+                            console.log(`${category} adding item:`, item.material);
                             items.push({
                                 material: item.material,
                                 name: this.formatItemName(item.name || item.material),
@@ -222,12 +232,19 @@ class ItemDataLoader {
                                 lore: item.lore,
                                 customName: item.name
                             });
+                        } else {
+                            console.log(`${category} item ${itemKey} has no material:`, item);
                         }
                     }
+                } else {
+                    console.log(`${category} page ${pageKey} has no items property`);
                 }
             }
+        } else {
+            console.log(`${category} data has no pages property`);
         }
         
+        console.log(`${category} final items count:`, items.length);
         return items;
     }
 
