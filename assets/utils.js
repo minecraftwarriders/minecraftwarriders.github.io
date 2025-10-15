@@ -175,7 +175,7 @@ class ItemDataLoader {
         }
 
         try {
-            const response = await fetch(`pages/sections/${category}.yml`);
+            const response = await fetch(`sections/${category}.yml`);
             if (!response.ok) {
                 throw new Error(`Failed to load ${category}: ${response.status}`);
             }
