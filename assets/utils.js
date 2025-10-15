@@ -6,41 +6,91 @@
 // YAML Parser (Simple implementation for our use case)
 class SimpleYAMLParser {
     static parse(yamlString) {
-        const lines = yamlString.split('\n');
-        const result = {};
-        const stack = [result];
-        let currentIndent = 0;
-        
-        for (let line of lines) {
-            // Skip comments and empty lines
-            if (line.trim().startsWith('#') || line.trim() === '') continue;
+        try {
+            // Simple regex-based parser for your specific YAML structure
+            const result = { pages: {} };
             
-            const indent = line.search(/\S/);
-            const trimmedLine = line.trim();
+            // Find pages section
+            const pageMatches = yamlString.match(/pages:\s*\n([\s\S]*)/)?.[1] || '';
             
-            // Handle indentation changes
-            while (stack.length > 1 && indent <= currentIndent) {
-                stack.pop();
-                currentIndent -= 2;
+            // Find page sections (page1, page2, etc.)
+            const pageRegex = /(\s*)(\w+):\s*\n([\s\S]*?)(?=\n\s*\w+:|$)/g;
+            let pageMatch;
+            
+            while ((pageMatch = pageRegex.exec(pageMatches)) !== null) {
+                const pageName = pageMatch[2];
+                const pageContent = pageMatch[3];
+                
+                result.pages[pageName] = this.parsePage(pageContent);
             }
             
-            if (trimmedLine.includes(':')) {
-                const [key, value] = trimmedLine.split(':').map(s => s.trim());
-                const current = stack[stack.length - 1];
+            return result;
+        } catch (error) {
+            console.error('YAML parsing error:', error);
+            return { pages: {} };
+        }
+    }
+    
+    static parsePage(pageContent) {
+        const page = { items: {} };
+        
+        // Extract gui-rows if present
+        const guiRowsMatch = pageContent.match(/gui-rows:\s*(\d+)/);
+        if (guiRowsMatch) {
+            page['gui-rows'] = parseInt(guiRowsMatch[1]);
+        }
+        
+        // Find items section
+        const itemsMatch = pageContent.match(/items:\s*\n([\s\S]*)/)?.[1] || '';
+        
+        // Find individual items ('1':, '2':, etc.)
+        const itemRegex = /(\s*)'(\d+)':\s*\n([\s\S]*?)(?=\n\s*'\d+':|$)/g;
+        let itemMatch;
+        
+        while ((itemMatch = itemRegex.exec(itemsMatch)) !== null) {
+            const itemId = itemMatch[2];
+            const itemContent = itemMatch[3];
+            
+            page.items[itemId] = this.parseItem(itemContent);
+        }
+        
+        return page;
+    }
+    
+    static parseItem(itemContent) {
+        const item = {};
+        const lines = itemContent.split('\n');
+        let currentArray = null;
+        let currentArrayKey = null;
+        
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (!trimmed || trimmed.startsWith('#')) continue;
+            
+            if (trimmed.startsWith('- ')) {
+                // Array item
+                const value = trimmed.substring(2).trim();
+                if (currentArray) {
+                    currentArray.push(this.parseValue(value));
+                }
+            } else if (trimmed.includes(':')) {
+                const [key, value] = trimmed.split(':', 2).map(s => s.trim());
                 
-                if (value === '' || value === null) {
-                    // This is an object
-                    current[key] = {};
-                    stack.push(current[key]);
-                    currentIndent = indent;
+                if (value === '') {
+                    // Start of array
+                    item[key] = [];
+                    currentArray = item[key];
+                    currentArrayKey = key;
                 } else {
-                    // This is a value
-                    current[key] = this.parseValue(value);
+                    // Simple value
+                    item[key] = this.parseValue(value);
+                    currentArray = null;
+                    currentArrayKey = null;
                 }
             }
         }
         
-        return result;
+        return item;
     }
     
     static parseValue(value) {

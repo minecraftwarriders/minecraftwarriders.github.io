@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug YAML Loading</title>
+    <script src="assets/utils.js"></script>
+</head>
+<body>
+    <h1>Debug YAML Loading</h1>
+    <div id="results"></div>
+    
+    <script>
+        async function testYAMLLoading() {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<p>Testing YAML loading...</p>';
+            
+            try {
+                // Test 1: Direct fetch
+                console.log('Testing direct fetch...');
+                const response = await fetch('pages/sections/Automation.yml');
+                console.log('Response status:', response.status);
+                console.log('Response ok:', response.ok);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const yamlText = await response.text();
+                console.log('YAML text length:', yamlText.length);
+                console.log('YAML preview:', yamlText.substring(0, 200));
+                
+                // Test 2: YAML parsing
+                const itemLoader = new ItemDataLoader();
+                const data = itemLoader.constructor.prototype.processYAMLData.call(
+                    itemLoader,
+                    SimpleYAMLParser.parse(yamlText),
+                    'automation'
+                );
+                
+                console.log('Parsed data:', data);
+                
+                resultsDiv.innerHTML = `
+                    <h2>✅ Success!</h2>
+                    <p><strong>Response Status:</strong> ${response.status}</p>
+                    <p><strong>YAML Length:</strong> ${yamlText.length} characters</p>
+                    <p><strong>Parsed Items:</strong> ${data.length}</p>
+                    <p><strong>First Item:</strong> ${JSON.stringify(data[0], null, 2)}</p>
+                    <h3>Raw YAML Preview:</h3>
+                    <pre style="background: #f5f5f5; padding: 10px; overflow: auto;">${yamlText.substring(0, 500)}</pre>
+                `;
+                
+                // Test 3: Full loader
+                console.log('Testing full ItemDataLoader...');
+                const allItems = await itemLoader.loadAllItems();
+                console.log('All items loaded:', allItems.length);
+                
+                resultsDiv.innerHTML += `
+                    <h3>Full Loader Results:</h3>
+                    <p><strong>Total Items:</strong> ${allItems.length}</p>
+                    <p><strong>Categories found:</strong> ${[...new Set(allItems.map(item => item.category))].join(', ')}</p>
+                `;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                resultsDiv.innerHTML = `
+                    <h2>❌ Error!</h2>
+                    <p><strong>Error:</strong> ${error.message}</p>
+                    <p><strong>Stack:</strong></p>
+                    <pre style="background: #ffebee; padding: 10px; overflow: auto;">${error.stack}</pre>
+                `;
+            }
+        }
+        
+        // Run test when page loads
+        window.addEventListener('load', testYAMLLoading);
+    </script>
+</body>
+</html>
