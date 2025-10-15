@@ -154,19 +154,24 @@ class ItemDataLoader {
     }
 
     async loadAllItems() {
-        try {
-            const allItems = [];
-            
-            for (const category of this.categories) {
-                const items = await this.loadCategory(category);
-                allItems.push(...items);
-            }
-            
-            return allItems.sort((a, b) => a.name.localeCompare(b.name));
-        } catch (error) {
-            console.error('Error loading items:', error);
-            return this.getFallbackItems();
-        }
+        // Force fallback for debugging
+        console.log('Loading items - using fallback for debugging');
+        return this.getFallbackItems();
+        
+        // Original code (commented out for debugging)
+        // try {
+        //     const allItems = [];
+        //     
+        //     for (const category of this.categories) {
+        //         const items = await this.loadCategory(category);
+        //         allItems.push(...items);
+        //     }
+        //     
+        //     return allItems.sort((a, b) => a.name.localeCompare(b.name));
+        // } catch (error) {
+        //     console.error('Error loading items:', error);
+        //     return this.getFallbackItems();
+        // }
     }
 
     async loadCategory(category) {
@@ -267,6 +272,24 @@ class ItemDataLoader {
                 sell: 3.94,
                 special: false,
                 icon: '🍞'
+            },
+            {
+                material: 'IRON_SWORD',
+                name: 'Iron Sword',
+                category: 'workstations',
+                buy: 50,
+                sell: 12.5,
+                special: false,
+                icon: '⚔️'
+            },
+            {
+                material: 'EMERALD',
+                name: 'Emerald',
+                category: 'ores',
+                buy: 200,
+                sell: 50,
+                special: false,
+                icon: '💚'
             }
         ];
     }
@@ -594,14 +617,21 @@ window.SearchUtils = SearchUtils;
 window.StorageUtils = StorageUtils;
 window.ToastManager = ToastManager;
 
-// Initialize global toast manager when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        window.toast = new ToastManager();
-    });
-} else {
-    window.toast = new ToastManager();
-}
+// Initialize global toast manager when DOM is ready (disabled for debugging)
+// if (document.readyState === 'loading') {
+//     document.addEventListener('DOMContentLoaded', () => {
+//         window.toast = new ToastManager();
+//     });
+// } else {
+//     window.toast = new ToastManager();
+// }
+
+// Temporary placeholder
+window.toast = {
+    show: function(message, type, duration) {
+        console.log(`Toast: ${message} (${type})`);
+    }
+};
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {
