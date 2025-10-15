@@ -154,24 +154,23 @@ class ItemDataLoader {
     }
 
     async loadAllItems() {
-        // Force fallback for debugging
-        console.log('Loading items - using fallback for debugging');
-        return this.getFallbackItems();
-        
-        // Original code (commented out for debugging)
-        // try {
-        //     const allItems = [];
-        //     
-        //     for (const category of this.categories) {
-        //         const items = await this.loadCategory(category);
-        //         allItems.push(...items);
-        //     }
-        //     
-        //     return allItems.sort((a, b) => a.name.localeCompare(b.name));
-        // } catch (error) {
-        //     console.error('Error loading items:', error);
-        //     return this.getFallbackItems();
-        // }
+        try {
+            console.log('Loading items from YAML files...');
+            const allItems = [];
+            
+            for (const category of this.categories) {
+                const items = await this.loadCategory(category);
+                console.log(`Loaded ${items.length} items from ${category}`);
+                allItems.push(...items);
+            }
+            
+            console.log(`Total items loaded: ${allItems.length}`);
+            return allItems.sort((a, b) => a.name.localeCompare(b.name));
+        } catch (error) {
+            console.error('Error loading items:', error);
+            console.log('Falling back to sample items');
+            return this.getFallbackItems();
+        }
     }
 
     async loadCategory(category) {
