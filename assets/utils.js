@@ -113,6 +113,12 @@ class ItemDataLoader {
             'Ores', 'Potions', 'Redstone', 'SpawnEggs', 'Spawners', 
             'Workstations', 'Z_EverythingElse'
         ];
+
+        // mcasset.cloud mirrors official client assets in a stable URL format.
+        // This is significantly more reliable than trying to scrape minecraft.net.
+        this.mcAssetVersion = '1.20.4';
+        this.mcAssetBase = `https://mcasset.cloud/${this.mcAssetVersion}/assets/minecraft/textures`;
+
         this.itemIcons = new Map([
             // Common Minecraft items with emoji representations
             ['CHEST', '📦'], ['DIAMOND', '💎'], ['IRON_INGOT', '🔸'],
@@ -164,7 +170,9 @@ class ItemDataLoader {
         }
 
         try {
-            const response = await fetch(`./sections/${category}.yml`);
+            const basePath = window.location.pathname.includes('/pages/') ? './sections/' : './pages/sections/';
+            const url = new URL(`${basePath}${category}.yml`, window.location.href);
+            const response = await fetch(url.toString(), { cache: 'no-store' });
             if (!response.ok) {
                 throw new Error(`Failed to load ${category}: ${response.status}`);
             }
@@ -208,12 +216,13 @@ class ItemDataLoader {
                             console.log(`${category} adding item:`, item.material);
                             items.push({
                                 material: item.material,
-                                name: this.formatItemName(item.name || item.material),
+                                name: this.formatItemName(item.name ?? item.material),
                                 category: category,
-                                buy: item.buy || -1,
-                                sell: item.sell || -1,
+                                buy: (item.buy ?? -1),
+                                sell: (item.sell ?? -1),
                                 special: item.autosell === true || item.lore !== undefined,
                                 icon: this.getItemIcon(item.material),
+                                iconUrls: this.getItemIconUrls(item.material),
                                 lore: item.lore,
                                 customName: item.name
                             });
@@ -234,9 +243,10 @@ class ItemDataLoader {
     }
 
     formatItemName(name) {
-        if (typeof name === 'string' && name.includes('§')) {
-            // Remove Minecraft color codes
-            return name.replace(/§[0-9a-fk-or]/g, '').trim();
+        if (typeof name === 'string') {
+            // Remove Minecraft color codes (both § and & formats)
+            const cleaned = name.replace(/§[0-9a-fk-or]/gi, '').replace(/&[0-9a-fk-or]/gi, '').trim();
+            if (cleaned) return cleaned;
         }
         
         // Convert UPPER_CASE_WITH_UNDERSCORES to Title Case
@@ -247,6 +257,20 @@ class ItemDataLoader {
 
     getItemIcon(material) {
         return this.itemIcons.get(material) || '📦';
+    }
+
+    getItemIconUrls(material) {
+        const mat = String(material || '').trim();
+        if (!mat) return [];
+
+        const name = mat.toLowerCase();
+        const preferBlock =
+            /(_block|_bricks|_brick|_planks|_stairs|_slab|_wall|_log|_wood|_ore|_glass|_terracotta|_concrete|_wool|_sandstone|_stone|_deepslate)$/.test(name) ||
+            ['stone', 'dirt', 'grass_block', 'cobblestone', 'netherrack', 'end_stone'].includes(name);
+
+        const blockUrl = `${this.mcAssetBase}/block/${encodeURIComponent(name)}.png`;
+        const itemUrl = `${this.mcAssetBase}/item/${encodeURIComponent(name)}.png`;
+        return preferBlock ? [blockUrl, itemUrl] : [itemUrl, blockUrl];
     }
 
     getFallbackItems() {

@@ -211,6 +211,12 @@
             border: 1px solid var(--dark-glass-border);
         }
 
+        .item-icon-img {
+            width: 36px;
+            height: 36px;
+            image-rendering: pixelated;
+        }
+
         .item-info {
             flex: 1;
         }
@@ -333,6 +339,12 @@
             justify-content: center;
             margin-right: var(--space-3);
             font-size: 1em;
+        }
+
+        .table-item-icon img {
+            width: 22px;
+            height: 22px;
+            image-rendering: pixelated;
         }
 
         .table-item-details {
@@ -751,9 +763,14 @@
                 const card = document.createElement('div');
                 card.className = `item-card fade-in ${item.special ? 'special-item' : ''}`;
                 
+                const iconUrls = Array.isArray(item.iconUrls) ? item.iconUrls : [];
+                const iconHtml = iconUrls.length
+                    ? `<img class="item-icon-img" alt="${item.material} icon" loading="lazy" decoding="async" data-icon material="${item.material}" src="${iconUrls[0]}">`
+                    : (item.icon || '📦');
+
                 card.innerHTML = `
                     <div class="item-header">
-                        <div class="item-icon">${item.icon || '📦'}</div>
+                        <div class="item-icon">${iconHtml}</div>
                         <div class="item-info">
                             <div class="item-name">${item.name}</div>
                             <div class="item-category">${item.category}</div>
@@ -777,6 +794,8 @@
                 
                 container.appendChild(card);
             });
+
+            wireUpIconFallback(container);
         }
 
         // Render list view
@@ -793,10 +812,15 @@
             `;
             
             filteredItems.forEach(item => {
+                const iconUrls = Array.isArray(item.iconUrls) ? item.iconUrls : [];
+                const iconHtml = iconUrls.length
+                    ? `<img alt="${item.material} icon" loading="lazy" decoding="async" data-icon material="${item.material}" src="${iconUrls[0]}">`
+                    : (item.icon || '📦');
+
                 html += `
                     <div class="table-row fade-in">
                         <div class="table-item-info">
-                            <div class="table-item-icon">${item.icon || '📦'}</div>
+                            <div class="table-item-icon">${iconHtml}</div>
                             <div class="table-item-details">
                                 <div class="table-item-name ${item.special ? 'special-item' : ''}">${item.name}</div>
                                 <div class="table-item-category">${item.category}</div>
@@ -814,6 +838,22 @@
             });
             
             container.innerHTML = html;
+            wireUpIconFallback(container);
+        }
+
+        function wireUpIconFallback(rootEl) {
+            const imgs = rootEl.querySelectorAll('img[data-icon][material]');
+            imgs.forEach(img => {
+                const material = img.getAttribute('material');
+                const urlList = (itemLoader.getItemIconUrls(material) || []);
+                let idx = 0;
+                const tryNext = () => {
+                    idx += 1;
+                    if (idx >= urlList.length) return;
+                    img.src = urlList[idx];
+                };
+                img.addEventListener('error', tryNext, { once: false });
+            });
         }
 
         // Update items count display
