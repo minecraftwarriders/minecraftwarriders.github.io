@@ -114,10 +114,10 @@ class ItemDataLoader {
             'Workstations', 'Z_EverythingElse'
         ];
 
-        // mcasset.cloud mirrors official client assets in a stable URL format.
-        // This is significantly more reliable than trying to scrape minecraft.net.
+        // Use raw GitHub-hosted official assets. This reliably serves `image/png` for <img> tags.
+        // (Some "asset browser" sites return HTML wrappers, which breaks <img> rendering.)
         this.mcAssetVersion = '1.20.4';
-        this.mcAssetBase = `https://mcasset.cloud/${this.mcAssetVersion}/assets/minecraft/textures`;
+        this.mcAssetBase = `https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/${this.mcAssetVersion}/assets/minecraft/textures`;
 
         this.itemIcons = new Map([
             // Common Minecraft items with emoji representations
