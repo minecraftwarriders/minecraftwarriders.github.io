@@ -71,63 +71,33 @@
 
         body {
             font-family: var(--font-sans);
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2), transparent 50%),
-                linear-gradient(135deg, var(--primary-900) 0%, #0c0c0c 100%);
+            /* Cleaner, less "AI gradient" background */
+            background: linear-gradient(180deg, #0b1220 0%, #0a0f17 100%);
             min-height: 100vh;
             color: var(--primary-100);
             overflow-x: hidden;
         }
 
-        /* Animated Background Particles */
-        .background-particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--accent-500);
-            border-radius: 50%;
-            animation: float 20s infinite linear;
-            opacity: 0.3;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); }
-            100% { transform: translateY(-100vh) rotate(360deg); }
-        }
+        /* Disable particles: looks "template-y" and distracts */
+        .background-particles { display: none; }
 
         /* Glass Morphism Components */
         .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: border-color 0.2s ease, background 0.2s ease;
         }
 
         .glass-card:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.14);
         }
 
         /* Navigation */
@@ -221,10 +191,7 @@
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-100) 0%, var(--accent-500) 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary-100);
             animation: fadeInUp 1s ease-out;
         }
 
@@ -295,10 +262,7 @@
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-100) 0%, var(--accent-500) 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary-100);
         }
 
         .section-description {
@@ -487,13 +451,7 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loading">
-        <div class="loading-spinner"></div>
-    </div>
-
-    <!-- Background Particles -->
-    <div class="background-particles" id="particles"></div>
+    <!-- Loading screen & particles removed for a cleaner feel -->
 
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
@@ -613,27 +571,7 @@
     </footer>
 
     <script>
-        // Loading Screen
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                document.getElementById('loading').classList.add('fade-out');
-            }, 500);
-        });
-
-        // Animated Background Particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
+        // (Removed) loading screen + particles
 
         // Navbar Scroll Effect
         function handleNavbarScroll() {
@@ -697,7 +635,6 @@
 
         // Initialize everything
         document.addEventListener('DOMContentLoaded', function() {
-            createParticles();
             setupSmoothScroll();
             
             window.addEventListener('scroll', handleNavbarScroll);

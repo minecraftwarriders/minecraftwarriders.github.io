@@ -137,11 +137,8 @@ body {
     font-size: var(--text-base);
     line-height: 1.6;
     color: var(--primary-100);
-    background: 
-        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3), transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3), transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2), transparent 50%),
-        linear-gradient(135deg, var(--primary-900) 0%, #0c0c0c 100%);
+    /* Cleaner, less "template-y" background */
+    background: linear-gradient(180deg, #0b1220 0%, #0a0f17 100%);
     min-height: 100vh;
     overflow-x: hidden;
 }
