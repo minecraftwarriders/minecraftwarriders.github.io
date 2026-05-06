@@ -263,7 +263,23 @@ class ItemDataLoader {
         const mat = String(material || '').trim();
         if (!mat) return [];
 
-        const name = mat.toLowerCase();
+        let name = mat.toLowerCase();
+
+        // Many materials don't have a 1:1 `<material>.png` texture file.
+        // Add a small alias layer for common cases so icons render.
+        const directAliases = {
+            grass_block: 'grass_block_side',
+            podzol: 'podzol_side',
+            mycelium: 'mycelium_side'
+        };
+        if (directAliases[name]) name = directAliases[name];
+
+        // WOOD blocks typically reuse LOG textures (no `*_wood.png` files).
+        // oak_wood -> oak_log, stripped_oak_wood -> stripped_oak_log, etc.
+        if (/_wood$/.test(name)) {
+            name = name.replace(/_wood$/, '_log');
+        }
+
         const preferBlock =
             /(_block|_bricks|_brick|_planks|_stairs|_slab|_wall|_log|_wood|_ore|_glass|_terracotta|_concrete|_wool|_sandstone|_stone|_deepslate)$/.test(name) ||
             ['stone', 'dirt', 'grass_block', 'cobblestone', 'netherrack', 'end_stone'].includes(name);
