@@ -1,10 +1,11 @@
 /* Sleek, simple site layer (overrides older "glass" theme) */
 
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap");
 
 :root {
-  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  /* Professional mono-forward typography */
+  --font-sans: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --font-mono: var(--font-sans);
 
   --bg0: #0b1020;
   --bg1: #0a0f17;
@@ -23,9 +24,10 @@
   --warn: #fbbf24;
   --bad: #fb7185;
 
-  --radius: 14px;
-  --radius-sm: 10px;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  /* Sharp corners, minimal effects */
+  --radius: 2px;
+  --radius-sm: 2px;
+  --shadow: none;
 
   --container: 1120px;
 }
@@ -52,7 +54,7 @@ body {
   z-index: 50;
   background: rgba(10, 15, 23, 0.72);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(12px);
+  backdrop-filter: none;
 }
 
 .site-header .row {
@@ -73,7 +75,7 @@ body {
 .brand img {
   width: 36px;
   height: 36px;
-  border-radius: 10px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
 }
 .brand .title {
@@ -98,7 +100,7 @@ body {
   font-weight: 600;
   font-size: 14px;
   padding: 8px 10px;
-  border-radius: 10px;
+  border-radius: var(--radius);
 }
 .nav a:hover {
   background: var(--panel);
@@ -116,7 +118,7 @@ body {
   justify-content: center;
   gap: 10px;
   padding: 10px 14px;
-  border-radius: 12px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--panel);
   color: var(--text);
@@ -158,7 +160,6 @@ body {
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
 }
 
 .grid {

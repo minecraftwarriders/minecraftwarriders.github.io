@@ -284,9 +284,37 @@ class ItemDataLoader {
             /(_block|_bricks|_brick|_planks|_stairs|_slab|_wall|_log|_wood|_ore|_glass|_terracotta|_concrete|_wool|_sandstone|_stone|_deepslate)$/.test(name) ||
             ['stone', 'dirt', 'grass_block', 'cobblestone', 'netherrack', 'end_stone'].includes(name);
 
-        const blockUrl = `${this.mcAssetBase}/block/${encodeURIComponent(name)}.png`;
-        const itemUrl = `${this.mcAssetBase}/item/${encodeURIComponent(name)}.png`;
-        return preferBlock ? [blockUrl, itemUrl] : [itemUrl, blockUrl];
+        const blockNames = [
+            name,
+            `${name}_side`,
+            `${name}_top`,
+            `${name}_bottom`,
+            `${name}_front`,
+            `${name}_back`,
+            `${name}_end`,
+            `${name}_inside`
+        ];
+
+        const itemNames = [
+            name,
+            // Sensible generic fallbacks for special categories
+            name.endsWith('_spawn_egg') ? 'spawn_egg' : null,
+            name.includes('potion') ? 'potion' : null,
+            name.includes('arrow') ? 'arrow' : null
+        ].filter(Boolean);
+
+        const urls = [];
+        const push = (u) => { if (!urls.includes(u)) urls.push(u); };
+
+        if (preferBlock) {
+            blockNames.forEach(n => push(`${this.mcAssetBase}/block/${encodeURIComponent(n)}.png`));
+            itemNames.forEach(n => push(`${this.mcAssetBase}/item/${encodeURIComponent(n)}.png`));
+        } else {
+            itemNames.forEach(n => push(`${this.mcAssetBase}/item/${encodeURIComponent(n)}.png`));
+            blockNames.forEach(n => push(`${this.mcAssetBase}/block/${encodeURIComponent(n)}.png`));
+        }
+
+        return urls;
     }
 
     getFallbackItems() {
