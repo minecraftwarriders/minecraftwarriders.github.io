@@ -14,36 +14,19 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
     <!-- Shared CSS -->
-    <link rel="stylesheet" href="../assets/styles.css">
     <link rel="stylesheet" href="../assets/site.css">
-    
     <style>
-        /* Wiki-specific styles */
-        .wiki-layout {
-            display: flex;
-            min-height: 100vh;
-            padding-top: 80px;
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 320px;
-            height: calc(100vh - 80px);
-            padding: var(--space-3);
-            background: rgba(15, 23, 42, 0.9);
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
-            overflow-y: auto;
-            overflow-x: hidden;
-            z-index: 10;
-        }
+      /* Keep only tiny wiki-specific adjustments */
+      .wiki-legacy { display: none; }
+      .icon {
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        opacity: 0.9;
+      }
+      .muted { color: var(--muted); }
+    </style>
 
         .sidebar::-webkit-scrollbar {
             width: 6px;
@@ -672,137 +655,148 @@
             }
         }
     </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-brand">
-                <img src="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png" alt="War Riders Logo" class="nav-logo">
-                <span class="nav-title">War Riders</span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="wiki.html" class="active">Wiki</a></li>
-                <li><a href="items.html">Items</a></li>
-            </ul>
-            <div class="mobile-menu-toggle" id="mobileMenuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="badge">MC<br/>WR</div>
+          <div style="font-weight:800;">War Riders</div>
         </div>
-    </nav>
-
-    <div class="wiki-layout">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search commands, plugins..." id="searchInput">
-            </div>
-
-            <!-- Navigation Sections -->
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleNavSection('nav-main')">
-                    <span class="nav-section-icon">🏠</span>
-                    <h3 class="nav-section-title">Main Navigation</h3>
-                    <span class="nav-section-toggle expanded">▶</span>
-                </div>
-                <ul class="nav-links" id="nav-main">
-                    <li><a href="#home" class="nav-link active" onclick="showSection('home')">Overview</a></li>
-                    <li><a href="#beginners" class="nav-link" onclick="showSection('beginners')">Beginner's Guide</a></li>
-                    <li><a href="#commands-all" class="nav-link" onclick="showSection('commands-all')">All Commands</a></li>
-                </ul>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleNavSection('nav-essential')">
-                    <span class="nav-section-icon">⚡</span>
-                    <h3 class="nav-section-title">Essential Plugins</h3>
-                    <span class="nav-section-toggle expanded">▶</span>
-                </div>
-                <ul class="nav-links" id="nav-essential">
-                    <li><a href="#essentials" class="nav-link" onclick="showSection('essentials')">EssentialsX</a></li>
-                    <li><a href="#auraskills" class="nav-link" onclick="showSection('auraskills')">AuraSkills</a></li>
-                    <li><a href="#economy" class="nav-link" onclick="showSection('economy')">Economy Shop</a></li>
-                    <li><a href="#autosell" class="nav-link" onclick="showSection('autosell')">AutoSell Chests</a></li>
-                </ul>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleNavSection('nav-economy')">
-                    <span class="nav-section-icon">💰</span>
-                    <h3 class="nav-section-title">Economy & Trading</h3>
-                    <span class="nav-section-toggle">▶</span>
-                </div>
-                <ul class="nav-links" id="nav-economy" style="display: none;">
-                    <li><a href="#auctionhouse" class="nav-link" onclick="showSection('auctionhouse')">Auction House</a></li>
-                    <li><a href="#bankplus" class="nav-link" onclick="showSection('bankplus')">Banking</a></li>
-                    <li><a href="#tradeplus" class="nav-link" onclick="showSection('tradeplus')">Trading</a></li>
-                </ul>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleNavSection('nav-social')">
-                    <span class="nav-section-icon">👥</span>
-                    <h3 class="nav-section-title">Social & Fun</h3>
-                    <span class="nav-section-toggle">▶</span>
-                </div>
-                <ul class="nav-links" id="nav-social" style="display: none;">
-                    <li><a href="#marriage" class="nav-link" onclick="showSection('marriage')">Marriage System</a></li>
-                    <li><a href="#achievements" class="nav-link" onclick="showSection('achievements')">Achievements</a></li>
-                    <li><a href="#brewery" class="nav-link" onclick="showSection('brewery')">Brewing</a></li>
-                </ul>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleNavSection('nav-building')">
-                    <span class="nav-section-icon">🏗️</span>
-                    <h3 class="nav-section-title">Building & World</h3>
-                    <span class="nav-section-toggle">▶</span>
-                </div>
-                <ul class="nav-links" id="nav-building" style="display: none;">
-                    <li><a href="#worldedit" class="nav-link" onclick="showSection('worldedit')">WorldEdit</a></li>
-                    <li><a href="#bigdoors" class="nav-link" onclick="showSection('bigdoors')">BigDoors</a></li>
-                    <li><a href="#movecraft" class="nav-link" onclick="showSection('movecraft')">Movecraft</a></li>
-                </ul>
-            </div>
-
-            <div class="nav-section">
-                <div class="nav-section-header" onclick="toggleNavSection('nav-utility')">
-                    <span class="nav-section-icon">🛠️</span>
-                    <h3 class="nav-section-title">Utilities & QoL</h3>
-                    <span class="nav-section-toggle">▶</span>
-                </div>
-                <ul class="nav-links" id="nav-utility" style="display: none;">
-                    <li><a href="#graves" class="nav-link" onclick="showSection('graves')">Death Graves</a></li>
-                    <li><a href="#shulkerpacks" class="nav-link" onclick="showSection('shulkerpacks')">Shulker Packs</a></li>
-                    <li><a href="#enchants" class="nav-link" onclick="showSection('enchants')">Custom Enchants</a></li>
-                </ul>
-            </div>
+        <nav class="topnav" aria-label="Top">
+          <a data-nav href="../index.html">Home</a>
+          <a data-nav class="active" href="./wiki.html">Wiki</a>
+          <a data-nav href="./items.html">Items</a>
+        </nav>
+        <div class="search" role="search">
+          <span class="muted">🔎</span>
+          <input id="globalSearch" type="search" placeholder="Search commands, plugins..." autocomplete="off" />
+          <span class="kbd">⌘K</span>
         </div>
+        <div class="topbar-right">
+          <div class="avatar" aria-hidden="true"></div>
+        </div>
+      </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Home Section -->
-            <section class="content-section active" id="home">
-                <div class="hero-section">
-                    <h1 class="hero-title">Server Wiki</h1>
-                    <p class="hero-description">
-                        Your complete guide to all plugins, commands, and features on Minecraft War Riders server.
-                    </p>
-                    <div class="quick-actions">
-                        <button class="btn btn-primary" onclick="showSection('beginners')">
-                            🎯 Beginner's Guide
-                        </button>
-                        <button class="btn btn-secondary" onclick="showSection('commands-all')">
-                            ⚡ All Commands
-                        </button>
-                        <a href="items.html" class="btn btn-secondary">
-                            💰 Item Prices
-                        </a>
-                    </div>
+      <div class="shell">
+        <aside class="sidebar" aria-label="Sidebar">
+          <div class="section-title">Navigation</div>
+          <a class="side-link" href="./wiki.html#overview"><span class="dot">▦</span>Overview</a>
+          <a class="side-link" href="./wiki.html#beginners"><span class="dot">⌁</span>Beginner’s Guide</a>
+          <a class="side-link active" href="./wiki.html#commands"><span class="dot">⚡</span>All Commands</a>
+
+          <div class="section-title">Categories</div>
+          <a class="side-link" href="./wiki.html#cat-essential"><span class="dot">⚡</span>Essential Plugins</a>
+          <a class="side-link" href="./wiki.html#cat-econ"><span class="dot">⛁</span>Economy & Trading</a>
+          <a class="side-link" href="./wiki.html#cat-social"><span class="dot">⬣</span>Social & Fun</a>
+          <a class="side-link" href="./wiki.html#cat-build"><span class="dot">⬢</span>Building & World</a>
+          <a class="side-link" href="./wiki.html#cat-qol"><span class="dot">⛭</span>Utilities & QoL</a>
+        </aside>
+
+        <main class="content">
+          <div class="crumbs"><a href="./wiki.html#overview">Home</a> › <span>Commands</span></div>
+
+          <section class="hero-card" id="commands">
+            <div>
+              <h1>All Commands Reference</h1>
+              <p>Complete list of every command available on the server, organized by category.</p>
+              <div class="stats">
+                <div class="stat"><span>⌘</span> <strong>156</strong> <span>Commands</span></div>
+                <div class="stat"><span>▦</span> <strong>7</strong> <span>Categories</span></div>
+                <div class="stat"><span>∞</span> <strong>∞</strong> <span>Possibilities</span></div>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <img src="https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.4/assets/minecraft/textures/block/chiseled_bookshelf.png" alt="" />
+            </div>
+          </section>
+
+          <section class="section" id="cat-essential">
+            <h2>🌐 Teleportation &amp; Movement</h2>
+            <div class="tile-grid" data-tiles="teleport"></div>
+          </section>
+
+          <section class="section" id="cat-econ">
+            <h2>💰 Economy &amp; Trading</h2>
+            <div class="tile-grid" data-tiles="economy"></div>
+          </section>
+
+          <section class="section" id="cat-social">
+            <h2>👥 Social &amp; Communication</h2>
+            <div class="tile-grid" data-tiles="social"></div>
+          </section>
+
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const COMMANDS = {
+        teleport: [
+          { cmd: "/spawn", desc: "Teleport to spawn" },
+          { cmd: "/home [name]", desc: "Go to your home" },
+          { cmd: "/sethome [name]", desc: "Set your home location" },
+          { cmd: "/tpa [player]", desc: "Request teleport to player" },
+          { cmd: "/back", desc: "Return to last location" },
+          { cmd: "/warp [name]", desc: "Go to warp location" }
+        ],
+        economy: [
+          { cmd: "/balance", desc: "Check your balance" },
+          { cmd: "/shop", desc: "Open the server shop" },
+          { cmd: "/ah", desc: "Open auction house" }
+        ],
+        social: [
+          { cmd: "/msg [player] [message]", desc: "Private message" },
+          { cmd: "/marry [player]", desc: "Propose marriage" },
+          { cmd: "/list", desc: "Online players" }
+        ]
+      };
+
+      function renderTiles() {
+        document.querySelectorAll("[data-tiles]").forEach((grid) => {
+          const key = grid.getAttribute("data-tiles");
+          const items = COMMANDS[key] || [];
+          grid.innerHTML = items
+            .map(
+              (i) => `
+              <div class="tile">
+                <div class="left">
+                  <div class="cmd">${escapeHtml(i.cmd)}</div>
+                  <div class="desc">${escapeHtml(i.desc)}</div>
                 </div>
+                <div class="chev">›</div>
+              </div>
+            `,
+            )
+            .join("");
+        });
+      }
+
+      function escapeHtml(s) {
+        return String(s)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function setupSearch() {
+        const input = document.getElementById("globalSearch");
+        if (!input) return;
+        input.addEventListener("input", () => {
+          const q = input.value.trim().toLowerCase();
+          document.querySelectorAll(".tile").forEach((t) => {
+            const txt = t.textContent.toLowerCase();
+            t.style.display = !q || txt.includes(q) ? "" : "none";
+          });
+        });
+      }
+
+      renderTiles();
+      setupSearch();
+    </script>
+    <script src="../assets/site.js" defer></script>
 
                 <div class="feature-grid">
                     <div class="feature-card" onclick="showSection('essentials')">
@@ -1534,7 +1528,5 @@
                 showSection('home');
             }
         });
-    </script>
-    <script src="../assets/site.js" defer></script>
-</body>
+  </body>
 </html>

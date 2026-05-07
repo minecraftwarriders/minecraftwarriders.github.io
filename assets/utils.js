@@ -292,7 +292,12 @@ class ItemDataLoader {
             `${name}_front`,
             `${name}_back`,
             `${name}_end`,
-            `${name}_inside`
+            `${name}_inside`,
+            // Common variants seen across blocks
+            `${name}_0`,
+            `${name}_1`,
+            `${name}_2`,
+            `${name}_3`
         ];
 
         const itemNames = [
