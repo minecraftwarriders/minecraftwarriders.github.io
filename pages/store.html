@@ -108,12 +108,13 @@
           <a data-nav href="./items.html">Items</a>
           <a data-nav class="active" href="./store.html">Store</a>
         </nav>
-        <div class="search" role="search">
-          <span style="color: var(--muted)">🔎</span>
-          <input type="search" placeholder="Search store..." disabled />
-          <span class="kbd">⌘K</span>
+        <div class="topbar-right" style="margin-left:auto;">
+          <a class="btn" href="../index.html">Home</a>
+          <button class="btn" type="button" data-copy="panda.cloudns.nz">
+            Copy IP <span class="kbd" data-copy-badge>IP</span>
+          </button>
         </div>
-        <div class="topbar-right"><div class="avatar" aria-hidden="true"></div></div>
+        <div class="avatar" aria-hidden="true"></div>
       </header>
 
       <div class="shell">
@@ -150,7 +151,7 @@
                 <input id="storeSearch" type="search" placeholder="Search cosmetics..." autocomplete="off" />
               </div>
             </div>
-            <div class="chip-row" id="storeCats"></div>
+            <!-- categories intentionally hidden for a cleaner storefront -->
             <div id="storeError" class="store-note" style="color: var(--bad)"></div>
             <div id="storeEmpty" class="store-note" style="display: none">No cosmetics match your search.</div>
             <div class="store-grid" id="storeGrid"></div>

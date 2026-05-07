@@ -36,14 +36,13 @@
           <a data-nav href="./pages/items.html">Items</a>
           <a data-nav href="./pages/store.html">Store</a>
         </nav>
-        <div class="search" role="search">
-          <span style="color:var(--muted);">🔎</span>
-          <input type="search" placeholder="Search the wiki..." disabled />
-          <span class="kbd">⌘K</span>
+        <div class="topbar-right" style="margin-left:auto;">
+          <button class="btn" type="button" data-copy="panda.cloudns.nz">
+            Copy IP <span class="kbd" data-copy-badge>IP</span>
+          </button>
+          <a class="btn primary" href="./pages/store.html">Store</a>
         </div>
-        <div class="topbar-right">
-          <div class="avatar" aria-hidden="true"></div>
-        </div>
+        <div class="avatar" aria-hidden="true"></div>
       </header>
 
       <div class="shell">
@@ -75,40 +74,22 @@
               <a class="tile" href="./pages/wiki.html" style="text-decoration:none; color:inherit;">
                 <div class="left">
                   <div class="cmd">Wiki</div>
-                  <div class="desc">Explore commands, plugins, guides, and server info.</div>
+                  <div class="desc">Commands, guides, and server info.</div>
                 </div>
                 <div class="chev">›</div>
               </a>
               <a class="tile" href="./pages/items.html" style="text-decoration:none; color:inherit;">
                 <div class="left">
                   <div class="cmd">Item Prices</div>
-                  <div class="desc">View all shop items and market prices.</div>
+                  <div class="desc">Search and compare shop prices.</div>
                 </div>
                 <div class="chev">›</div>
               </a>
-              <div class="tile">
+              <a class="tile" href="./pages/store.html" style="text-decoration:none; color:inherit;">
                 <div class="left">
-                  <div class="cmd">Join</div>
-                  <div class="desc"><code>panda.cloudns.nz</code></div>
+                  <div class="cmd">Store</div>
+                  <div class="desc">Cosmetic-only perks. No gameplay advantages.</div>
                 </div>
-                <div class="chev">›</div>
-              </div>
-            </div>
-          </section>
-
-          <section class="section">
-            <h2>Quick Links</h2>
-            <div class="tile-grid">
-              <a class="tile" href="./pages/wiki.html#beginners" style="text-decoration:none; color:inherit;">
-                <div class="left"><div class="cmd">Beginner’s Guide</div><div class="desc">Start here if you’re new.</div></div>
-                <div class="chev">›</div>
-              </a>
-              <a class="tile" href="./pages/wiki.html#commands" style="text-decoration:none; color:inherit;">
-                <div class="left"><div class="cmd">All Commands</div><div class="desc">Everything, organized.</div></div>
-                <div class="chev">›</div>
-              </a>
-              <a class="tile" href="./pages/items.html" style="text-decoration:none; color:inherit;">
-                <div class="left"><div class="cmd">Item Prices</div><div class="desc">Search and compare prices.</div></div>
                 <div class="chev">›</div>
               </a>
             </div>
