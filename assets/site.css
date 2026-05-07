@@ -7,19 +7,22 @@
   --font-sans: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
   --font-mono: var(--font-sans);
 
-  --bg0: #0b1020;
-  --bg1: #0a0f17;
-  --panel: rgba(255, 255, 255, 0.04);
-  --panel2: rgba(255, 255, 255, 0.06);
-  --border: rgba(255, 255, 255, 0.1);
-  --border2: rgba(255, 255, 255, 0.14);
+  /* Warmer, classic Minecraft-web palette */
+  --bg0: #0f0d0a;
+  --bg1: #14110c;
+  --panel: rgba(255, 255, 255, 0.05);
+  --panel2: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.11);
+  --border2: rgba(255, 255, 255, 0.16);
 
   --text: rgba(255, 255, 255, 0.92);
   --muted: rgba(255, 255, 255, 0.68);
   --faint: rgba(255, 255, 255, 0.52);
 
-  --accent: #79a6ff;
-  --accent2: #b6ccff;
+  /* Hypixel-ish gold accent */
+  --accent: #d7b25a;
+  --accent2: #f1d18a;
+  --accent-deep: #8a6a1d;
   --ok: #4ade80;
   --warn: #fbbf24;
   --bad: #fb7185;
@@ -38,7 +41,10 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background: linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(215,178,90,0.12), rgba(0,0,0,0)),
+    radial-gradient(900px 480px at 90% 0%, rgba(255,255,255,0.06), rgba(0,0,0,0)),
+    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
   color: var(--text);
 }
 
@@ -131,8 +137,13 @@ body {
   background: var(--panel2);
 }
 .btn.primary {
-  border-color: rgba(121, 166, 255, 0.35);
-  background: rgba(121, 166, 255, 0.18);
+  border-color: rgba(215, 178, 90, 0.45);
+  background: rgba(215, 178, 90, 0.18);
+  color: rgba(255, 255, 255, 0.95);
+}
+.btn.primary:hover {
+  border-color: rgba(241, 209, 138, 0.55);
+  background: rgba(215, 178, 90, 0.24);
 }
 
 .hero {
@@ -276,8 +287,8 @@ body {
 }
 .topnav a.active {
   color: var(--text);
-  background: rgba(121, 166, 255, 0.12);
-  border-color: rgba(121, 166, 255, 0.22);
+  background: rgba(215, 178, 90, 0.14);
+  border-color: rgba(215, 178, 90, 0.28);
 }
 
 .search {
@@ -356,8 +367,8 @@ body {
   color: var(--text);
 }
 .side-link.active {
-  background: rgba(121, 166, 255, 0.12);
-  border-color: rgba(121, 166, 255, 0.22);
+  background: rgba(215, 178, 90, 0.14);
+  border-color: rgba(215, 178, 90, 0.28);
   color: var(--text);
 }
 .side-link .dot {
@@ -382,7 +393,9 @@ body {
 
 .hero-card {
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  background:
+    radial-gradient(520px 240px at 20% 20%, rgba(215,178,90,0.14), rgba(0,0,0,0)),
+    linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
   border-radius: var(--radius);
   padding: 18px;
   display: grid;
@@ -472,6 +485,71 @@ body {
   font-weight: 700;
   font-size: 13px;
 }
+
+/* --- Store bits (shared) --- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  padding: 6px 10px;
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+.pill.good { color: rgba(255,255,255,0.92); border-color: rgba(74, 222, 128, 0.25); background: rgba(74, 222, 128, 0.09); }
+.pill.warn { color: rgba(255,255,255,0.92); border-color: rgba(251, 191, 36, 0.25); background: rgba(251, 191, 36, 0.09); }
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.62);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  z-index: 200;
+}
+.modal-backdrop.open { display: flex; }
+.modal {
+  width: min(720px, 100%);
+  border: 1px solid var(--border);
+  background: rgba(18, 14, 10, 0.96);
+  border-radius: var(--radius);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.45);
+  overflow: hidden;
+}
+.modal .hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+}
+.modal .bd { padding: 14px; }
+.modal .ft {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+.icon-btn {
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+}
+.icon-btn:hover { border-color: var(--border2); background: rgba(255,255,255,0.05); }
 .tile .desc {
   color: var(--muted);
   font-size: 12px;

@@ -1,0 +1,79 @@
+{
+  "meta": {
+    "title": "Cosmetics Store",
+    "subtitle": "All purchasable items are cosmetic-only. No gameplay advantages.",
+    "purchase": {
+      "methodLabel": "Buy via Discord ticket",
+      "instructions": [
+        "Open a ticket in Discord: #support → “Store Purchase”.",
+        "Tell staff what you want to buy and your in-game name.",
+        "After payment, cosmetics are applied to your account."
+      ],
+      "linkLabel": "Open Discord",
+      "linkUrl": "https://discord.gg/your-invite"
+    }
+  },
+  "categories": [
+    {
+      "id": "ranks",
+      "label": "Ranks (Cosmetic)",
+      "note": "Chat tag, name color, tab styling."
+    },
+    {
+      "id": "particles",
+      "label": "Particles",
+      "note": "Purely visual trails and auras."
+    },
+    {
+      "id": "pets",
+      "label": "Pets",
+      "note": "Cosmetic companions."
+    }
+  ],
+  "products": [
+    {
+      "id": "rank-knight",
+      "category": "ranks",
+      "name": "Knight",
+      "price": 4.99,
+      "currency": "USD",
+      "badge": "POPULAR",
+      "description": "Gold name + [KNIGHT] tag + chat styling (cosmetic only).",
+      "includes": ["[KNIGHT] chat tag", "Gold name color", "Tab highlight"],
+      "image": "../assets/images/castlehomeimage.png"
+    },
+    {
+      "id": "rank-warlord",
+      "category": "ranks",
+      "name": "Warlord",
+      "price": 9.99,
+      "currency": "USD",
+      "badge": "BEST VALUE",
+      "description": "Premium tag + animated-ish styling (still cosmetic only).",
+      "includes": ["[WARLORD] chat tag", "Name gradient style", "Tab + chat flare"],
+      "image": "../assets/images/diamondblockcommandsimage.png"
+    },
+    {
+      "id": "particle-ember",
+      "category": "particles",
+      "name": "Ember Aura",
+      "price": 2.99,
+      "currency": "USD",
+      "badge": "",
+      "description": "Soft ember particles around your character.",
+      "includes": ["Aura toggle", "Color variants"],
+      "image": "../assets/images/itemschestimage.png"
+    },
+    {
+      "id": "pet-baby-slime",
+      "category": "pets",
+      "name": "Baby Slime Pet",
+      "price": 3.99,
+      "currency": "USD",
+      "badge": "",
+      "description": "A tiny slime follows you (cosmetic only).",
+      "includes": ["Name your pet", "Hide/show toggle"],
+      "image": "../assets/images/itemschestimage.png"
+    }
+  ]
+}

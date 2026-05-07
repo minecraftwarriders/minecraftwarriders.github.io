@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Store - Minecraft War Riders</title>
+    <meta property="og:title" content="Store - Minecraft War Riders" />
+    <meta property="og:description" content="Cosmetic-only store: ranks, particles, pets, and more." />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png"
+    />
+    <link rel="stylesheet" href="../assets/site.css" />
+    <script src="../assets/site.js" defer></script>
+    <script src="../assets/store.js" defer></script>
+    <style>
+      /* Store page layout (reuses existing card styles) */
+      .store-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      @media (max-width: 980px) {
+        .store-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .store-note {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+        margin-top: 10px;
+      }
+      .store-controls {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .store-controls .ctl {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 8px 10px;
+        border-radius: var(--radius);
+        color: var(--text);
+        font: inherit;
+        font-size: 13px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        min-width: 260px;
+        flex: 1;
+      }
+      .store-controls input {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        font-size: 13px;
+      }
+      .chip-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .chip {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--muted);
+        padding: 6px 10px;
+        border-radius: var(--radius);
+        font-size: 12px;
+        cursor: pointer;
+        user-select: none;
+        font-weight: 700;
+      }
+      .chip.active {
+        color: var(--text);
+        border-color: rgba(215, 178, 90, 0.28);
+        background: rgba(215, 178, 90, 0.14);
+      }
+      ul {
+        margin: 8px 0 0;
+        padding-left: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="badge">MC<br />WR</div>
+          <div style="font-weight: 800">War Riders</div>
+        </div>
+        <nav class="topnav" aria-label="Top">
+          <a data-nav href="../index.html">Home</a>
+          <a data-nav href="./wiki.html">Wiki</a>
+          <a data-nav href="./items.html">Items</a>
+          <a data-nav class="active" href="./store.html">Store</a>
+        </nav>
+        <div class="search" role="search">
+          <span style="color: var(--muted)">🔎</span>
+          <input type="search" placeholder="Search store..." disabled />
+          <span class="kbd">⌘K</span>
+        </div>
+        <div class="topbar-right"><div class="avatar" aria-hidden="true"></div></div>
+      </header>
+
+      <div class="shell">
+        <aside class="sidebar" aria-label="Sidebar">
+          <div class="section-title">Store</div>
+          <a class="side-link active" href="./store.html"><span class="dot">⛃</span>Cosmetics</a>
+          <a class="side-link" href="./items.html"><span class="dot">⛁</span>Item Prices</a>
+          <a class="side-link" href="./wiki.html"><span class="dot">⚡</span>Commands</a>
+          <a class="side-link" href="../index.html"><span class="dot">⌂</span>Home</a>
+        </aside>
+
+        <main class="content">
+          <div class="crumbs"><a href="../index.html">Home</a> › <span>Store</span></div>
+
+          <section class="hero-card">
+            <div>
+              <div class="kicker">Official Store</div>
+              <h1 id="storeTitle">Store</h1>
+              <p id="storeSub">Cosmetic-only perks. No gameplay advantages.</p>
+              <div class="store-note">
+                <span class="pill good">COSMETIC ONLY</span>
+                <span class="pill" style="margin-left: 8px">No P2W</span>
+              </div>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <img src="../assets/images/itemschestimage.png" alt="" />
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="store-controls">
+              <div class="ctl">
+                <span style="color: var(--muted)">🔎</span>
+                <input id="storeSearch" type="search" placeholder="Search cosmetics..." autocomplete="off" />
+              </div>
+            </div>
+            <div class="chip-row" id="storeCats"></div>
+            <div id="storeError" class="store-note" style="color: var(--bad)"></div>
+            <div id="storeEmpty" class="store-note" style="display: none">No cosmetics match your search.</div>
+            <div class="store-grid" id="storeGrid"></div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <!-- Buy modal -->
+    <div id="buyModal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="hd">
+          <div style="display: grid; gap: 2px">
+            <div id="modalTitle" style="font-weight: 900">Purchase</div>
+            <div style="color: var(--muted); font-size: 12px">
+              <span id="modalPrice">—</span>
+            </div>
+          </div>
+          <button id="modalClose" class="icon-btn" type="button" aria-label="Close">X</button>
+        </div>
+        <div class="bd">
+          <div id="modalDesc" style="color: var(--muted); font-size: 13px; line-height: 1.6"></div>
+          <div style="margin-top: 12px; display: grid; gap: 8px">
+            <div style="font-weight: 900">Includes</div>
+            <ul id="modalIncludes"></ul>
+          </div>
+          <div style="margin-top: 12px; display: grid; gap: 8px">
+            <div style="font-weight: 900" id="modalMethod">Purchase method</div>
+            <ul id="modalSteps"></ul>
+          </div>
+        </div>
+        <div class="ft">
+          <a id="modalLink" class="btn primary" href="#" target="_blank" rel="noreferrer">Open link</a>
+          <button class="btn" type="button" onclick="document.getElementById('modalClose').click()">Close</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
