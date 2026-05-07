@@ -14,13 +14,6 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Shared CSS -->
-    <link rel="stylesheet" href="../assets/styles.css">
     <link rel="stylesheet" href="../assets/site.css">
     
     <!-- Utilities -->
@@ -29,24 +22,15 @@
     
     <style>
         /* Items page specific styles */
-        .items-header {
-            text-align: center;
-            padding: var(--space-12) 0 var(--space-8);
-            background: var(--glass-bg);
-            border-radius: var(--radius-2xl);
-            margin: var(--space-6) 0;
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-        }
+        .items-hero h1 { margin: 0; font-size: 30px; letter-spacing: -0.02em; }
+        .items-hero p { margin: 10px 0 0; color: var(--muted); font-size: 13px; max-width: 72ch; }
+        .items-hero { display: grid; grid-template-columns: 1fr 260px; gap: 16px; align-items: center; }
+        .items-hero .art img { width: 92%; height: auto; image-rendering: pixelated; }
+        .items-hero .art { border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); background: radial-gradient(circle at 30% 30%, rgba(121,166,255,0.12), rgba(0,0,0,0)); display: grid; place-items: center; min-height: 170px; overflow: hidden; }
 
-        .items-title {
-            font-size: var(--text-5xl);
-            background: linear-gradient(135deg, var(--primary-100) 0%, var(--accent-500) 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: var(--space-4);
-        }
+        .chip-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+        .chip { border:1px solid var(--border); background: rgba(255,255,255,0.03); color: var(--muted); padding:6px 10px; border-radius: var(--radius); font-size:12px; cursor:pointer; user-select:none; }
+        .chip.active { color: var(--text); border-color: rgba(121,166,255,0.22); background: rgba(121,166,255,0.12); }
 
         .items-description {
             font-size: var(--text-lg);
@@ -55,18 +39,11 @@
             margin: 0 auto;
         }
 
-        .controls-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-xl);
-            padding: var(--space-6);
-            margin-bottom: var(--space-6);
-            display: grid;
-            grid-template-columns: 1fr auto auto auto;
-            gap: var(--space-4);
-            align-items: center;
-        }
+        .controls-panel { margin-top: 14px; display:flex; gap:10px; flex-wrap:wrap; }
+        .ctl { border:1px solid var(--border); background: rgba(255,255,255,0.03); padding:8px 10px; border-radius: var(--radius); color: var(--text); font: inherit; font-size: 13px; }
+        .ctl select, .ctl input { border:none; outline:none; background:transparent; color:inherit; font:inherit; font-size:13px; }
+        .ctl.search { flex:1; min-width: 260px; display:flex; align-items:center; gap:10px; }
+        .ctl.search input { flex:1; }
 
         .search-container {
             position: relative;
@@ -159,30 +136,12 @@
         }
 
         /* Grid View */
-        .items-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: var(--space-4);
-            margin-bottom: var(--space-8);
-        }
+        .items-grid { display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+        @media (max-width: 980px){ .items-hero { grid-template-columns: 1fr; } .items-grid { grid-template-columns: 1fr; } }
 
-        .item-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-4);
-            transition: all var(--transition-base);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
+        .item-card { border:1px solid var(--border); background: rgba(255,255,255,0.03); border-radius: var(--radius); padding: 12px; }
 
-        .item-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--glass-border-hover);
-        }
+        .item-card:hover { border-color: var(--border2); }
 
         .item-card::before {
             content: '';
@@ -200,18 +159,7 @@
             margin-bottom: var(--space-3);
         }
 
-        .item-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--dark-glass-bg);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: var(--space-3);
-            font-size: 1.5em;
-            border: 1px solid var(--dark-glass-border);
-        }
+        .item-icon { width: 38px; height: 38px; border:1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); border-radius: var(--radius); display:grid; place-items:center; margin-right: 10px; }
 
         .item-icon-img {
             width: 36px;
@@ -237,19 +185,9 @@
             letter-spacing: 0.5px;
         }
 
-        .item-pricing {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-3);
-        }
+        .item-pricing { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
 
-        .price-box {
-            background: var(--dark-glass-bg);
-            border: 1px solid var(--dark-glass-border);
-            border-radius: var(--radius-md);
-            padding: var(--space-3);
-            text-align: center;
-        }
+        .price-box { border:1px solid rgba(255,255,255,0.08); border-radius: var(--radius); padding: 10px; text-align:center; background: rgba(0,0,0,0.15); }
 
         .price-box.buy {
             border-color: rgba(16, 185, 129, 0.3);
@@ -273,13 +211,9 @@
             font-weight: 600;
         }
 
-        .price-box.buy .price-value {
-            color: var(--success-400);
-        }
+        .price-box.buy .price-value { color: var(--ok); }
 
-        .price-box.sell .price-value {
-            color: var(--warning-400);
-        }
+        .price-box.sell .price-value { color: var(--warn); }
 
         .price-unavailable {
             color: var(--primary-500);
@@ -499,86 +433,89 @@
         </div>
     </nav>
 
-    <div class="wrap app-shell">
-        <!-- Header -->
-        <div class="items-header">
-            <h1 class="items-title">Item Prices</h1>
-            <p class="items-description">
-                Complete pricing guide for all items available on the server. Search, filter, and compare prices easily.
-            </p>
+    <div class="app">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="badge">MC<br/>WR</div>
+          <div style="font-weight:800;">War Riders</div>
         </div>
+        <nav class="topnav" aria-label="Top">
+          <a data-nav href="../index.html">Home</a>
+          <a data-nav href="./wiki.html">Wiki</a>
+          <a data-nav class="active" href="./items.html">Items</a>
+        </nav>
+        <div class="search" role="search">
+          <span class="muted">🔎</span>
+          <input id="globalSearch" type="search" placeholder="Search items..." autocomplete="off" />
+          <span class="kbd">⌘K</span>
+        </div>
+        <div class="topbar-right"><div class="avatar" aria-hidden="true"></div></div>
+      </header>
 
-        <!-- Controls Panel -->
-        <div class="controls-panel">
-            <div class="search-container">
-                <span class="search-icon">🔍</span>
-                <input type="text" class="search-input" placeholder="Search items..." id="searchInput">
+      <div class="shell">
+        <aside class="sidebar" aria-label="Sidebar">
+          <div class="section-title">Items</div>
+          <a class="side-link active" href="./items.html"><span class="dot">⛁</span>Item Prices</a>
+          <a class="side-link" href="./wiki.html#commands"><span class="dot">⚡</span>Commands</a>
+        </aside>
+
+        <main class="content">
+          <div class="crumbs"><a href="../index.html">Home</a> › <span>Items</span></div>
+
+          <section class="hero-card">
+            <div class="items-hero">
+              <div>
+                <h1>Item Prices</h1>
+                <p>Complete pricing guide for all items available on the server. Search, filter, and compare prices easily.</p>
+              </div>
+              <div class="art"><img src="../assets/images/itemschestimage.png" alt="" /></div>
+            </div>
+            <div class="controls-panel">
+              <div class="ctl search">
+                <span style="color:var(--muted);">🔎</span>
+                <input type="search" id="searchInput" placeholder="Search items..." />
+              </div>
+              <div class="ctl">
+                <select id="categoryFilter">
+                  <option value="">All</option>
+                  <option value="automation">Automation</option>
+                  <option value="blocks">Blocks</option>
+                  <option value="decoration">Decoration</option>
+                  <option value="dyes">Dyes</option>
+                  <option value="enchanting">Enchanting</option>
+                  <option value="farming">Farming</option>
+                  <option value="food">Food</option>
+                  <option value="miscellaneous">Miscellaneous</option>
+                  <option value="mobs">Mobs</option>
+                  <option value="music">Music</option>
+                  <option value="ores">Ores</option>
+                  <option value="potions">Potions</option>
+                  <option value="redstone">Redstone</option>
+                  <option value="spawneggs">Spawn Eggs</option>
+                  <option value="spawners">Spawners</option>
+                  <option value="workstations">Workstations</option>
+                  <option value="z_everythingelse">Everything Else</option>
+                </select>
+              </div>
+              <div class="ctl">
+                <select id="sortSelect">
+                  <option value="name">Name A-Z</option>
+                  <option value="buy-high">Buy high</option>
+                  <option value="buy-low">Buy low</option>
+                  <option value="sell-high">Sell high</option>
+                  <option value="sell-low">Sell low</option>
+                </select>
+              </div>
             </div>
 
-            <select class="filter-select" id="categoryFilter">
-                <option value="">All Categories</option>
-                <option value="automation">Automation</option>
-                <option value="blocks">Blocks</option>
-                <option value="decoration">Decoration</option>
-                <option value="dyes">Dyes</option>
-                <option value="enchanting">Enchanting</option>
-                <option value="farming">Farming</option>
-                <option value="food">Food</option>
-                <option value="miscellaneous">Miscellaneous</option>
-                <option value="mobs">Mobs</option>
-                <option value="music">Music</option>
-                <option value="ores">Ores</option>
-                <option value="potions">Potions</option>
-                <option value="redstone">Redstone</option>
-                <option value="spawneggs">Spawn Eggs</option>
-                <option value="spawners">Spawners</option>
-                <option value="workstations">Workstations</option>
-                <option value="z_everythingelse">Everything Else</option>
-            </select>
+            <div class="chip-row" id="categoryChips"></div>
+            <div class="items-count" id="itemsCount" style="margin-top:10px; color:var(--muted); font-size:12px;">Loading…</div>
+          </section>
 
-            <select class="sort-select" id="sortSelect">
-                <option value="name">Sort by Name</option>
-                <option value="buy-high">Buy Price (High to Low)</option>
-                <option value="buy-low">Buy Price (Low to High)</option>
-                <option value="sell-high">Sell Price (High to Low)</option>
-                <option value="sell-low">Sell Price (Low to High)</option>
-            </select>
-
-            <div class="view-toggle">
-                <button class="view-toggle-btn active" data-view="grid" id="gridViewBtn">
-                    ⊞
-                </button>
-                <button class="view-toggle-btn" data-view="list" id="listViewBtn">
-                    ☰
-                </button>
-            </div>
-        </div>
-
-        <!-- Stats Bar -->
-        <div class="stats-bar">
-            <div class="items-count" id="itemsCount">
-                Loading items...
-            </div>
-            <div class="loading-spinner" id="loadingSpinner" style="display: none;"></div>
-        </div>
-
-        <!-- Categories Filter (Quick Access) -->
-        <div class="categories-filter" id="categoriesFilter" style="display: none;">
-            <div class="categories-title">Quick Filter by Category:</div>
-            <div id="categoryChips"></div>
-        </div>
-
-        <!-- Items Grid View -->
-        <div class="items-grid" id="itemsGrid"></div>
-
-        <!-- Items Table View -->
-        <div class="items-table" id="itemsTable" style="display: none;"></div>
-
-        <!-- Empty State -->
-        <div class="empty-state" id="emptyState" style="display: none;">
-            <h3>No items found</h3>
-            <p>Try adjusting your search or filter criteria.</p>
-        </div>
+          <div class="items-grid" id="itemsGrid"></div>
+          <div class="empty-state" id="emptyState" style="display:none; text-align:center; color:var(--muted); padding:18px;">No items found</div>
+        </main>
+      </div>
     </div>
 
     <script>
@@ -595,6 +532,7 @@
             loadItems();
             setupEventListeners();
             setupNavbar();
+            setupTopSearch();
         });
 
         // Load and process items data
@@ -645,9 +583,7 @@
             // Sort select
             document.getElementById('sortSelect').addEventListener('change', handleSort);
             
-            // View toggle
-            document.getElementById('gridViewBtn').addEventListener('click', () => setView('grid'));
-            document.getElementById('listViewBtn').addEventListener('click', () => setView('list'));
+            // No list view toggle in the new layout; keep grid only
         }
 
         // Handle search functionality
@@ -666,6 +602,17 @@
             
             renderItems();
             updateItemsCount();
+        }
+
+        // Wire topbar search to the page search input
+        function setupTopSearch() {
+            const top = document.getElementById('globalSearch');
+            const main = document.getElementById('searchInput');
+            if (!top || !main) return;
+            top.addEventListener('input', () => {
+                main.value = top.value;
+                handleSearch();
+            });
         }
 
         // Handle category filtering
@@ -720,23 +667,7 @@
 
         // Set view mode (grid or list)
         function setView(view) {
-            currentView = view;
-            
-            // Update button states
-            document.querySelectorAll('.view-toggle-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(view + 'ViewBtn').classList.add('active');
-            
-            // Show/hide appropriate containers
-            if (view === 'grid') {
-                document.getElementById('itemsGrid').style.display = 'grid';
-                document.getElementById('itemsTable').style.display = 'none';
-            } else {
-                document.getElementById('itemsGrid').style.display = 'none';
-                document.getElementById('itemsTable').style.display = 'block';
-            }
-            
+            currentView = 'grid';
             renderItems();
         }
 
@@ -749,11 +680,7 @@
             
             showEmptyState(false);
             
-            if (currentView === 'grid') {
-                renderGridView();
-            } else {
-                renderListView();
-            }
+            renderGridView();
         }
 
         // Render grid view
@@ -801,47 +728,7 @@
         }
 
         // Render list view
-        function renderListView() {
-            const container = document.getElementById('itemsTable');
-            
-            let html = `
-                <div class="table-header">
-                    <div>Item</div>
-                    <div>Category</div>
-                    <div>Buy Price</div>
-                    <div>Sell Price</div>
-                </div>
-            `;
-            
-            filteredItems.forEach(item => {
-                const iconUrls = Array.isArray(item.iconUrls) ? item.iconUrls : [];
-                const iconHtml = iconUrls.length
-                    ? `<img alt="${item.material} icon" loading="lazy" decoding="async" data-icon material="${item.material}" src="${iconUrls[0]}">`
-                    : (item.icon || '📦');
-
-                html += `
-                    <div class="table-row fade-in">
-                        <div class="table-item-info">
-                            <div class="table-item-icon">${iconHtml}</div>
-                            <div class="table-item-details">
-                                <div class="table-item-name ${item.special ? 'special-item' : ''}">${item.name}</div>
-                                <div class="table-item-category">${item.category}</div>
-                            </div>
-                        </div>
-                        <div class="table-item-category">${item.category}</div>
-                        <div class="table-price buy ${item.buy === -1 ? 'unavailable' : ''}">
-                            ${item.buy === -1 ? 'N/A' : '$' + item.buy.toLocaleString()}
-                        </div>
-                        <div class="table-price sell ${item.sell === -1 ? 'unavailable' : ''}">
-                            ${item.sell === -1 ? 'N/A' : '$' + item.sell.toLocaleString()}
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-            wireUpIconFallback(container);
-        }
+        // List view removed in the new layout
 
         function wireUpIconFallback(rootEl) {
             const imgs = rootEl.querySelectorAll('img[data-icon][material]');
@@ -870,24 +757,28 @@
         function generateCategoryChips() {
             const categories = [...new Set(currentItems.map(item => item.category))];
             const container = document.getElementById('categoryChips');
-            
-            categories.forEach(category => {
+            if (!container) return;
+            container.innerHTML = '';
+
+            const addChip = (label, value) => {
                 const chip = document.createElement('span');
-                chip.className = 'category-chip';
-                chip.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                chip.className = 'chip' + (document.getElementById('categoryFilter').value === value ? ' active' : '');
+                chip.textContent = label;
                 chip.addEventListener('click', () => {
-                    document.getElementById('categoryFilter').value = category;
+                    document.getElementById('categoryFilter').value = value;
                     handleFilter();
+                    generateCategoryChips();
                 });
                 container.appendChild(chip);
-            });
-            
-            document.getElementById('categoriesFilter').style.display = 'block';
+            };
+
+            addChip('All', '');
+            categories.forEach(category => addChip(category, category));
         }
 
         // Show/hide loading state
         function showLoading(show) {
-            document.getElementById('loadingSpinner').style.display = show ? 'block' : 'none';
+            // no spinner in new layout; keep hook for loader
         }
 
         // Show/hide empty state

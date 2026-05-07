@@ -21,520 +21,99 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Sleek site layer -->
-    <link rel="stylesheet" href="./assets/styles.css">
     <link rel="stylesheet" href="./assets/site.css">
-    
-    <style>
-        :root {
-            /* Modern Color Palette */
-            --primary-900: #0f172a;
-            --primary-800: #1e293b;
-            --primary-700: #334155;
-            --primary-600: #475569;
-            --primary-500: #64748b;
-            --primary-400: #94a3b8;
-            --primary-300: #cbd5e1;
-            --primary-200: #e2e8f0;
-            --primary-100: #f1f5f9;
-            
-            --accent-500: #3b82f6;
-            --accent-600: #2563eb;
-            --accent-700: #1d4ed8;
-            
-            --success-500: #10b981;
-            --warning-500: #f59e0b;
-            --error-500: #ef4444;
-            
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            
-            /* Typography */
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-            
-            /* Spacing */
-            --section-padding: clamp(4rem, 8vw, 8rem);
-            --container-padding: clamp(1rem, 5vw, 2rem);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            /* Cleaner, less "AI gradient" background */
-            background: linear-gradient(180deg, #0b1220 0%, #0a0f17 100%);
-            min-height: 100vh;
-            color: var(--primary-100);
-            overflow-x: hidden;
-        }
-
-        /* Disable particles: looks "template-y" and distracts */
-        .background-particles { display: none; }
-
-        /* Glass Morphism Components */
-        .glass {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-        }
-
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            transition: border-color 0.2s ease, background 0.2s ease;
-        }
-
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.14);
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem var(--container-padding);
-            transition: all 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary-100);
-            text-decoration: none;
-        }
-
-        .logo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--primary-300);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s ease;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-100);
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--accent-500);
-            border-radius: 2px;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: var(--section-padding) var(--container-padding);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            text-align: center;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            color: var(--primary-100);
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--primary-400);
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 1s ease-out 0.2s both;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out 0.4s both;
-        }
-
-        .btn {
-            padding: 14px 32px;
-            border-radius: 12px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-600) 0%, var(--accent-700) 100%);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px -8px rgba(59, 130, 246, 0.5);
-        }
-
-        .btn-secondary {
-            background: var(--glass-bg);
-            color: var(--primary-100);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-
-        /* Features Section */
-        .features {
-            padding: var(--section-padding) var(--container-padding);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--primary-100);
-        }
-
-        .section-description {
-            font-size: 1.125rem;
-            color: var(--primary-400);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            padding: 2.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--accent-500), var(--accent-600));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .feature-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary-100);
-        }
-
-        .feature-description {
-            color: var(--primary-400);
-            line-height: 1.6;
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: var(--section-padding) var(--container-padding);
-            background: rgba(255, 255, 255, 0.02);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--accent-500);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--primary-400);
-            font-weight: 500;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 3rem var(--container-padding);
-            border-top: 1px solid var(--glass-border);
-            text-align: center;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-link {
-            color: var(--primary-400);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--primary-100);
-        }
-
-        .footer-text {
-            color: var(--primary-500);
-            font-size: 0.875rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .animate-on-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .btn {
-                width: 200px;
-            }
-        }
-
-        /* Loading Animation */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-900);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease;
-        }
-
-        .loading-screen.fade-out {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(59, 130, 246, 0.3);
-            border-top: 3px solid var(--accent-500);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
 </head>
 <body>
-    <!-- Loading screen & particles removed for a cleaner feel -->
-
-    <header class="site-header">
-        <div class="wrap">
-            <div class="row">
-                <a class="brand" href="./">
-                    <img src="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png" alt="War Riders logo">
-                    <div>
-                        <div class="title">War Riders</div>
-                        <div class="sub">Survival server guide</div>
-                    </div>
-                </a>
-                <nav class="nav" aria-label="Primary">
-                    <a data-nav href="./">Home</a>
-                    <a data-nav href="./pages/wiki.html">Wiki</a>
-                    <a data-nav href="./pages/items.html">Items</a>
-                </nav>
-            </div>
+    <div class="app">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="badge">MC<br/>WR</div>
+          <div style="font-weight:800;">War Riders</div>
         </div>
-    </header>
-
-    <main class="wrap">
-        <section class="hero">
-            <span class="kicker">Minecraft War Riders</span>
-            <h1>Server Guide</h1>
-            <p>
-                Quick links for players: commands, plugin docs, and the full shop price list.
-            </p>
-            <div class="actions">
-                <a class="btn primary" href="./pages/wiki.html">Wiki</a>
-                <a class="btn" href="./pages/items.html">Item prices</a>
-            </div>
-        </section>
-
-        <section class="panel" style="padding:18px;">
-            <div class="grid cols-3">
-                <div class="card">
-                    <h3>Join</h3>
-                    <p><span class="kicker" style="margin:0; letter-spacing:0.08em;">SERVER IP</span><br><code>play.example.com</code></p>
-                </div>
-                <div class="card">
-                    <h3>Start here</h3>
-                    <p><code>/spawn</code> <code>/sethome</code> <code>/shop</code> <code>/skills</code></p>
-                </div>
-                <div class="card">
-                    <h3>Prices</h3>
-                    <p>Use the Items page to search buy/sell values by material.</p>
-                </div>
-            </div>
-        </section>
-
-        <section style="padding:18px 0;">
-            <div class="grid cols-2">
-                <div class="card">
-                    <h3>Quick links</h3>
-                    <p>
-                        <a class="btn" href="./pages/wiki.html#beginners">Beginner’s guide</a>
-                        <a class="btn" href="./pages/wiki.html#commands-all">All commands</a>
-                        <a class="btn" href="./pages/items.html">Prices</a>
-                    </p>
-                </div>
-                <div class="card">
-                    <h3>Server info</h3>
-                    <p>Drop your Discord link in the footer once you have it.</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="wrap">
-            <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; align-items:center;">
-                <div>© Minecraft War Riders</div>
-                <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                    <a class="btn" href="./pages/wiki.html">Wiki</a>
-                    <a class="btn" href="./pages/items.html">Items</a>
-                </div>
-            </div>
+        <nav class="topnav" aria-label="Top">
+          <a data-nav class="active" href="./">Home</a>
+          <a data-nav href="./pages/wiki.html">Wiki</a>
+          <a data-nav href="./pages/items.html">Items</a>
+        </nav>
+        <div class="search" role="search">
+          <span style="color:var(--muted);">🔎</span>
+          <input type="search" placeholder="Search the wiki..." disabled />
+          <span class="kbd">⌘K</span>
         </div>
-    </footer>
+        <div class="topbar-right">
+          <div class="avatar" aria-hidden="true"></div>
+        </div>
+      </header>
+
+      <div class="shell">
+        <aside class="sidebar" aria-label="Sidebar">
+          <div class="section-title">Home</div>
+          <a class="side-link active" href="./"><span class="dot">⌂</span>Server Guide</a>
+          <a class="side-link" href="./pages/wiki.html#beginners"><span class="dot">⌁</span>Beginner’s Guide</a>
+          <a class="side-link" href="./pages/wiki.html#commands"><span class="dot">⚡</span>All Commands</a>
+          <a class="side-link" href="./pages/items.html"><span class="dot">⛁</span>Item Prices</a>
+        </aside>
+
+        <main class="content">
+          <div class="crumbs"><a href="./">Home</a> › <span>Server</span></div>
+
+          <section class="hero-card">
+            <div>
+              <div class="kicker">Minecraft War Riders</div>
+              <h1>Server<br/>Guide</h1>
+              <p>Quick links for players: commands, plugin docs, and the full shop price list.</p>
+            </div>
+            <div class="hero-art" aria-hidden="true">
+              <img src="./assets/images/castlehomeimage.png" alt="" />
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="tile-grid">
+              <a class="tile" href="./pages/wiki.html" style="text-decoration:none; color:inherit;">
+                <div class="left">
+                  <div class="cmd">Wiki</div>
+                  <div class="desc">Explore commands, plugins, guides, and server info.</div>
+                </div>
+                <div class="chev">›</div>
+              </a>
+              <a class="tile" href="./pages/items.html" style="text-decoration:none; color:inherit;">
+                <div class="left">
+                  <div class="cmd">Item Prices</div>
+                  <div class="desc">View all shop items and market prices.</div>
+                </div>
+                <div class="chev">›</div>
+              </a>
+              <div class="tile">
+                <div class="left">
+                  <div class="cmd">Join</div>
+                  <div class="desc"><code>play.warriders.example</code></div>
+                </div>
+                <div class="chev">›</div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2>Quick Links</h2>
+            <div class="tile-grid">
+              <a class="tile" href="./pages/wiki.html#beginners" style="text-decoration:none; color:inherit;">
+                <div class="left"><div class="cmd">Beginner’s Guide</div><div class="desc">Start here if you’re new.</div></div>
+                <div class="chev">›</div>
+              </a>
+              <a class="tile" href="./pages/wiki.html#commands" style="text-decoration:none; color:inherit;">
+                <div class="left"><div class="cmd">All Commands</div><div class="desc">Everything, organized.</div></div>
+                <div class="chev">›</div>
+              </a>
+              <a class="tile" href="./pages/items.html" style="text-decoration:none; color:inherit;">
+                <div class="left"><div class="cmd">Item Prices</div><div class="desc">Search and compare prices.</div></div>
+                <div class="chev">›</div>
+              </a>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
 
     <script src="./assets/site.js" defer></script>
 </body>
