@@ -97,10 +97,37 @@
   .join-grid,
   .store-grid,
   .items-grid,
+  .product-page,
+  .product-feature-row,
   .store-steps,
   .wiki-card-grid,
   .command-list {
     grid-template-columns: 1fr !important;
+  }
+
+  .product-page {
+    padding: 12px;
+  }
+
+  .coin-checkout,
+  .coin-checkout-form {
+    grid-template-columns: 1fr;
+  }
+
+  .product-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .product-main-image {
+    min-height: 320px;
+  }
+
+  .product-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .product-feature-row {
+    padding: 0;
   }
 
   .feature-strip,

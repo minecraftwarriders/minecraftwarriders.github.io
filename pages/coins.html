@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../assets/desktop.css" media="(min-width: 781px)" />
     <link rel="stylesheet" href="../assets/mobile.css" media="(max-width: 780px)" />
     <script src="../assets/site.js" defer></script>
+    <script src="../assets/coin-checkout.js" defer></script>
   </head>
   <body class="art-page store-page">
     <div class="app">
@@ -93,42 +94,66 @@
           </section>
 
           <section class="section" id="buy-coins">
+            <div class="coin-checkout" id="coinCheckout">
+              <div>
+                <strong id="coinSelectedName">Coin Bundle</strong>
+                <span id="coinSelectedAmount">Choose a bundle</span>
+                <span id="coinSelectedPrice"></span>
+              </div>
+              <form id="coinCheckoutForm" class="coin-checkout-form">
+                <label for="coinMinecraftName">Minecraft username</label>
+                <input
+                  id="coinMinecraftName"
+                  name="minecraftName"
+                  type="text"
+                  autocomplete="username"
+                  inputmode="text"
+                  minlength="3"
+                  maxlength="16"
+                  pattern="[A-Za-z0-9_]{3,16}"
+                  placeholder="Your in-game name"
+                  required
+                />
+                <button id="coinCheckoutButton" class="btn primary" type="submit">Pay</button>
+                <div id="coinCheckoutStatus" class="store-note" role="status" aria-live="polite"></div>
+              </form>
+            </div>
             <div class="coin-grid">
               <article class="coin-card">
                 <div class="coin-amount">100</div>
                 <h3>Pocket Change</h3>
                 <p>$0.99. A small starter bundle for trying the in-game store.</p>
-                <div class="actions"><a class="btn primary" href="./store.html?product=coin-pocket-change">Buy coins</a></div>
+                <div class="actions"><button class="btn primary" type="button" data-coin-buy="coin-pocket-change">Buy coins</button></div>
               </article>
               <article class="coin-card">
                 <div class="coin-amount">300</div>
                 <h3>Little Treat</h3>
                 <p>$2.49. A light bundle for a few smaller cosmetics.</p>
-                <div class="actions"><a class="btn primary" href="./store.html?product=coin-little-treat">Buy coins</a></div>
+                <div class="actions"><button class="btn primary" type="button" data-coin-buy="coin-little-treat">Buy coins</button></div>
               </article>
               <article class="coin-card">
                 <div class="coin-amount">600</div>
                 <h3>The Splurge</h3>
                 <p>$4.49. A stronger bundle for a pet, trail, or multiple smaller unlocks.</p>
-                <div class="actions"><a class="btn primary" href="./store.html?product=coin-the-splurge">Buy coins</a></div>
+                <div class="actions"><button class="btn primary" type="button" data-coin-buy="coin-the-splurge">Buy coins</button></div>
               </article>
               <article class="coin-card">
                 <div class="coin-amount">1,200</div>
                 <h3>Big Bag</h3>
                 <p>$7.99. A larger bundle for building out your cosmetic collection.</p>
-                <div class="actions"><a class="btn primary" href="./store.html?product=coin-big-bag">Buy coins</a></div>
+                <div class="actions"><button class="btn primary" type="button" data-coin-buy="coin-big-bag">Buy coins</button></div>
               </article>
               <article class="coin-card">
                 <div class="coin-amount">2,500</div>
                 <h3>Loaded</h3>
                 <p>$14.99. A big balance for players who want options.</p>
-                <div class="actions"><a class="btn primary" href="./store.html?product=coin-loaded">Buy coins</a></div>
+                <div class="actions"><button class="btn primary" type="button" data-coin-buy="coin-loaded">Buy coins</button></div>
               </article>
               <article class="coin-card">
                 <div class="coin-amount">5,000</div>
                 <h3>Absolutely Unhinged</h3>
                 <p>$24.99. The biggest bundle for going wild in the cosmetic store.</p>
-                <div class="actions"><a class="btn primary" href="./store.html?product=coin-unhinged">Buy coins</a></div>
+                <div class="actions"><button class="btn primary" type="button" data-coin-buy="coin-unhinged">Buy coins</button></div>
               </article>
             </div>
           </section>

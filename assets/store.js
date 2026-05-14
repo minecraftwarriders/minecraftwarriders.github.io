@@ -85,7 +85,7 @@
               <p class="item-description">${escapeHtml(p.description || "")}</p>
             </div>
             <div class="item-actions">
-              <button class="btn primary" data-buy="${escapeHtml(p.id)}">Buy</button>
+              <a class="btn primary" href="${escapeHtml(detailHref)}">Buy</a>
               <a class="btn" href="${escapeHtml(detailHref)}">Details</a>
             </div>
           </div>
@@ -94,8 +94,6 @@
       .join("");
 
     if (empty) empty.style.display = filtered.length ? "none" : "block";
-
-    $$("[data-buy]", grid).forEach((b) => b.addEventListener("click", () => openModal(b.dataset.buy || "")));
   }
 
   function setCheckoutStatus(message, isError = false) {
@@ -298,8 +296,6 @@
       });
     });
 
-    const initialProduct = new URLSearchParams(window.location.search).get("product");
-    if (initialProduct) setTimeout(() => openModal(initialProduct), 0);
   }
 
   init().catch((err) => {

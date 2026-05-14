@@ -1306,35 +1306,221 @@ body.art-page::after {
   justify-content: flex-end;
 }
 
-.product-detail-hero {
-  min-height: min(680px, calc(100vh - 150px));
-  align-items: end;
-  background-position: center;
-  background-size: cover;
-}
-
-.product-detail-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(8, 7, 6, 0.94), rgba(8, 7, 6, 0.58));
-  pointer-events: none;
-}
-
-.product-detail-hero > * {
-  z-index: 1;
-}
-
-.detail-panel {
+.product-page {
   display: grid;
-  gap: 18px;
-  max-width: 760px;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.72fr);
+  gap: 24px;
+  align-items: start;
+  border: 1px solid rgba(241, 209, 138, 0.14);
+  background: rgba(250, 246, 236, 0.93);
+  color: #17130f;
+  padding: 18px;
 }
 
-.detail-meta {
+.product-gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.product-main-image img,
+.product-feature-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-main-image {
+  min-height: clamp(420px, 54vw, 660px);
+  background: #e8e2d7;
+  overflow: hidden;
+}
+
+.product-main-image img {
+  object-position: center 58%;
+}
+
+.product-buy-box {
+  display: grid;
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.product-rating {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  color: #7b5035;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.product-buy-box h1 {
+  margin: 0;
+  color: #17130f;
+  font: 900 clamp(26px, 3.4vw, 44px) / 1.02 var(--font-sans);
+  letter-spacing: -0.04em;
+}
+
+.product-price-line {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  font-size: 16px;
+}
+
+.product-price-line strong {
+  color: #9a2f20;
+  font-size: 22px;
+}
+
+.product-old-price {
+  color: rgba(23, 19, 15, 0.48);
+  text-decoration: line-through;
+}
+
+.product-field {
+  display: grid;
+  gap: 8px;
+}
+
+.product-field > span {
+  color: rgba(23, 19, 15, 0.7);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.product-field > strong {
+  color: #17130f;
+  font-size: 13px;
+}
+
+.product-options {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+.product-option {
+  min-width: 52px;
+  padding: 9px 11px;
+  text-align: center;
+  border: 1px solid rgba(23, 19, 15, 0.22);
+  color: #17130f;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.product-option.active {
+  border-color: #17130f;
+  background: rgba(23, 19, 15, 0.06);
+}
+
+.product-description,
+.product-delivery,
+.product-coin-price {
+  margin: 0;
+  color: rgba(23, 19, 15, 0.72);
+  line-height: 1.55;
+}
+
+.product-actions {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  gap: 10px;
+}
+
+.product-checkout-form {
+  display: grid;
+  gap: 10px;
+}
+
+.product-checkout-form label {
+  color: rgba(23, 19, 15, 0.78);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.product-checkout-form input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(23, 19, 15, 0.22);
+  background: rgba(255, 255, 255, 0.56);
+  color: #17130f;
+  padding: 11px 12px;
+  font: inherit;
+  outline: none;
+}
+
+.product-checkout-form input:focus {
+  border-color: #7b5035;
+}
+
+.product-checkout-status {
+  color: rgba(23, 19, 15, 0.68);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.product-actions .btn {
+  min-height: 44px;
+  color: #17130f;
+  border-color: rgba(23, 19, 15, 0.2);
+  background: rgba(23, 19, 15, 0.04);
+}
+
+.product-actions .btn.primary {
+  color: #fff;
+  border-color: #7f3f2c;
+  background: #a84f38;
+}
+
+.product-feature-row {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  padding: 0 18px;
+}
+
+.product-feature {
+  display: grid;
+  justify-items: center;
+  gap: 7px;
+  text-align: center;
+  color: var(--text);
+}
+
+.product-feature-image,
+.product-feature-mark {
+  width: 78px;
+  height: 78px;
+  border: 3px solid rgba(241, 209, 138, 0.45);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.product-feature-mark {
+  display: grid;
+  place-items: center;
+  color: var(--accent2);
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1;
+}
+
+.product-feature strong {
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.product-feature span {
+  max-width: 18ch;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
 }
 
 .detail-section-grid,
@@ -1378,6 +1564,72 @@ body.art-page::after {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.coin-checkout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.7fr) minmax(300px, 1fr);
+  gap: 18px;
+  align-items: end;
+  border: 1px solid rgba(241, 209, 138, 0.16);
+  background: rgba(8, 7, 6, 0.68);
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+.coin-checkout strong,
+.coin-checkout span {
+  display: block;
+}
+
+.coin-checkout strong {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.02em;
+}
+
+.coin-checkout span {
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.coin-checkout-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.coin-checkout-form label {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.coin-checkout-form input {
+  min-height: 42px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--text);
+  padding: 11px 12px;
+  font: inherit;
+  outline: none;
+}
+
+.coin-checkout-form input:focus {
+  border-color: rgba(241, 209, 138, 0.44);
+}
+
+.coin-checkout-form .store-note {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+[data-coin-buy].active {
+  border-color: rgba(241, 209, 138, 0.55);
+  background: rgba(215, 178, 90, 0.26);
 }
 
 /* Make legacy "glass" bits calmer */
