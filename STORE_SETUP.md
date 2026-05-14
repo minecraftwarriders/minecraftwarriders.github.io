@@ -32,7 +32,7 @@ The browser sends only:
 
 ```json
 {
-  "productId": "rank-knight",
+  "productId": "trail-personal-sunshine",
   "minecraftName": "PlayerName"
 }
 ```
@@ -67,10 +67,10 @@ DATA_FILE=./data/orders.json
 If you create products/prices in Stripe, put the `price_...` IDs in `.env`:
 
 ```txt
-STRIPE_PRICE_RANK_KNIGHT=price_...
-STRIPE_PRICE_RANK_WARLORD=price_...
-STRIPE_PRICE_PARTICLE_EMBER=price_...
-STRIPE_PRICE_PET_BABY_SLIME=price_...
+STRIPE_PRICE_TRAIL_PERSONAL_SUNSHINE=price_...
+STRIPE_PRICE_PET_BUSINESS_CAT=price_...
+STRIPE_PRICE_HAT_FEDORA=price_...
+STRIPE_PRICE_TAG_DOING_MY_BEST=price_...
 ```
 
 Do not use `prod_...` IDs or `buy.stripe.com` Payment Link URLs for the API checkout. The API creates Checkout Sessions directly so it can attach the Minecraft username, product ID, order ID, and delivery target to Stripe metadata.
@@ -159,9 +159,9 @@ For a hub and future servers, use LuckPerms on:
 Point all of them at the same SQL database, then use server/context-specific permissions where needed:
 
 ```txt
-lp user PlayerName permission set warriders.cosmetic.particle.ember true server=survival
+lp user PlayerName permission set warriders.cosmetic.trail.personal_sunshine true server=survival
 lp user PlayerName permission set warriders.cosmetic.hub.glow true server=hub
-lp user PlayerName parent add knight
+lp user PlayerName permission set warriders.cosmetic.tag.doing_my_best true
 ```
 
 Keep BungeeCord on the Raspberry Pi as the proxy. It does not need Stripe code.
@@ -174,9 +174,9 @@ Example:
 
 ```js
 {
-  id: "particle-ember",
+  id: "trail-personal-sunshine",
   targetServer: "survival",
-  commands: ["lp user {player} permission set warriders.cosmetic.particle.ember true"]
+  commands: ["lp user {player} permission set warriders.cosmetic.trail.personal_sunshine true"]
 }
 ```
 

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Cosmetics Store",
-    "subtitle": "All purchasable items are cosmetic-only. No gameplay advantages.",
+    "subtitle": "Cosmetic-only trails, pets, hats, and chat tags. No gameplay advantages.",
     "purchase": {
       "mode": "payment",
       "apiBaseUrl": "https://store-api.minecraftwarriders.com",
@@ -15,69 +15,208 @@
   },
   "categories": [
     {
-      "id": "ranks",
-      "label": "Ranks (Cosmetic)",
-      "note": "Chat tag, name color, tab styling."
-    },
-    {
-      "id": "particles",
-      "label": "Particles",
-      "note": "Purely visual trails and auras."
+      "id": "trails",
+      "label": "Trails",
+      "note": "Particle effects that follow your movement."
     },
     {
       "id": "pets",
       "label": "Pets",
-      "note": "Cosmetic companions."
+      "note": "Cosmetic companions that follow you around."
+    },
+    {
+      "id": "hats",
+      "label": "Hats",
+      "note": "Wearable cosmetics with no gameplay advantage."
+    },
+    {
+      "id": "tags",
+      "label": "Chat Tags",
+      "note": "Cosmetic labels for chat and profile styling."
     }
   ],
   "products": [
     {
-      "id": "rank-knight",
-      "category": "ranks",
-      "name": "Knight",
+      "id": "trail-personal-sunshine",
+      "category": "trails",
+      "name": "Personal Sunshine",
+      "price": 1.99,
+      "coinPrice": 200,
+      "currency": "USD",
+      "badge": "BRIGHT",
+      "description": "A warm golden dust trail that brightens the path behind you.",
+      "delivery": "Unlocks the Personal Sunshine trail permission.",
+      "includes": ["Golden dust trail", "Toggle command access", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-trail-personal-sunshine.png"
+    },
+    {
+      "id": "trail-coffee-wisps",
+      "category": "trails",
+      "name": "Coffee Wisps",
+      "price": 1.99,
+      "coinPrice": 200,
+      "currency": "USD",
+      "badge": "",
+      "description": "Soft roasted wisps for players who are always freshly brewed.",
+      "delivery": "Unlocks the Coffee Wisps trail permission.",
+      "includes": ["Smoke wisp trail", "Toggle command access", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-trail-coffee-wisps.png"
+    },
+    {
+      "id": "trail-bubble-world",
+      "category": "trails",
+      "name": "Bubble World",
+      "price": 1.99,
+      "coinPrice": 200,
+      "currency": "USD",
+      "badge": "",
+      "description": "A clear bubble trail for players living in their own little world.",
+      "delivery": "Unlocks the Bubble World trail permission.",
+      "includes": ["Bubble trail", "Toggle command access", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-trail-bubble-world.png"
+    },
+    {
+      "id": "trail-soul-flame",
+      "category": "trails",
+      "name": "Soul Flame",
+      "price": 2.49,
+      "coinPrice": 250,
+      "currency": "USD",
+      "badge": "",
+      "description": "A blue soul fire trail for the mysterious overthinker build.",
+      "delivery": "Unlocks the Soul Flame trail permission.",
+      "includes": ["Soul flame trail", "Toggle command access", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-trail-soul-flame.png"
+    },
+    {
+      "id": "trail-enchanted-glyphs",
+      "category": "trails",
+      "name": "Enchanted Glyphs",
+      "price": 2.99,
+      "coinPrice": 300,
+      "currency": "USD",
+      "badge": "RARE",
+      "description": "Glowing arcane particles that make every hallway feel forbidden.",
+      "delivery": "Unlocks the Enchanted Glyphs trail permission.",
+      "includes": ["Glyph trail", "Toggle command access", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-trail-enchanted-glyphs.png"
+    },
+    {
+      "id": "pet-gerald",
+      "category": "pets",
+      "name": "Gerald",
+      "price": 3.99,
+      "coinPrice": 400,
+      "currency": "USD",
+      "badge": "",
+      "description": "A chicken. Just Gerald. He has never been late to anything.",
+      "delivery": "Unlocks the Gerald pet permission.",
+      "includes": ["Gerald companion", "Hide/show toggle", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-pet-gerald.png"
+    },
+    {
+      "id": "pet-business-cat",
+      "category": "pets",
+      "name": "Business Cat",
       "price": 4.99,
+      "coinPrice": 500,
+      "currency": "USD",
+      "badge": "SERIOUS",
+      "description": "A cat in a tiny tie. Very serious. Very employed.",
+      "delivery": "Unlocks the Business Cat pet permission.",
+      "includes": ["Business Cat companion", "Hide/show toggle", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-pet-business-cat.png"
+    },
+    {
+      "id": "pet-sad-crab",
+      "category": "pets",
+      "name": "Sad Crab",
+      "price": 3.99,
+      "coinPrice": 400,
+      "currency": "USD",
+      "badge": "",
+      "description": "Slowly shuffles behind you. Doing his best.",
+      "delivery": "Unlocks the Sad Crab pet permission.",
+      "includes": ["Sad Crab companion", "Hide/show toggle", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-pet-sad-crab.png"
+    },
+    {
+      "id": "pet-biscuit",
+      "category": "pets",
+      "name": "Biscuit",
+      "price": 4.99,
+      "coinPrice": 500,
       "currency": "USD",
       "badge": "POPULAR",
-      "description": "Gold name + [KNIGHT] tag + chat styling (cosmetic only).",
-      "delivery": "Granted automatically after payment is confirmed.",
-      "includes": ["[KNIGHT] chat tag", "Gold name color", "Tab highlight"],
-      "image": "../assets/images/castlehomeimage.png"
+      "description": "A golden retriever puppy with aggressive enthusiasm.",
+      "delivery": "Unlocks the Biscuit pet permission.",
+      "includes": ["Biscuit companion", "Hide/show toggle", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-pet-biscuit.png"
     },
     {
-      "id": "rank-warlord",
-      "category": "ranks",
-      "name": "Warlord",
-      "price": 9.99,
-      "currency": "USD",
-      "badge": "BEST VALUE",
-      "description": "Premium tag, name styling, and tab flare (still cosmetic only).",
-      "delivery": "Granted automatically after payment is confirmed.",
-      "includes": ["[WARLORD] chat tag", "Name styling", "Tab + chat flare"],
-      "image": "../assets/images/diamondblockcommandsimage.png"
-    },
-    {
-      "id": "particle-ember",
-      "category": "particles",
-      "name": "Ember Aura",
-      "price": 2.99,
-      "currency": "USD",
-      "badge": "",
-      "description": "Soft ember particles around your character.",
-      "delivery": "Unlocks the ember particle permission on the Paper server.",
-      "includes": ["Aura toggle", "Color variants"],
-      "image": "../assets/images/itemschestimage.png"
-    },
-    {
-      "id": "pet-baby-slime",
+      "id": "pet-mochi",
       "category": "pets",
-      "name": "Baby Slime Pet",
-      "price": 3.99,
+      "name": "Mochi",
+      "price": 4.99,
+      "coinPrice": 500,
       "currency": "USD",
       "badge": "",
-      "description": "A tiny slime follows you (cosmetic only).",
-      "delivery": "Unlocks the baby slime pet permission on the Paper server.",
-      "includes": ["Name your pet", "Hide/show toggle"],
-      "image": "../assets/images/itemschestimage.png"
+      "description": "A tiny round cat. Basically a circle with opinions.",
+      "delivery": "Unlocks the Mochi pet permission.",
+      "includes": ["Mochi companion", "Hide/show toggle", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-pet-mochi.png"
+    },
+    {
+      "id": "hat-sunny-side-up",
+      "category": "hats",
+      "name": "Sunny Side Up",
+      "price": 1.99,
+      "coinPrice": 200,
+      "currency": "USD",
+      "badge": "",
+      "description": "A fried egg hat for players who wake up and choose breakfast.",
+      "delivery": "Unlocks the Sunny Side Up hat permission.",
+      "includes": ["Wearable hat cosmetic", "Wardrobe access", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-hat-sunny-side-up.png"
+    },
+    {
+      "id": "hat-fedora",
+      "category": "hats",
+      "name": "The Fedora",
+      "price": 1.99,
+      "coinPrice": 200,
+      "currency": "USD",
+      "badge": "",
+      "description": "You know what you did. At least now it is official.",
+      "delivery": "Unlocks The Fedora hat permission.",
+      "includes": ["Wearable hat cosmetic", "Wardrobe access", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-hat-fedora.png"
+    },
+    {
+      "id": "tag-certified-menace",
+      "category": "tags",
+      "name": "[Certified Menace]",
+      "price": 1.99,
+      "coinPrice": 200,
+      "currency": "USD",
+      "badge": "",
+      "description": "A chat tag for players who are technically helping.",
+      "delivery": "Unlocks the [Certified Menace] chat tag permission.",
+      "includes": ["Chat tag unlock", "Profile styling", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-tag-certified-menace.png"
+    },
+    {
+      "id": "tag-doing-my-best",
+      "category": "tags",
+      "name": "[Doing My Best]",
+      "price": 1.49,
+      "coinPrice": 150,
+      "currency": "USD",
+      "badge": "",
+      "description": "A chat tag for honest effort, questionable outcomes, and good vibes.",
+      "delivery": "Unlocks the [Doing My Best] chat tag permission.",
+      "includes": ["Chat tag unlock", "Profile styling", "Permanent unlock"],
+      "image": "../assets/images/cosmetic-tag-doing-my-best.png"
     }
   ]
 }

@@ -67,6 +67,8 @@
         const catLabel = categoriesById.get(p.category)?.label || p.category;
         const delivery = p.delivery || "Automatic permission grant after payment.";
         const mode = state.data?.meta?.purchase?.mode || "payment";
+        const coinPrice = Number(p.coinPrice);
+        const coinLabel = Number.isFinite(coinPrice) ? `${coinPrice.toLocaleString()} coins in-game` : "";
         return `
           <div class="item-card" data-prod="${escapeHtml(p.id)}">
             <div class="item-header">
@@ -83,6 +85,7 @@
                 <div>
                   <div class="price-label">Price</div>
                   <div class="price-value">${escapeHtml(fmtMoney(p.price, p.currency || "USD"))}</div>
+                  ${coinLabel ? `<div class="coin-value">${escapeHtml(coinLabel)}</div>` : ""}
                 </div>
                 ${badge ? `<span class="pill warn">${escapeHtml(badge)}</span>` : `<span class="pill">Cosmetic</span>`}
               </div>
@@ -161,7 +164,10 @@
     const configured = checkoutIsConfigured();
 
     $("#modalTitle").textContent = p.name || "Purchase";
-    $("#modalPrice").textContent = fmtMoney(p.price, p.currency || "USD");
+    const coinPrice = Number(p.coinPrice);
+    $("#modalPrice").textContent = Number.isFinite(coinPrice)
+      ? `${fmtMoney(p.price, p.currency || "USD")} or ${coinPrice.toLocaleString()} coins in-game`
+      : fmtMoney(p.price, p.currency || "USD");
     $("#modalDesc").textContent = p.description || "";
     $("#modalIncludes").innerHTML = (p.includes || [])
       .map((x) => `<li style="margin:6px 0; color:var(--muted); font-size:13px;">${escapeHtml(x)}</li>`)

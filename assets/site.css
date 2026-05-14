@@ -1166,6 +1166,12 @@ body.art-page::after {
   font-weight: 900;
   letter-spacing: -0.03em;
 }
+.coin-value {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
 .item-description {
   margin: 0;
   color: var(--muted);
