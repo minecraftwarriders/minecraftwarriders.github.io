@@ -36,7 +36,7 @@
       }
       #storeCheckoutNotice {
         border: 1px solid currentColor;
-        border-radius: 12px;
+        border-radius: 4px;
         padding: 11px 13px;
         background: rgba(255, 255, 255, 0.035);
       }
@@ -51,7 +51,7 @@
         border: 1px solid var(--border);
         background: rgba(255, 255, 255, 0.03);
         padding: 12px 14px;
-        border-radius: 12px;
+        border-radius: 3px;
         color: var(--text);
         font: inherit;
         font-size: 15px;
@@ -81,7 +81,7 @@
         background: rgba(255, 255, 255, 0.03);
         color: var(--muted);
         padding: 9px 12px;
-        border-radius: 999px;
+        border-radius: 3px;
         font-size: 13px;
         cursor: pointer;
         user-select: none;
@@ -109,7 +109,7 @@
       .checkout-form input {
         border: 1px solid var(--border);
         background: rgba(255, 255, 255, 0.03);
-        border-radius: 10px;
+        border-radius: 3px;
         color: var(--text);
         font: inherit;
         padding: 12px 14px;
@@ -125,7 +125,7 @@
       }
       .store-step {
         border: 1px solid var(--border);
-        border-radius: 14px;
+        border-radius: 4px;
         padding: 16px;
         background: rgba(255, 255, 255, 0.035);
       }
@@ -172,10 +172,10 @@
       <div class="shell">
         <aside class="sidebar" aria-label="Sidebar">
           <div class="section-title">Store</div>
-          <a class="side-link active" href="./store.html"><span class="dot">⛃</span>Cosmetics</a>
-          <a class="side-link" href="./items.html"><span class="dot">⛁</span>Item Prices</a>
-          <a class="side-link" href="./wiki.html"><span class="dot">⚡</span>Commands</a>
-          <a class="side-link" href="../index.html"><span class="dot">⌂</span>Home</a>
+          <a class="side-link active" href="./store.html">Cosmetics</a>
+          <a class="side-link" href="./items.html">Item Prices</a>
+          <a class="side-link" href="./wiki.html">Commands</a>
+          <a class="side-link" href="../index.html">Home</a>
         </aside>
 
         <main class="content">
@@ -208,7 +208,7 @@
                 <span>Use your exact Minecraft name so the server can deliver to the right player.</span>
               </div>
               <div class="store-step">
-                <strong>3. Stripe confirms payment</strong>
+                <strong>3. Payment is confirmed</strong>
                 <span>The Paper server pulls the paid order and grants the LuckPerms permission automatically.</span>
               </div>
             </div>
@@ -217,7 +217,7 @@
           <section class="section">
             <div class="store-controls">
               <div class="ctl">
-                <span style="color: var(--muted)">🔎</span>
+                <span style="color: var(--muted)">Search</span>
                 <input id="storeSearch" type="search" placeholder="Search cosmetics..." autocomplete="off" />
               </div>
             </div>
@@ -271,7 +271,7 @@
           </form>
         </div>
         <div class="ft">
-          <button id="checkoutButton" class="btn primary" type="submit" form="checkoutForm">Checkout with Stripe</button>
+          <button id="checkoutButton" class="btn primary" type="submit" form="checkoutForm">Pay</button>
           <button class="btn" type="button" onclick="document.getElementById('modalClose').click()">Close</button>
         </div>
       </div>

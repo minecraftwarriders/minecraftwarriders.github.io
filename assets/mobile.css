@@ -39,7 +39,7 @@
     flex: 1 0 100%;
     min-width: 0;
     padding: 10px 12px;
-    border-radius: 10px;
+    border-radius: 3px;
   }
 
   .shell {
@@ -50,7 +50,7 @@
   .hero-card {
     grid-template-columns: 1fr;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 6px;
   }
 
   .hero-card h1 {
@@ -101,7 +101,7 @@
     left: 10px;
     width: calc(100vw - 20px);
     max-height: calc(100vh - 20px);
-    border-radius: 14px;
+    border-radius: 6px;
   }
 
   .wiki-layout {

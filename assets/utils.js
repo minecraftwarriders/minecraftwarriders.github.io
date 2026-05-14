@@ -120,27 +120,22 @@ class ItemDataLoader {
         this.mcAssetBase = `https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/${this.mcAssetVersion}/assets/minecraft/textures`;
 
         this.itemIcons = new Map([
-            // Common Minecraft items with emoji representations
-            ['CHEST', '📦'], ['DIAMOND', '💎'], ['IRON_INGOT', '🔸'],
-            ['GOLD_INGOT', '🟨'], ['EMERALD', '💚'], ['BREAD', '🍞'],
-            ['APPLE', '🍎'], ['STONE', '🪨'], ['OAK_LOG', '🪵'],
-            ['WHEAT', '🌾'], ['CARROT', '🥕'], ['POTATO', '🥔'],
-            ['BEEF', '🥩'], ['PORKCHOP', '🥓'], ['CHICKEN', '🍗'],
-            ['IRON_PICKAXE', '⛏️'], ['IRON_SWORD', '⚔️'], ['IRON_AXE', '🪓'],
-            ['BOW', '🏹'], ['ARROW', '➡️'], ['COAL', '⚫'],
-            ['REDSTONE', '🔴'], ['LAPIS_LAZULI', '🔵'], ['GLOWSTONE_DUST', '✨'],
-            // Decoration items
-            ['CHAIN', '⛓️'], ['FLOWER_POT', '🪴'], ['ITEM_FRAME', '🖼️'],
-            ['PAINTING', '🎨'], ['ARMOR_STAND', '🚶'], ['BANNER', '🏴'],
-            // Food items
-            ['COOKED_BEEF', '🍖'], ['COOKED_CHICKEN', '🍗'], ['COOKED_SALMON', '🍣'],
-            ['COOKIE', '🍪'], ['CAKE', '🎂'], ['PUMPKIN_PIE', '🥧'],
-            // Blocks
-            ['COBBLESTONE', '🪨'], ['DIRT', '🟫'], ['GRASS_BLOCK', '🟩'],
-            ['SAND', '🟨'], ['GRAVEL', '⚫'], ['WOOD_PLANKS', '🟫'],
-            // Ores
-            ['COAL_ORE', '⚫'], ['IRON_ORE', '🔸'], ['GOLD_ORE', '🟨'],
-            ['DIAMOND_ORE', '💎'], ['EMERALD_ORE', '💚'], ['REDSTONE_ORE', '🔴']
+            ['CHEST', 'Chest'], ['DIAMOND', 'Diamond'], ['IRON_INGOT', 'Iron'],
+            ['GOLD_INGOT', 'Gold'], ['EMERALD', 'Emerald'], ['BREAD', 'Bread'],
+            ['APPLE', 'Apple'], ['STONE', 'Stone'], ['OAK_LOG', 'Log'],
+            ['WHEAT', 'Wheat'], ['CARROT', 'Carrot'], ['POTATO', 'Potato'],
+            ['BEEF', 'Beef'], ['PORKCHOP', 'Pork'], ['CHICKEN', 'Chicken'],
+            ['IRON_PICKAXE', 'Pickaxe'], ['IRON_SWORD', 'Sword'], ['IRON_AXE', 'Axe'],
+            ['BOW', 'Bow'], ['ARROW', 'Arrow'], ['COAL', 'Coal'],
+            ['REDSTONE', 'Redstone'], ['LAPIS_LAZULI', 'Lapis'], ['GLOWSTONE_DUST', 'Glowstone'],
+            ['CHAIN', 'Chain'], ['FLOWER_POT', 'Pot'], ['ITEM_FRAME', 'Frame'],
+            ['PAINTING', 'Painting'], ['ARMOR_STAND', 'Armor'], ['BANNER', 'Banner'],
+            ['COOKED_BEEF', 'Beef'], ['COOKED_CHICKEN', 'Chicken'], ['COOKED_SALMON', 'Salmon'],
+            ['COOKIE', 'Cookie'], ['CAKE', 'Cake'], ['PUMPKIN_PIE', 'Pie'],
+            ['COBBLESTONE', 'Stone'], ['DIRT', 'Dirt'], ['GRASS_BLOCK', 'Grass'],
+            ['SAND', 'Sand'], ['GRAVEL', 'Gravel'], ['WOOD_PLANKS', 'Planks'],
+            ['COAL_ORE', 'Coal Ore'], ['IRON_ORE', 'Iron Ore'], ['GOLD_ORE', 'Gold Ore'],
+            ['DIAMOND_ORE', 'Diamond Ore'], ['EMERALD_ORE', 'Emerald Ore'], ['REDSTONE_ORE', 'Redstone Ore']
         ]);
     }
 
@@ -256,7 +251,7 @@ class ItemDataLoader {
     }
 
     getItemIcon(material) {
-        return this.itemIcons.get(material) || '📦';
+        return this.itemIcons.get(material) || 'Item';
     }
 
     getItemIconUrls(material) {
@@ -332,7 +327,7 @@ class ItemDataLoader {
                 buy: 10000,
                 sell: -1,
                 special: true,
-                icon: '📦'
+                icon: 'Item'
             },
             {
                 material: 'DIAMOND',
@@ -341,7 +336,7 @@ class ItemDataLoader {
                 buy: 100,
                 sell: 25,
                 special: false,
-                icon: '💎'
+                icon: 'Diamond'
             },
             {
                 material: 'BREAD',
@@ -350,7 +345,7 @@ class ItemDataLoader {
                 buy: 15.75,
                 sell: 3.94,
                 special: false,
-                icon: '🍞'
+                icon: 'Bread'
             },
             {
                 material: 'IRON_SWORD',
@@ -359,7 +354,7 @@ class ItemDataLoader {
                 buy: 50,
                 sell: 12.5,
                 special: false,
-                icon: '⚔️'
+                icon: 'Sword'
             },
             {
                 material: 'EMERALD',
@@ -368,7 +363,7 @@ class ItemDataLoader {
                 buy: 200,
                 sell: 50,
                 special: false,
-                icon: '💚'
+                icon: 'Emerald'
             }
         ];
     }
@@ -641,11 +636,10 @@ class ToastManager {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
+            border-radius: 4px;
             padding: var(--space-4);
             margin-bottom: var(--space-2);
             max-width: 400px;
-            animation: slideInRight var(--transition-base) ease-out;
             pointer-events: auto;
             cursor: pointer;
         `;

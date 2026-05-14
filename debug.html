@@ -41,7 +41,7 @@
                 console.log('Parsed data:', data);
                 
                 resultsDiv.innerHTML = `
-                    <h2>✅ Success!</h2>
+                    <h2>Success</h2>
                     <p><strong>Response Status:</strong> ${response.status}</p>
                     <p><strong>YAML Length:</strong> ${yamlText.length} characters</p>
                     <p><strong>Parsed Items:</strong> ${data.length}</p>
@@ -64,7 +64,7 @@
             } catch (error) {
                 console.error('Error:', error);
                 resultsDiv.innerHTML = `
-                    <h2>❌ Error!</h2>
+                    <h2>Error</h2>
                     <p><strong>Error:</strong> ${error.message}</p>
                     <p><strong>Stack:</strong></p>
                     <pre style="background: #ffebee; padding: 10px; overflow: auto;">${error.stack}</pre>

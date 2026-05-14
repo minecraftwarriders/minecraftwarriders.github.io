@@ -22,7 +22,6 @@
           <strong>${item.label}</strong>
           <span>${item.desc}</span>
         </div>
-        <span aria-hidden="true">›</span>
       </a>
     `;
   }
@@ -66,7 +65,7 @@
               <div style="color: var(--muted); font-size: 12px;">panda.cloudns.nz</div>
             </div>
           </div>
-          <button class="site-menu-close" type="button" data-menu-close aria-label="Close menu">×</button>
+          <button class="site-menu-close" type="button" data-menu-close aria-label="Close menu">X</button>
         </div>
         <div class="site-menu-body">
           <div class="site-menu-section">

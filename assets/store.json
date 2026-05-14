@@ -3,12 +3,12 @@
     "title": "Cosmetics Store",
     "subtitle": "All purchasable items are cosmetic-only. No gameplay advantages.",
     "purchase": {
-      "mode": "stripe",
+      "mode": "payment",
       "apiBaseUrl": "https://store-api.minecraftwarriders.com",
-      "methodLabel": "Secure Stripe checkout",
+      "methodLabel": "Secure payment",
       "instructions": [
         "Enter your exact Minecraft username.",
-        "Pay securely through Stripe Checkout.",
+        "Pay securely on the payment page.",
         "After payment, the Paper server automatically grants your cosmetic permission."
       ]
     }
@@ -39,7 +39,7 @@
       "currency": "USD",
       "badge": "POPULAR",
       "description": "Gold name + [KNIGHT] tag + chat styling (cosmetic only).",
-      "delivery": "Granted through LuckPerms after Stripe confirms payment.",
+      "delivery": "Granted automatically after payment is confirmed.",
       "includes": ["[KNIGHT] chat tag", "Gold name color", "Tab highlight"],
       "image": "../assets/images/castlehomeimage.png"
     },
@@ -50,9 +50,9 @@
       "price": 9.99,
       "currency": "USD",
       "badge": "BEST VALUE",
-      "description": "Premium tag + animated-ish styling (still cosmetic only).",
-      "delivery": "Granted through LuckPerms after Stripe confirms payment.",
-      "includes": ["[WARLORD] chat tag", "Name gradient style", "Tab + chat flare"],
+      "description": "Premium tag, name styling, and tab flare (still cosmetic only).",
+      "delivery": "Granted automatically after payment is confirmed.",
+      "includes": ["[WARLORD] chat tag", "Name styling", "Tab + chat flare"],
       "image": "../assets/images/diamondblockcommandsimage.png"
     },
     {

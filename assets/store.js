@@ -22,7 +22,7 @@
 
   const purchaseModeLabel = (mode) => {
     if (mode === "manual") return "Manual delivery";
-    if (mode === "disabled") return "Checkout not live";
+    if (mode === "disabled") return "Payment unavailable";
     return "Auto delivery";
   };
 
@@ -65,8 +65,8 @@
       .map((p) => {
         const badge = (p.badge || "").trim();
         const catLabel = categoriesById.get(p.category)?.label || p.category;
-        const delivery = p.delivery || "Automatic permission grant after Stripe payment.";
-        const mode = state.data?.meta?.purchase?.mode || "stripe";
+        const delivery = p.delivery || "Automatic permission grant after payment.";
+        const mode = state.data?.meta?.purchase?.mode || "payment";
         return `
           <div class="item-card" data-prod="${escapeHtml(p.id)}">
             <div class="item-header">
@@ -93,7 +93,7 @@
               </div>
             </div>
             <div class="item-actions">
-              <button class="btn primary" data-buy="${escapeHtml(p.id)}">Buy now</button>
+              <button class="btn primary" data-buy="${escapeHtml(p.id)}">Buy</button>
               <button class="btn" data-details="${escapeHtml(p.id)}">View details</button>
             </div>
           </div>
@@ -142,7 +142,7 @@
     const button = $("#checkoutButton");
     if (!button) return;
     button.disabled = false;
-    button.textContent = "Checkout with Stripe";
+    button.textContent = "Pay";
   }
 
   function openModal(id) {
@@ -177,8 +177,8 @@
     resetCheckoutButton();
     setCheckoutStatus(
       configured
-        ? "Next: enter your exact Minecraft username, then Stripe opens in this tab."
-        : "Checkout is wired, but the Store API URL is missing. Deploy the API before real buyers use this."
+        ? "Next: enter your exact Minecraft username, then continue to payment."
+        : "Payments are not available yet. You can still browse cosmetics."
     );
 
     backdrop.classList.add("open");
@@ -208,7 +208,7 @@
   async function startCheckout() {
     const apiBaseUrl = getStoreApiBaseUrl();
     if (!checkoutIsConfigured()) {
-      setCheckoutStatus("Checkout is not live yet. Deploy the Store API and set assets/store.json meta.purchase.apiBaseUrl to the real HTTPS API URL.", true);
+      setCheckoutStatus("Payments are not available yet. Please check back soon.", true);
       return;
     }
 
@@ -227,9 +227,9 @@
     const button = $("#checkoutButton");
     if (button) {
       button.disabled = true;
-      button.textContent = "Opening Stripe...";
+      button.textContent = "Opening payment...";
     }
-    setCheckoutStatus("Creating secure Stripe checkout...");
+    setCheckoutStatus("Opening secure payment...");
 
     try {
       const res = await fetch(`${apiBaseUrl}/api/create-checkout-session`, {
@@ -239,14 +239,14 @@
       });
       const payload = await res.json().catch(() => ({}));
       if (!res.ok || !payload.url) {
-        throw new Error(payload.error || `Checkout API returned HTTP ${res.status}.`);
+        throw new Error(payload.error || `Payment returned HTTP ${res.status}.`);
       }
       window.location.assign(payload.url);
     } catch (err) {
-      setCheckoutStatus(`Could not reach checkout. Make sure the Store API is deployed and configured. ${String(err?.message || err)}`, true);
+      setCheckoutStatus(`Payment is not available right now. ${String(err?.message || err)}`, true);
       if (button) {
         button.disabled = false;
-        button.textContent = "Checkout with Stripe";
+        button.textContent = "Pay";
       }
     }
   }
@@ -254,16 +254,16 @@
   async function checkCheckoutHealth() {
     const apiBaseUrl = getStoreApiBaseUrl();
     if (!apiBaseUrl) {
-      setCheckoutNotice("Checkout is not live yet: the Store API URL is missing.", true);
+      setCheckoutNotice("Payments are not available yet. You can still browse cosmetics.", true);
       return;
     }
 
     try {
       const res = await fetch(`${apiBaseUrl}/api/health`, { cache: "no-store" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setCheckoutNotice("Checkout system online. Purchases open secure Stripe Checkout and deliver automatically.");
+      setCheckoutNotice("Payments are online. Purchases are delivered automatically.");
     } catch {
-      setCheckoutNotice("Checkout API is not reachable yet. Browsing works, but Buy will not open Stripe until the Store API is deployed.", true);
+      setCheckoutNotice("Payments are temporarily unavailable. You can still browse cosmetics.", true);
     }
   }
 

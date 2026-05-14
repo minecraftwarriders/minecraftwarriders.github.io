@@ -77,7 +77,7 @@ The wiki covers essential server plugins:
 - Test assets stored locally for development
 
 ### Style Guidelines
-- Consistent emoji usage for visual categorization (⚡, 💰, 🏗️, etc.)
+- No emoji usage in customer-facing UI.
 - Color-coded information boxes (tips, warnings, important notes)
 - Command syntax highlighting with monospace formatting
 - Responsive design considerations for mobile users

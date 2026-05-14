@@ -326,11 +326,18 @@
         }
 
         .special-item::after {
-            content: '✨';
+            content: 'Featured';
             position: absolute;
-            top: -4px;
-            right: -4px;
-            font-size: 0.8em;
+            top: 8px;
+            right: 8px;
+            padding: 3px 6px;
+            border: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.42);
+            color: var(--accent2);
+            border-radius: 3px;
+            font-size: 0.68em;
+            font-weight: 900;
+            text-transform: uppercase;
         }
 
         /* Category chips */
@@ -339,7 +346,7 @@
             padding: var(--space-1) var(--space-2);
             background: var(--dark-glass-bg);
             border: 1px solid var(--dark-glass-border);
-            border-radius: var(--radius-full);
+            border-radius: 3px;
             font-size: var(--text-xs);
             color: var(--primary-400);
             margin: var(--space-1);
@@ -362,22 +369,6 @@
             font-weight: 600;
             color: var(--primary-300);
             margin-bottom: var(--space-3);
-        }
-
-        /* Animation */
-        .fade-in {
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
         }
 
         /* Clean pass overrides: keep items simple and readable */
@@ -404,7 +395,7 @@
         }
         .ctl {
             min-height: 44px;
-            border-radius: 10px;
+            border-radius: 3px;
             padding: 10px 12px;
             background: rgba(255,255,255,0.035);
         }
@@ -414,7 +405,7 @@
             color: var(--text);
         }
         .chip {
-            border-radius: 999px;
+            border-radius: 3px;
             padding: 8px 11px;
             font-weight: 700;
         }
@@ -429,7 +420,7 @@
             margin-top: 18px;
         }
         .item-card {
-            border-radius: 10px;
+            border-radius: 4px;
             padding: 14px;
             background: rgba(255,255,255,0.035);
         }
@@ -469,9 +460,9 @@
           <a data-nav href="./store.html">Store</a>
         </nav>
         <div class="search" role="search">
-          <span class="muted">🔎</span>
+          <span class="muted">Search</span>
           <input id="globalSearch" type="search" placeholder="Search items..." autocomplete="off" />
-          <span class="kbd">⌘K</span>
+          <span class="kbd">Ctrl K</span>
         </div>
         <div class="topbar-right"><div class="avatar" aria-hidden="true"></div></div>
       </header>
@@ -479,8 +470,8 @@
       <div class="shell">
         <aside class="sidebar" aria-label="Sidebar">
           <div class="section-title">Items</div>
-          <a class="side-link active" href="./items.html"><span class="dot">⛁</span>Item Prices</a>
-          <a class="side-link" href="./wiki.html#commands"><span class="dot">⚡</span>Commands</a>
+          <a class="side-link active" href="./items.html">Item Prices</a>
+          <a class="side-link" href="./wiki.html#commands">Commands</a>
         </aside>
 
         <main class="content">
@@ -496,7 +487,7 @@
             </div>
             <div class="controls-panel">
               <div class="ctl search">
-                <span style="color:var(--muted);">🔎</span>
+                <span style="color:var(--muted);">Search</span>
                 <input type="search" id="searchInput" placeholder="Search items..." />
               </div>
               <div class="ctl">
@@ -714,12 +705,12 @@
             
             filteredItems.forEach(item => {
                 const card = document.createElement('div');
-                card.className = `item-card fade-in ${item.special ? 'special-item' : ''}`;
+                card.className = `item-card ${item.special ? 'special-item' : ''}`;
                 
                 const iconUrls = Array.isArray(item.iconUrls) ? item.iconUrls : [];
                 const iconHtml = iconUrls.length
                     ? `<img class="item-icon-img" alt="${item.material} icon" loading="lazy" decoding="async" data-icon material="${item.material}" src="${iconUrls[0]}">`
-                    : (item.icon || '📦');
+                    : '<span class="item-icon-fallback">Item</span>';
 
                 card.innerHTML = `
                     <div class="item-header">
@@ -802,7 +793,7 @@
 
         // Show/hide loading state
         function showLoading(show) {
-            // no spinner in new layout; keep hook for loader
+            // Loading state is intentionally static in the new layout.
         }
 
         // Show/hide empty state
