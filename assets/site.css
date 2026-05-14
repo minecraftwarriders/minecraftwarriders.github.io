@@ -1552,6 +1552,15 @@ body.art-page::after {
   line-height: 1;
 }
 
+.coin-card-img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 14px;
+  border: 1px solid rgba(241, 209, 138, 0.14);
+}
+
 .coin-card p,
 .detail-section p {
   margin: 0;
@@ -1630,6 +1639,87 @@ body.art-page::after {
 [data-coin-buy].active {
   border-color: rgba(241, 209, 138, 0.55);
   background: rgba(215, 178, 90, 0.26);
+}
+
+.pay-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.42fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.pay-list,
+.pay-summary {
+  border: 1px solid rgba(241, 209, 138, 0.14);
+  background: rgba(8, 7, 6, 0.68);
+  padding: 18px;
+}
+
+.pay-list-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.pay-list-head strong,
+.pay-summary > strong {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+}
+
+.pay-item {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.pay-item img {
+  width: 86px;
+  height: 64px;
+  object-fit: cover;
+  border: 1px solid rgba(241, 209, 138, 0.16);
+}
+
+.pay-item strong,
+.pay-item span,
+.pay-item-price strong,
+.pay-item-price span {
+  display: block;
+}
+
+.pay-item span,
+.pay-item-price span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.pay-item-price {
+  text-align: right;
+}
+
+.link-button {
+  margin-top: 7px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--accent2);
+  font: 800 12px/1 var(--font-sans);
+  cursor: pointer;
+}
+
+.pay-total {
+  color: var(--accent2);
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1;
+  margin: 10px 0 14px;
 }
 
 /* Make legacy "glass" bits calmer */

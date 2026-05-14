@@ -24,70 +24,10 @@
     return categories.find((category) => category.id === product.category)?.label || product.category || "Cosmetic";
   }
 
-  function getStoreApiBaseUrl() {
-    const configured = state.data?.meta?.purchase?.apiBaseUrl || window.WAR_RIDERS_STORE_API_URL || "";
-    return String(configured).replace(/\/+$/, "");
-  }
-
-  function validMinecraftName(name) {
-    return /^[A-Za-z0-9_]{3,16}$/.test(name);
-  }
-
-  function setCheckoutStatus(message, isError = false) {
-    const el = $("#productCheckoutStatus");
-    if (!el) return;
-    el.textContent = message || "";
-    el.style.color = isError ? "#9f1d2f" : "rgba(23, 19, 15, 0.68)";
-  }
-
-  function resetCheckoutButton() {
-    const button = $("#productCheckoutButton");
-    if (!button) return;
-    button.disabled = false;
-    button.textContent = "Pay";
-  }
-
-  async function startCheckout() {
-    const apiBaseUrl = getStoreApiBaseUrl();
-    if (!apiBaseUrl) {
-      setCheckoutStatus("Payments are not available yet. Please check back soon.", true);
-      return;
-    }
-
-    const minecraftName = ($("#productMinecraftName")?.value || "").trim();
-    if (!validMinecraftName(minecraftName)) {
-      setCheckoutStatus("Enter a valid Minecraft username: 3-16 letters, numbers, or underscores.", true);
-      return;
-    }
-
-    const productId = state.product?.id;
-    if (!productId) {
-      setCheckoutStatus("Choose an item before checking out.", true);
-      return;
-    }
-
-    const button = $("#productCheckoutButton");
-    if (button) {
-      button.disabled = true;
-      button.textContent = "Opening payment...";
-    }
-    setCheckoutStatus("Opening secure payment...");
-
-    try {
-      const res = await fetch(`${apiBaseUrl}/api/create-checkout-session`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId, minecraftName }),
-      });
-      const payload = await res.json().catch(() => ({}));
-      if (!res.ok || !payload.url) {
-        throw new Error(payload.error || `Payment returned HTTP ${res.status}.`);
-      }
-      window.location.assign(payload.url);
-    } catch (err) {
-      setCheckoutStatus(`Payment is not available right now. ${String(err?.message || err)}`, true);
-      resetCheckoutButton();
-    }
+  function goToPay() {
+    if (!state.product?.id) return;
+    window.WarRidersCart?.add?.(state.product.id);
+    window.location.assign("./pay.html");
   }
 
   function renderMissing() {
@@ -152,29 +92,11 @@
             </div>
           </div>
           <p class="product-description">${escapeHtml(product.description || "A cosmetic unlock for your player.")}</p>
-          <form id="productCheckoutForm" class="product-checkout-form">
-            <label for="productMinecraftName">Minecraft username</label>
-            <input
-              id="productMinecraftName"
-              name="minecraftName"
-              type="text"
-              autocomplete="username"
-              inputmode="text"
-              minlength="3"
-              maxlength="16"
-              pattern="[A-Za-z0-9_]{3,16}"
-              placeholder="Your in-game name"
-              required
-            />
-            <div class="product-actions">
-              <button id="productCheckoutButton" class="btn primary" type="submit">Pay</button>
-              <a class="btn" href="./store.html">Back to Store</a>
-            </div>
-            <div id="productCheckoutStatus" class="product-checkout-status" role="status" aria-live="polite">
-              Enter your exact Minecraft username. Once your order is confirmed, this cosmetic is added to your player.
-            </div>
-          </form>
-          <div class="product-delivery">Once your order is confirmed, this cosmetic is added to your player automatically.</div>
+          <div class="product-actions">
+            <button id="productPayButton" class="btn primary" type="button">Pay</button>
+            <a class="btn" href="./store.html">Back to Store</a>
+          </div>
+          <div class="product-delivery">Pay takes this item to the order page, where you can review everything and add more before checkout.</div>
           ${coinText ? `<div class="product-coin-price">${escapeHtml(coinText)}</div>` : ""}
         </aside>
       </section>
@@ -203,10 +125,7 @@
       </section>
     `;
 
-    $("#productCheckoutForm")?.addEventListener("submit", (event) => {
-      event.preventDefault();
-      startCheckout();
-    });
+    $("#productPayButton")?.addEventListener("click", goToPay);
   }
 
   async function init() {

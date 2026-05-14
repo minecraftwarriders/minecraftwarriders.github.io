@@ -229,7 +229,7 @@
       "displayInStore": false,
       "description": "A small coin pack for trying the in-game store.",
       "includes": ["100 coins", "Never expires", "Tied to your account"],
-      "image": "../assets/images/war-riders-store-bg.png"
+      "image": "../assets/images/coin-pocket-change.png"
     },
     {
       "id": "coin-little-treat",
@@ -242,7 +242,7 @@
       "displayInStore": false,
       "description": "A light coin pack for a few smaller cosmetics.",
       "includes": ["300 coins", "Never expires", "Tied to your account"],
-      "image": "../assets/images/war-riders-store-bg.png"
+      "image": "../assets/images/coin-little-treat.png"
     },
     {
       "id": "coin-the-splurge",
@@ -255,7 +255,7 @@
       "displayInStore": false,
       "description": "A stronger coin pack for a pet, trail, or a few smaller unlocks.",
       "includes": ["600 coins", "Never expires", "Tied to your account"],
-      "image": "../assets/images/war-riders-store-bg.png"
+      "image": "../assets/images/coin-the-splurge.png"
     },
     {
       "id": "coin-big-bag",
@@ -268,7 +268,7 @@
       "displayInStore": false,
       "description": "A larger coin pack for building out your cosmetic collection.",
       "includes": ["1,200 coins", "Never expires", "Tied to your account"],
-      "image": "../assets/images/war-riders-store-bg.png"
+      "image": "../assets/images/coin-big-bag.png"
     },
     {
       "id": "coin-loaded",
@@ -281,7 +281,7 @@
       "displayInStore": false,
       "description": "A big coin balance for players who want options.",
       "includes": ["2,500 coins", "Never expires", "Tied to your account"],
-      "image": "../assets/images/war-riders-store-bg.png"
+      "image": "../assets/images/coin-loaded.png"
     },
     {
       "id": "coin-unhinged",
@@ -294,7 +294,7 @@
       "displayInStore": false,
       "description": "The biggest coin pack for going wild in the cosmetic store.",
       "includes": ["5,000 coins", "Never expires", "Tied to your account"],
-      "image": "../assets/images/war-riders-store-bg.png"
+      "image": "../assets/images/coin-unhinged.png"
     }
   ]
 }

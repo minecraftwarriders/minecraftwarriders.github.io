@@ -8,8 +8,9 @@
   }
 
   function currentKey() {
+    if (page === "pay.html") return "pay";
     if (page === "store.html" || page === "store-success.html" || page === "store-cancel.html" || page === "cosmetic.html") return "store";
-    if (page === "coins.html") return "coins";
+    if (page === "coins.html" || page === "coin.html") return "coins";
     if (page === "items.html") return "items";
     if (page === "wiki.html") return "wiki";
     return "home";
@@ -39,6 +40,7 @@
       { key: "items", label: "Item Prices", desc: "Search buy/sell values.", url: href("pages/items.html") },
       { key: "store", label: "Cosmetic Store", desc: "Trails, pets, hats, tags, and no P2W.", url: href("pages/store.html") },
       { key: "coins", label: "Coins", desc: "How coins work and where to buy bundles.", url: href("pages/coins.html") },
+      { key: "pay", label: "Pay", desc: "Review your current order.", url: href("pages/pay.html") },
     ];
     const player = [
       { key: "beginner", label: "Beginner's Guide", desc: "First steps after joining.", url: href("pages/wiki.html#beginners") },
@@ -133,6 +135,7 @@
             <a href="${href("pages/items.html")}">Items</a>
             <a href="${href("pages/store.html")}">Store</a>
             <a href="${href("pages/coins.html")}">Coins</a>
+            <a href="${href("pages/pay.html")}">Pay</a>
           </nav>
         </div>
       </footer>

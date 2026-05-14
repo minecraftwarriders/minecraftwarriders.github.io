@@ -52,11 +52,12 @@ app.get("/api/health", (_req, res) => {
 });
 
 app.post("/api/create-checkout-session", async (req, res) => {
-  const productId = String(req.body?.productId || "");
+  const productIds = normalizeProductIds(req.body);
   const minecraftName = String(req.body?.minecraftName || "").trim();
-  const product = getProduct(productId);
+  const products = productIds.map((productId) => getProduct(productId));
 
-  if (!product) return res.status(404).json({ error: "Unknown product." });
+  if (!productIds.length) return res.status(400).json({ error: "Choose at least one item." });
+  if (products.some((product) => !product)) return res.status(404).json({ error: "Unknown product in order." });
   if (!validMinecraftName(minecraftName)) {
     return res.status(400).json({ error: "Minecraft username must be 3-16 letters, numbers, or underscores." });
   }
@@ -64,6 +65,8 @@ app.post("/api/create-checkout-session", async (req, res) => {
   const orderId = crypto.randomUUID();
   const successUrl = `${publicSiteUrl}/pages/store-success.html?session_id={CHECKOUT_SESSION_ID}`;
   const cancelUrl = `${publicSiteUrl}/pages/store-cancel.html`;
+  const lineItems = groupedProducts(products).map(({ product, quantity }) => checkoutLineItem(product, quantity));
+  const amountCents = products.reduce((sum, product) => sum + Number(product.amountCents || 0), 0);
 
   try {
     const session = await stripe.checkout.sessions.create(
@@ -72,12 +75,11 @@ app.post("/api/create-checkout-session", async (req, res) => {
         success_url: successUrl,
         cancel_url: cancelUrl,
         client_reference_id: orderId,
-        line_items: [checkoutLineItem(product)],
+        line_items: lineItems,
         metadata: {
           orderId,
-          productId: product.id,
-          minecraftName,
-          targetServer: product.targetServer
+          productIds: productIds.join(","),
+          minecraftName
         }
       },
       { idempotencyKey: `checkout:${orderId}` }
@@ -87,11 +89,19 @@ app.post("/api/create-checkout-session", async (req, res) => {
       state.orders.push({
         id: orderId,
         stripeSessionId: session.id,
-        productId: product.id,
+        productIds,
+        items: products.map((product, index) => ({
+          index,
+          productId: product.id,
+          name: product.name,
+          targetServer: product.targetServer,
+          amountCents: product.amountCents,
+          currency: product.currency
+        })),
         minecraftName,
-        targetServer: product.targetServer,
-        amountCents: product.amountCents,
-        currency: product.currency,
+        targetServer: products.length === 1 ? products[0].targetServer : "mixed",
+        amountCents,
+        currency: products[0]?.currency || "usd",
         status: "checkout_created",
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
@@ -150,7 +160,10 @@ app.post("/api/deliveries/:id/complete", requireBridgeAuth, async (req, res) => 
 
     const order = state.orders.find((item) => item.id === delivery.orderId);
     if (order) {
-      order.status = success ? "delivered" : "delivery_failed";
+      const orderDeliveries = state.deliveries.filter((item) => item.orderId === order.id);
+      if (orderDeliveries.some((item) => item.status === "failed")) order.status = "delivery_failed";
+      else if (orderDeliveries.every((item) => item.status === "delivered")) order.status = "delivered";
+      else order.status = "delivery_pending";
       order.updatedAt = now;
       order.deliveryMessage = message;
     }
@@ -187,11 +200,9 @@ async function handleCheckoutPaid(session, stripeEventId) {
   if (session.payment_status !== "paid") return;
 
   const orderId = session.metadata?.orderId || session.client_reference_id;
-  const productId = session.metadata?.productId;
   const minecraftName = session.metadata?.minecraftName;
-  const product = getProduct(productId);
 
-  if (!orderId || !product || !validMinecraftName(minecraftName || "")) {
+  if (!orderId || !validMinecraftName(minecraftName || "")) {
     throw new Error(`Invalid paid checkout metadata for session ${session.id}`);
   }
 
@@ -199,15 +210,32 @@ async function handleCheckoutPaid(session, stripeEventId) {
 
   await store.update((state) => {
     let order = state.orders.find((item) => item.id === orderId);
+    const productIds =
+      order?.productIds ||
+      (order?.productId ? [order.productId] : null) ||
+      String(session.metadata?.productIds || session.metadata?.productId || "").split(",").filter(Boolean);
+    const products = productIds.map((productId) => getProduct(productId));
+    if (!productIds.length || products.some((product) => !product)) {
+      throw new Error(`Invalid paid checkout products for session ${session.id}`);
+    }
+
     if (!order) {
       order = {
         id: orderId,
         stripeSessionId: session.id,
-        productId: product.id,
+        productIds,
+        items: products.map((product, index) => ({
+          index,
+          productId: product.id,
+          name: product.name,
+          targetServer: product.targetServer,
+          amountCents: product.amountCents,
+          currency: product.currency
+        })),
         minecraftName,
-        targetServer: product.targetServer,
-        amountCents: product.amountCents,
-        currency: product.currency,
+        targetServer: products.length === 1 ? products[0].targetServer : "mixed",
+        amountCents: products.reduce((sum, product) => sum + Number(product.amountCents || 0), 0),
+        currency: products[0]?.currency || "usd",
         createdAt: now
       };
       state.orders.push(order);
@@ -218,11 +246,13 @@ async function handleCheckoutPaid(session, stripeEventId) {
     order.stripePaymentIntentId = session.payment_intent || "";
     order.stripeEventId = stripeEventId;
 
-    const existingDelivery = state.deliveries.find((delivery) => delivery.orderId === orderId);
-    if (!existingDelivery) {
+    products.forEach((product, index) => {
+      const existingDelivery = state.deliveries.find((delivery) => delivery.orderId === orderId && delivery.itemIndex === index);
+      if (existingDelivery) return;
       state.deliveries.push({
         id: crypto.randomUUID(),
         orderId,
+        itemIndex: index,
         stripeSessionId: session.id,
         productId: product.id,
         minecraftName,
@@ -233,7 +263,7 @@ async function handleCheckoutPaid(session, stripeEventId) {
         createdAt: now,
         updatedAt: now
       });
-    }
+    });
   });
 }
 
@@ -244,16 +274,16 @@ function requireBridgeAuth(req, res, next) {
   next();
 }
 
-function checkoutLineItem(product) {
+function checkoutLineItem(product, quantity = 1) {
   if (product.stripePriceId) {
     return {
-      quantity: 1,
+      quantity,
       price: product.stripePriceId
     };
   }
 
   return {
-    quantity: 1,
+    quantity,
     price_data: {
       currency: product.currency,
       unit_amount: product.amountCents,
@@ -265,10 +295,26 @@ function checkoutLineItem(product) {
   };
 }
 
+function normalizeProductIds(body) {
+  const source = Array.isArray(body?.productIds) ? body.productIds : [body?.productId];
+  return source.map((value) => String(value || "").trim()).filter(Boolean).slice(0, 20);
+}
+
+function groupedProducts(products) {
+  const groups = [];
+  for (const product of products) {
+    const existing = groups.find((group) => group.product.id === product.id);
+    if (existing) existing.quantity += 1;
+    else groups.push({ product, quantity: 1 });
+  }
+  return groups;
+}
+
 function publicDelivery(delivery) {
   return {
     id: delivery.id,
     orderId: delivery.orderId,
+    itemIndex: delivery.itemIndex,
     productId: delivery.productId,
     minecraftName: delivery.minecraftName,
     targetServer: delivery.targetServer,

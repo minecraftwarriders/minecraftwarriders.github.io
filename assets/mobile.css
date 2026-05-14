@@ -99,6 +99,7 @@
   .items-grid,
   .product-page,
   .product-feature-row,
+  .pay-layout,
   .store-steps,
   .wiki-card-grid,
   .command-list {
@@ -124,6 +125,15 @@
 
   .product-actions {
     grid-template-columns: 1fr;
+  }
+
+  .pay-item {
+    grid-template-columns: 72px minmax(0, 1fr);
+  }
+
+  .pay-item-price {
+    grid-column: 1 / -1;
+    text-align: left;
   }
 
   .product-feature-row {
