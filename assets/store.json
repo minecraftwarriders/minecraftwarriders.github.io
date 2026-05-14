@@ -9,7 +9,7 @@
       "instructions": [
         "Enter your exact Minecraft username.",
         "Pay securely on the payment page.",
-        "After payment, the Paper server automatically grants your cosmetic permission."
+        "Once your order is confirmed, the item is added to your player automatically."
       ]
     }
   },
@@ -45,7 +45,7 @@
       "currency": "USD",
       "badge": "BRIGHT",
       "description": "A warm golden dust trail that brightens the path behind you.",
-      "delivery": "Unlocks the Personal Sunshine trail permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Golden dust trail", "Toggle command access", "Permanent unlock"],
       "image": "../assets/images/cosmetic-trail-personal-sunshine.png"
     },
@@ -58,7 +58,7 @@
       "currency": "USD",
       "badge": "",
       "description": "Soft roasted wisps for players who are always freshly brewed.",
-      "delivery": "Unlocks the Coffee Wisps trail permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Smoke wisp trail", "Toggle command access", "Permanent unlock"],
       "image": "../assets/images/cosmetic-trail-coffee-wisps.png"
     },
@@ -71,7 +71,7 @@
       "currency": "USD",
       "badge": "",
       "description": "A clear bubble trail for players living in their own little world.",
-      "delivery": "Unlocks the Bubble World trail permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Bubble trail", "Toggle command access", "Permanent unlock"],
       "image": "../assets/images/cosmetic-trail-bubble-world.png"
     },
@@ -84,7 +84,7 @@
       "currency": "USD",
       "badge": "",
       "description": "A blue soul fire trail for the mysterious overthinker build.",
-      "delivery": "Unlocks the Soul Flame trail permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Soul flame trail", "Toggle command access", "Permanent unlock"],
       "image": "../assets/images/cosmetic-trail-soul-flame.png"
     },
@@ -97,7 +97,7 @@
       "currency": "USD",
       "badge": "RARE",
       "description": "Glowing arcane particles that make every hallway feel forbidden.",
-      "delivery": "Unlocks the Enchanted Glyphs trail permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Glyph trail", "Toggle command access", "Permanent unlock"],
       "image": "../assets/images/cosmetic-trail-enchanted-glyphs.png"
     },
@@ -110,7 +110,7 @@
       "currency": "USD",
       "badge": "",
       "description": "A chicken. Just Gerald. He has never been late to anything.",
-      "delivery": "Unlocks the Gerald pet permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Gerald companion", "Hide/show toggle", "Permanent unlock"],
       "image": "../assets/images/cosmetic-pet-gerald.png"
     },
@@ -123,7 +123,7 @@
       "currency": "USD",
       "badge": "SERIOUS",
       "description": "A cat in a tiny tie. Very serious. Very employed.",
-      "delivery": "Unlocks the Business Cat pet permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Business Cat companion", "Hide/show toggle", "Permanent unlock"],
       "image": "../assets/images/cosmetic-pet-business-cat.png"
     },
@@ -136,7 +136,7 @@
       "currency": "USD",
       "badge": "",
       "description": "Slowly shuffles behind you. Doing his best.",
-      "delivery": "Unlocks the Sad Crab pet permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Sad Crab companion", "Hide/show toggle", "Permanent unlock"],
       "image": "../assets/images/cosmetic-pet-sad-crab.png"
     },
@@ -149,7 +149,7 @@
       "currency": "USD",
       "badge": "POPULAR",
       "description": "A golden retriever puppy with aggressive enthusiasm.",
-      "delivery": "Unlocks the Biscuit pet permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Biscuit companion", "Hide/show toggle", "Permanent unlock"],
       "image": "../assets/images/cosmetic-pet-biscuit.png"
     },
@@ -162,7 +162,7 @@
       "currency": "USD",
       "badge": "",
       "description": "A tiny round cat. Basically a circle with opinions.",
-      "delivery": "Unlocks the Mochi pet permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Mochi companion", "Hide/show toggle", "Permanent unlock"],
       "image": "../assets/images/cosmetic-pet-mochi.png"
     },
@@ -175,7 +175,7 @@
       "currency": "USD",
       "badge": "",
       "description": "A fried egg hat for players who wake up and choose breakfast.",
-      "delivery": "Unlocks the Sunny Side Up hat permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Wearable hat cosmetic", "Wardrobe access", "Permanent unlock"],
       "image": "../assets/images/cosmetic-hat-sunny-side-up.png"
     },
@@ -188,7 +188,7 @@
       "currency": "USD",
       "badge": "",
       "description": "You know what you did. At least now it is official.",
-      "delivery": "Unlocks The Fedora hat permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Wearable hat cosmetic", "Wardrobe access", "Permanent unlock"],
       "image": "../assets/images/cosmetic-hat-fedora.png"
     },
@@ -201,7 +201,7 @@
       "currency": "USD",
       "badge": "",
       "description": "A chat tag for players who are technically helping.",
-      "delivery": "Unlocks the [Certified Menace] chat tag permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Chat tag unlock", "Profile styling", "Permanent unlock"],
       "image": "../assets/images/cosmetic-tag-certified-menace.png"
     },
@@ -214,9 +214,87 @@
       "currency": "USD",
       "badge": "",
       "description": "A chat tag for honest effort, questionable outcomes, and good vibes.",
-      "delivery": "Unlocks the [Doing My Best] chat tag permission.",
+      "delivery": "Added to your player after order confirmation.",
       "includes": ["Chat tag unlock", "Profile styling", "Permanent unlock"],
       "image": "../assets/images/cosmetic-tag-doing-my-best.png"
+    },
+    {
+      "id": "coin-pocket-change",
+      "category": "coins",
+      "name": "Pocket Change",
+      "price": 0.99,
+      "coins": 100,
+      "currency": "USD",
+      "badge": "",
+      "displayInStore": false,
+      "description": "A small coin pack for trying the in-game store.",
+      "includes": ["100 coins", "Never expires", "Tied to your account"],
+      "image": "../assets/images/war-riders-store-bg.png"
+    },
+    {
+      "id": "coin-little-treat",
+      "category": "coins",
+      "name": "Little Treat",
+      "price": 2.49,
+      "coins": 300,
+      "currency": "USD",
+      "badge": "",
+      "displayInStore": false,
+      "description": "A light coin pack for a few smaller cosmetics.",
+      "includes": ["300 coins", "Never expires", "Tied to your account"],
+      "image": "../assets/images/war-riders-store-bg.png"
+    },
+    {
+      "id": "coin-the-splurge",
+      "category": "coins",
+      "name": "The Splurge",
+      "price": 4.49,
+      "coins": 600,
+      "currency": "USD",
+      "badge": "VALUE",
+      "displayInStore": false,
+      "description": "A stronger coin pack for a pet, trail, or a few smaller unlocks.",
+      "includes": ["600 coins", "Never expires", "Tied to your account"],
+      "image": "../assets/images/war-riders-store-bg.png"
+    },
+    {
+      "id": "coin-big-bag",
+      "category": "coins",
+      "name": "Big Bag",
+      "price": 7.99,
+      "coins": 1200,
+      "currency": "USD",
+      "badge": "POPULAR",
+      "displayInStore": false,
+      "description": "A larger coin pack for building out your cosmetic collection.",
+      "includes": ["1,200 coins", "Never expires", "Tied to your account"],
+      "image": "../assets/images/war-riders-store-bg.png"
+    },
+    {
+      "id": "coin-loaded",
+      "category": "coins",
+      "name": "Loaded",
+      "price": 14.99,
+      "coins": 2500,
+      "currency": "USD",
+      "badge": "BEST VALUE",
+      "displayInStore": false,
+      "description": "A big coin balance for players who want options.",
+      "includes": ["2,500 coins", "Never expires", "Tied to your account"],
+      "image": "../assets/images/war-riders-store-bg.png"
+    },
+    {
+      "id": "coin-unhinged",
+      "category": "coins",
+      "name": "Absolutely Unhinged",
+      "price": 24.99,
+      "coins": 5000,
+      "currency": "USD",
+      "badge": "MAX",
+      "displayInStore": false,
+      "description": "The biggest coin pack for going wild in the cosmetic store.",
+      "includes": ["5,000 coins", "Never expires", "Tied to your account"],
+      "image": "../assets/images/war-riders-store-bg.png"
     }
   ]
 }

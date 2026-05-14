@@ -182,6 +182,14 @@ Example:
 
 Use `{player}` exactly. The Paper plugin replaces it with the buyer's Minecraft username.
 
+Coin bundles are also listed in `store-api/src/catalog.js`. They currently use commands like:
+
+```txt
+coins give {player} 600
+```
+
+If your coin plugin uses a different command, update those bundle commands before selling coin packs.
+
 ## 6. Going Live Checklist
 
 - Rotate any Stripe secret or restricted keys that were pasted into chat, Discord, screenshots, or docs.

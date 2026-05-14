@@ -729,8 +729,8 @@ body.art-page::after {
 .home-hero h1 {
   max-width: 950px;
   font-family: var(--font-display);
-  font-size: clamp(42px, 5.8vw, 74px);
-  line-height: 0.94;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 0.98;
   letter-spacing: -0.025em;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.45), 0 0 34px rgba(0, 0, 0, 0.65);
 }
@@ -860,8 +860,8 @@ body.art-page::after {
 .page-hero h1 {
   max-width: 900px;
   font-family: var(--font-display);
-  font-size: clamp(42px, 6vw, 76px);
-  line-height: 0.92;
+  font-size: clamp(36px, 4.8vw, 62px);
+  line-height: 0.98;
   letter-spacing: -0.025em;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.42), 0 0 28px rgba(0, 0, 0, 0.55);
 }
@@ -906,7 +906,7 @@ body.art-page::after {
   .home-hero h1,
   .page-hero h1 {
     max-width: 760px;
-    font-size: clamp(42px, 9vw, 68px);
+    font-size: clamp(36px, 8vw, 56px);
   }
 
   .world-card,
@@ -1105,6 +1105,8 @@ body.art-page::after {
 .item-header {
   display: grid;
   gap: 12px;
+  color: inherit;
+  text-decoration: none;
 }
 .item-icon {
   width: 100%;
@@ -1129,6 +1131,8 @@ body.art-page::after {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 62%;
+  filter: brightness(1.16) saturate(1.08);
   image-rendering: auto;
 }
 .item-info {
@@ -1264,6 +1268,116 @@ body.art-page::after {
   display: grid;
   place-items: center;
   color: var(--muted);
+}
+
+.store-message,
+.coin-message {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  border: 1px solid rgba(74, 222, 128, 0.22);
+  background: rgba(4, 18, 12, 0.74);
+  padding: 18px;
+}
+
+.store-message strong,
+.coin-message strong {
+  display: block;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+
+.store-message p,
+.coin-message p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.store-message-actions,
+.coin-message-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.product-detail-hero {
+  min-height: min(680px, calc(100vh - 150px));
+  align-items: end;
+  background-position: center;
+  background-size: cover;
+}
+
+.product-detail-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 7, 6, 0.94), rgba(8, 7, 6, 0.58));
+  pointer-events: none;
+}
+
+.product-detail-hero > * {
+  z-index: 1;
+}
+
+.detail-panel {
+  display: grid;
+  gap: 18px;
+  max-width: 760px;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail-section-grid,
+.coin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.detail-section,
+.coin-card {
+  border: 1px solid rgba(241, 209, 138, 0.14);
+  background: rgba(8, 7, 6, 0.62);
+  padding: 18px;
+}
+
+.detail-section h2,
+.coin-card h3 {
+  margin: 0 0 8px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.02em;
+}
+
+.coin-card .coin-amount {
+  color: var(--accent2);
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1;
+}
+
+.coin-card p,
+.detail-section p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.coin-card .actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 /* Make legacy "glass" bits calmer */

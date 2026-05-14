@@ -159,7 +159,13 @@
           <a data-nav href="./wiki.html">Wiki</a>
           <a data-nav href="./items.html">Items</a>
           <a data-nav class="active" href="./store.html">Store</a>
+          <a data-nav href="./coins.html">Coins</a>
         </nav>
+        <div class="search" role="search">
+          <span class="muted">Search</span>
+          <input id="globalSearch" type="search" placeholder="Search store..." autocomplete="off" />
+          <span class="kbd">Ctrl K</span>
+        </div>
         <div class="topbar-right" style="margin-left:auto;">
           <a class="btn" href="../index.html">Home</a>
           <button class="btn" type="button" data-copy="panda.cloudns.nz">
@@ -173,6 +179,7 @@
         <aside class="sidebar" aria-label="Sidebar">
           <div class="section-title">Store</div>
           <a class="side-link active" href="./store.html">Cosmetics</a>
+          <a class="side-link" href="./coins.html">Coins</a>
           <a class="side-link" href="./items.html">Item Prices</a>
           <a class="side-link" href="./wiki.html">Commands</a>
           <a class="side-link" href="../index.html">Home</a>
@@ -190,7 +197,6 @@
                 <span class="pill good">COSMETIC ONLY</span>
                 <span class="pill">No P2W</span>
                 <span class="pill">Coin prices listed</span>
-                <span class="pill">Auto-delivery after payment</span>
               </div>
             </div>
             <div class="hero-art" aria-hidden="true">
@@ -199,18 +205,14 @@
           </section>
 
           <section class="section">
-            <div class="store-steps" aria-label="How store purchases work">
-              <div class="store-step">
-                <strong>1. Pick a cosmetic</strong>
-                <span>Choose a rank, particle, pet, or visual perk. Everything here is cosmetic-only.</span>
+            <div class="store-message">
+              <div>
+                <strong>How purchases work</strong>
+                <p>Choose a cosmetic, enter your exact Minecraft username, and pay. Once your order is confirmed, the cosmetic is added to your player automatically.</p>
               </div>
-              <div class="store-step">
-                <strong>2. Enter your username</strong>
-                <span>Use your exact Minecraft name. Coin prices are shown for the in-game store.</span>
-              </div>
-              <div class="store-step">
-                <strong>3. Payment is confirmed</strong>
-                <span>The Paper server pulls the paid order and grants the LuckPerms permission automatically.</span>
+              <div class="store-message-actions">
+                <a class="btn" href="./coins.html">How coins work</a>
+                <a class="btn primary" href="./coins.html#buy-coins">Buy coins</a>
               </div>
             </div>
           </section>

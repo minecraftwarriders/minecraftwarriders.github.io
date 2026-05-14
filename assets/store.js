@@ -20,12 +20,6 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
 
-  const purchaseModeLabel = (mode) => {
-    if (mode === "manual") return "Manual delivery";
-    if (mode === "disabled") return "Payment unavailable";
-    return "Auto delivery";
-  };
-
   const state = { data: null, category: "all", q: "", selectedProductId: "" };
 
   function setCategory(cat) {
@@ -60,18 +54,17 @@
     const grid = $("#storeGrid");
     const empty = $("#storeEmpty");
     if (!grid) return;
-    const filtered = products.filter(productMatches);
+    const filtered = products.filter((p) => p.displayInStore !== false).filter(productMatches);
     grid.innerHTML = filtered
       .map((p) => {
         const badge = (p.badge || "").trim();
         const catLabel = categoriesById.get(p.category)?.label || p.category;
-        const delivery = p.delivery || "Automatic permission grant after payment.";
-        const mode = state.data?.meta?.purchase?.mode || "payment";
         const coinPrice = Number(p.coinPrice);
         const coinLabel = Number.isFinite(coinPrice) ? `${coinPrice.toLocaleString()} coins in-game` : "";
+        const detailHref = `./cosmetic.html?id=${encodeURIComponent(p.id)}`;
         return `
           <div class="item-card" data-prod="${escapeHtml(p.id)}">
-            <div class="item-header">
+            <a class="item-header" href="${escapeHtml(detailHref)}" aria-label="View ${escapeHtml(p.name)} details">
               <div class="item-icon" aria-hidden="true">
                 <img class="item-icon-img" src="${escapeHtml(p.image || "")}" alt="" loading="lazy" decoding="async" />
               </div>
@@ -79,7 +72,7 @@
                 <div class="item-name">${escapeHtml(p.name)}</div>
                 <div class="item-category">${escapeHtml(catLabel)}</div>
               </div>
-            </div>
+            </a>
             <div class="item-card-body">
               <div class="item-price-row">
                 <div>
@@ -90,14 +83,10 @@
                 ${badge ? `<span class="pill warn">${escapeHtml(badge)}</span>` : `<span class="pill">Cosmetic</span>`}
               </div>
               <p class="item-description">${escapeHtml(p.description || "")}</p>
-              <div class="delivery-note">
-                <strong>${escapeHtml(purchaseModeLabel(mode))}</strong>
-                <span>${escapeHtml(delivery)}</span>
-              </div>
             </div>
             <div class="item-actions">
               <button class="btn primary" data-buy="${escapeHtml(p.id)}">Buy</button>
-              <button class="btn" data-details="${escapeHtml(p.id)}">View details</button>
+              <a class="btn" href="${escapeHtml(detailHref)}">Details</a>
             </div>
           </div>
         `;
@@ -107,9 +96,6 @@
     if (empty) empty.style.display = filtered.length ? "none" : "block";
 
     $$("[data-buy]", grid).forEach((b) => b.addEventListener("click", () => openModal(b.dataset.buy || "")));
-    $$("[data-details]", grid).forEach((b) =>
-      b.addEventListener("click", () => openModal(b.dataset.details || "", { focusDetails: true })),
-    );
   }
 
   function setCheckoutStatus(message, isError = false) {
@@ -183,8 +169,8 @@
     resetCheckoutButton();
     setCheckoutStatus(
       configured
-        ? "Next: enter your exact Minecraft username, then continue to payment."
-        : "Payments are not available yet. You can still browse cosmetics."
+        ? "Next: enter your exact Minecraft username. Once your order is confirmed, this is added to your player."
+        : "Payments are not available yet. You can still browse the store."
     );
 
     backdrop.classList.add("open");
@@ -260,16 +246,16 @@
   async function checkCheckoutHealth() {
     const apiBaseUrl = getStoreApiBaseUrl();
     if (!apiBaseUrl) {
-      setCheckoutNotice("Payments are not available yet. You can still browse cosmetics.", true);
+      setCheckoutNotice("Payments are not available yet. You can still browse the store.", true);
       return;
     }
 
     try {
       const res = await fetch(`${apiBaseUrl}/api/health`, { cache: "no-store" });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setCheckoutNotice("Payments are online. Purchases are delivered automatically.");
+      setCheckoutNotice("Payments are online. Once an order is confirmed, it is added to your player.");
     } catch {
-      setCheckoutNotice("Payments are temporarily unavailable. You can still browse cosmetics.", true);
+      setCheckoutNotice("Payments are temporarily unavailable. You can still browse the store.", true);
     }
   }
 
@@ -302,7 +288,18 @@
     render();
     checkCheckoutHealth();
 
-    $("#storeSearch")?.addEventListener("input", (e) => setQuery(e.target.value || ""));
+    const searchInputs = [$("#storeSearch"), $("#globalSearch")].filter(Boolean);
+    searchInputs.forEach((input) => {
+      input.addEventListener("input", (e) => {
+        searchInputs.forEach((other) => {
+          if (other !== e.target) other.value = e.target.value || "";
+        });
+        setQuery(e.target.value || "");
+      });
+    });
+
+    const initialProduct = new URLSearchParams(window.location.search).get("product");
+    if (initialProduct) setTimeout(() => openModal(initialProduct), 0);
   }
 
   init().catch((err) => {

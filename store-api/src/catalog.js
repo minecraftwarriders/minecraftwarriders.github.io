@@ -138,6 +138,66 @@ export const products = [
     stripePriceId: process.env.STRIPE_PRICE_TAG_DOING_MY_BEST || "",
     targetServer: "survival",
     commands: ["lp user {player} permission set warriders.cosmetic.tag.doing_my_best true"]
+  },
+  {
+    id: "coin-pocket-change",
+    name: "Pocket Change",
+    description: "100 server coins.",
+    amountCents: 99,
+    currency: "usd",
+    stripePriceId: process.env.STRIPE_PRICE_COIN_POCKET_CHANGE || "",
+    targetServer: "survival",
+    commands: ["coins give {player} 100"]
+  },
+  {
+    id: "coin-little-treat",
+    name: "Little Treat",
+    description: "300 server coins.",
+    amountCents: 249,
+    currency: "usd",
+    stripePriceId: process.env.STRIPE_PRICE_COIN_LITTLE_TREAT || "",
+    targetServer: "survival",
+    commands: ["coins give {player} 300"]
+  },
+  {
+    id: "coin-the-splurge",
+    name: "The Splurge",
+    description: "600 server coins.",
+    amountCents: 449,
+    currency: "usd",
+    stripePriceId: process.env.STRIPE_PRICE_COIN_THE_SPLURGE || "",
+    targetServer: "survival",
+    commands: ["coins give {player} 600"]
+  },
+  {
+    id: "coin-big-bag",
+    name: "Big Bag",
+    description: "1,200 server coins.",
+    amountCents: 799,
+    currency: "usd",
+    stripePriceId: process.env.STRIPE_PRICE_COIN_BIG_BAG || "",
+    targetServer: "survival",
+    commands: ["coins give {player} 1200"]
+  },
+  {
+    id: "coin-loaded",
+    name: "Loaded",
+    description: "2,500 server coins.",
+    amountCents: 1499,
+    currency: "usd",
+    stripePriceId: process.env.STRIPE_PRICE_COIN_LOADED || "",
+    targetServer: "survival",
+    commands: ["coins give {player} 2500"]
+  },
+  {
+    id: "coin-unhinged",
+    name: "Absolutely Unhinged",
+    description: "5,000 server coins.",
+    amountCents: 2499,
+    currency: "usd",
+    stripePriceId: process.env.STRIPE_PRICE_COIN_UNHINGED || "",
+    targetServer: "survival",
+    commands: ["coins give {player} 5000"]
   }
 ];
 

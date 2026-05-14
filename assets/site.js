@@ -8,7 +8,8 @@
   }
 
   function currentKey() {
-    if (page === "store.html" || page === "store-success.html" || page === "store-cancel.html") return "store";
+    if (page === "store.html" || page === "store-success.html" || page === "store-cancel.html" || page === "cosmetic.html") return "store";
+    if (page === "coins.html") return "coins";
     if (page === "items.html") return "items";
     if (page === "wiki.html") return "wiki";
     return "home";
@@ -36,7 +37,8 @@
       { key: "home", label: "Home", desc: "Start here and copy the server IP.", url: href("index.html") },
       { key: "wiki", label: "Server Guide", desc: "Commands, plugins, and beginner help.", url: href("pages/wiki.html") },
       { key: "items", label: "Item Prices", desc: "Search buy/sell values.", url: href("pages/items.html") },
-      { key: "store", label: "Cosmetic Store", desc: "Ranks, particles, pets, and no P2W.", url: href("pages/store.html") },
+      { key: "store", label: "Cosmetic Store", desc: "Trails, pets, hats, tags, and no P2W.", url: href("pages/store.html") },
+      { key: "coins", label: "Coins", desc: "How coins work and where to buy bundles.", url: href("pages/coins.html") },
     ];
     const player = [
       { key: "beginner", label: "Beginner's Guide", desc: "First steps after joining.", url: href("pages/wiki.html#beginners") },
@@ -130,6 +132,7 @@
             <a href="${href("pages/wiki.html")}">Wiki</a>
             <a href="${href("pages/items.html")}">Items</a>
             <a href="${href("pages/store.html")}">Store</a>
+            <a href="${href("pages/coins.html")}">Coins</a>
           </nav>
         </div>
       </footer>

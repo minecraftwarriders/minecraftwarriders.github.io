@@ -104,6 +104,8 @@
   }
 
   .feature-strip,
+  .store-message,
+  .coin-message,
   .wiki-actions,
   .item-actions,
   .modal .ft,
@@ -149,5 +151,15 @@
 
   .site-footer nav {
     justify-content: flex-start;
+  }
+
+  .store-message-actions,
+  .coin-message-actions {
+    justify-content: stretch;
+  }
+
+  .store-message-actions .btn,
+  .coin-message-actions .btn {
+    width: 100%;
   }
 }
