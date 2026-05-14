@@ -20,7 +20,7 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
 
-  const state = { data: null, category: "all", q: "" };
+  const state = { data: null, category: "all", q: "", selectedProductId: "" };
 
   function setCategory(cat) {
     state.category = cat;
@@ -97,11 +97,28 @@
     );
   }
 
+  function setCheckoutStatus(message, isError = false) {
+    const el = $("#checkoutStatus");
+    if (!el) return;
+    el.textContent = message || "";
+    el.style.color = isError ? "var(--bad)" : "var(--muted)";
+  }
+
+  function getStoreApiBaseUrl() {
+    const configured = state.data?.meta?.purchase?.apiBaseUrl || window.WAR_RIDERS_STORE_API_URL || "";
+    return String(configured).replace(/\/+$/, "");
+  }
+
+  function validMinecraftName(name) {
+    return /^[A-Za-z0-9_]{3,16}$/.test(name);
+  }
+
   function openModal(id) {
     const data = state.data;
     if (!data) return;
     const p = (data.products || []).find((x) => x.id === id);
     if (!p) return;
+    state.selectedProductId = p.id;
 
     const backdrop = $("#buyModal");
     if (!backdrop) return;
@@ -122,16 +139,13 @@
       .map((x) => `<li style="margin:6px 0; color:var(--muted); font-size:13px;">${escapeHtml(x)}</li>`)
       .join("");
 
-    const link = $("#modalLink");
-    if (link) {
-      link.textContent = purchase.linkLabel || "Open link";
-      link.href = purchase.linkUrl || "#";
-      link.style.pointerEvents = purchase.linkUrl ? "auto" : "none";
-      link.style.opacity = purchase.linkUrl ? "1" : "0.6";
-    }
+    const nameInput = $("#minecraftName");
+    if (nameInput) nameInput.value = "";
+    setCheckoutStatus("");
 
     backdrop.classList.add("open");
     backdrop.setAttribute("aria-hidden", "false");
+    setTimeout(() => nameInput?.focus(), 0);
   }
 
   function closeModal() {
@@ -153,6 +167,52 @@
     });
   }
 
+  async function startCheckout() {
+    const apiBaseUrl = getStoreApiBaseUrl();
+    if (!apiBaseUrl) {
+      setCheckoutStatus("Store checkout is not configured yet. Set meta.purchase.apiBaseUrl in assets/store.json.", true);
+      return;
+    }
+
+    const minecraftName = ($("#minecraftName")?.value || "").trim();
+    if (!validMinecraftName(minecraftName)) {
+      setCheckoutStatus("Enter a valid Minecraft username: 3-16 letters, numbers, or underscores.", true);
+      return;
+    }
+
+    const productId = state.selectedProductId;
+    if (!productId) {
+      setCheckoutStatus("Choose an item before checking out.", true);
+      return;
+    }
+
+    const button = $("#checkoutButton");
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Opening Stripe...";
+    }
+    setCheckoutStatus("Creating secure Stripe checkout...");
+
+    try {
+      const res = await fetch(`${apiBaseUrl}/api/create-checkout-session`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId, minecraftName }),
+      });
+      const payload = await res.json().catch(() => ({}));
+      if (!res.ok || !payload.url) {
+        throw new Error(payload.error || "Checkout failed. Please try again.");
+      }
+      window.location.assign(payload.url);
+    } catch (err) {
+      setCheckoutStatus(String(err?.message || err), true);
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Checkout with Stripe";
+      }
+    }
+  }
+
   function render() {
     const data = state.data;
     if (!data) return;
@@ -164,6 +224,11 @@
 
   async function init() {
     wireModal();
+    $("#checkoutForm")?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      startCheckout();
+    });
+
     const res = await fetch("../assets/store.json", { cache: "no-store" });
     const data = await res.json();
     state.data = data;

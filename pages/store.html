@@ -93,6 +93,28 @@
         margin: 8px 0 0;
         padding-left: 18px;
       }
+      .checkout-form {
+        margin-top: 12px;
+        display: grid;
+        gap: 8px;
+      }
+      .checkout-form label {
+        font-size: 12px;
+        font-weight: 900;
+        color: var(--text);
+      }
+      .checkout-form input {
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: var(--radius);
+        color: var(--text);
+        font: inherit;
+        padding: 10px 12px;
+        outline: none;
+      }
+      .checkout-form input:focus {
+        border-color: rgba(215, 178, 90, 0.45);
+      }
     </style>
   </head>
   <body>
@@ -182,9 +204,25 @@
             <div style="font-weight: 900" id="modalMethod">Purchase method</div>
             <ul id="modalSteps"></ul>
           </div>
+          <form id="checkoutForm" class="checkout-form">
+            <label for="minecraftName">Minecraft username</label>
+            <input
+              id="minecraftName"
+              name="minecraftName"
+              type="text"
+              autocomplete="username"
+              inputmode="text"
+              minlength="3"
+              maxlength="16"
+              pattern="[A-Za-z0-9_]{3,16}"
+              placeholder="Your in-game name"
+              required
+            />
+            <div id="checkoutStatus" class="store-note" role="status" aria-live="polite"></div>
+          </form>
         </div>
         <div class="ft">
-          <a id="modalLink" class="btn primary" href="#" target="_blank" rel="noreferrer">Open link</a>
+          <button id="checkoutButton" class="btn primary" type="submit" form="checkoutForm">Checkout with Stripe</button>
           <button class="btn" type="button" onclick="document.getElementById('modalClose').click()">Close</button>
         </div>
       </div>

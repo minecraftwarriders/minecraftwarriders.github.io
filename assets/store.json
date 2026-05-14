@@ -3,14 +3,13 @@
     "title": "Cosmetics Store",
     "subtitle": "All purchasable items are cosmetic-only. No gameplay advantages.",
     "purchase": {
-      "methodLabel": "Buy via Discord ticket",
+      "apiBaseUrl": "https://store-api.minecraftwarriders.com",
+      "methodLabel": "Secure Stripe checkout",
       "instructions": [
-        "Open a ticket in Discord: #support → “Store Purchase”.",
-        "Tell staff what you want to buy and your in-game name.",
-        "After payment, cosmetics are applied to your account."
-      ],
-      "linkLabel": "Open Discord",
-      "linkUrl": "https://discord.gg/your-invite"
+        "Enter your exact Minecraft username.",
+        "Pay securely through Stripe Checkout.",
+        "After payment, the Paper server automatically grants your cosmetic permission."
+      ]
     }
   },
   "categories": [

@@ -1,0 +1,12 @@
+# Public URL where store-api is deployed.
+api-base-url: "https://store-api.minecraftwarriders.com"
+
+# Must match BRIDGE_TOKEN in store-api/.env.
+bridge-token: "replace-with-a-long-random-secret"
+
+# Delivery target this Paper server should process.
+# Use "survival" for the main Paper server and different IDs for future servers.
+server-id: "survival"
+
+# How often this plugin checks for paid purchases.
+poll-interval-seconds: 20

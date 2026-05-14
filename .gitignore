@@ -1,0 +1,7 @@
+node_modules/
+.env
+*.log
+store-api/data/orders.json
+store-api/data/orders.json.tmp
+store-api/data/orders.json.bak
+paper-store-bridge/target/

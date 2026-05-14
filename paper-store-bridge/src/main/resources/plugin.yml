@@ -1,0 +1,8 @@
+name: WarRidersStoreBridge
+version: '${project.version}'
+main: com.minecraftwarriders.storebridge.WarRidersStoreBridgePlugin
+api-version: '1.20'
+author: Minecraft War Riders
+description: Polls the War Riders Store API and applies paid cosmetic grants.
+softdepend:
+  - LuckPerms
