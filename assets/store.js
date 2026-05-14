@@ -20,6 +20,12 @@
       .replaceAll('"', "&quot;")
       .replaceAll("'", "&#039;");
 
+  const purchaseModeLabel = (mode) => {
+    if (mode === "manual") return "Manual delivery";
+    if (mode === "disabled") return "Checkout not live";
+    return "Auto delivery";
+  };
+
   const state = { data: null, category: "all", q: "", selectedProductId: "" };
 
   function setCategory(cat) {
@@ -59,6 +65,8 @@
       .map((p) => {
         const badge = (p.badge || "").trim();
         const catLabel = categoriesById.get(p.category)?.label || p.category;
+        const delivery = p.delivery || "Automatic permission grant after Stripe payment.";
+        const mode = state.data?.meta?.purchase?.mode || "stripe";
         return `
           <div class="item-card" data-prod="${escapeHtml(p.id)}">
             <div class="item-header">
@@ -70,19 +78,23 @@
                 <div class="item-category">${escapeHtml(catLabel)}</div>
               </div>
             </div>
-            <div style="display:flex; gap:10px; align-items:center; justify-content:space-between;">
-              <div>
-                <div class="price-label">Price</div>
-                <div class="price-value">${escapeHtml(fmtMoney(p.price, p.currency || "USD"))}</div>
+            <div class="item-card-body">
+              <div class="item-price-row">
+                <div>
+                  <div class="price-label">Price</div>
+                  <div class="price-value">${escapeHtml(fmtMoney(p.price, p.currency || "USD"))}</div>
+                </div>
+                ${badge ? `<span class="pill warn">${escapeHtml(badge)}</span>` : `<span class="pill">Cosmetic</span>`}
               </div>
-              ${badge ? `<span class="pill warn">${escapeHtml(badge)}</span>` : `<span class="pill">Cosmetic</span>`}
+              <p class="item-description">${escapeHtml(p.description || "")}</p>
+              <div class="delivery-note">
+                <strong>${escapeHtml(purchaseModeLabel(mode))}</strong>
+                <span>${escapeHtml(delivery)}</span>
+              </div>
             </div>
-            <div style="margin-top:10px; color:var(--muted); font-size:12px; line-height:1.5;">
-              ${escapeHtml(p.description || "")}
-            </div>
-            <div style="margin-top:12px; display:flex; gap:10px;">
-              <button class="btn primary" data-buy="${escapeHtml(p.id)}">Buy</button>
-              <button class="btn" data-details="${escapeHtml(p.id)}">Details</button>
+            <div class="item-actions">
+              <button class="btn primary" data-buy="${escapeHtml(p.id)}">Buy now</button>
+              <button class="btn" data-details="${escapeHtml(p.id)}">View details</button>
             </div>
           </div>
         `;
@@ -104,13 +116,33 @@
     el.style.color = isError ? "var(--bad)" : "var(--muted)";
   }
 
+  function setCheckoutNotice(message, isError = false) {
+    const el = $("#storeCheckoutNotice");
+    if (!el) return;
+    el.textContent = message || "";
+    el.style.display = message ? "block" : "none";
+    el.style.color = isError ? "var(--bad)" : "var(--ok)";
+  }
+
   function getStoreApiBaseUrl() {
     const configured = state.data?.meta?.purchase?.apiBaseUrl || window.WAR_RIDERS_STORE_API_URL || "";
     return String(configured).replace(/\/+$/, "");
   }
 
+  function checkoutIsConfigured() {
+    const apiBaseUrl = getStoreApiBaseUrl();
+    return Boolean(apiBaseUrl);
+  }
+
   function validMinecraftName(name) {
     return /^[A-Za-z0-9_]{3,16}$/.test(name);
+  }
+
+  function resetCheckoutButton() {
+    const button = $("#checkoutButton");
+    if (!button) return;
+    button.disabled = false;
+    button.textContent = "Checkout with Stripe";
   }
 
   function openModal(id) {
@@ -126,6 +158,7 @@
     const meta = data.meta || {};
     const purchase = meta.purchase || {};
     const instructions = Array.isArray(purchase.instructions) ? purchase.instructions : [];
+    const configured = checkoutIsConfigured();
 
     $("#modalTitle").textContent = p.name || "Purchase";
     $("#modalPrice").textContent = fmtMoney(p.price, p.currency || "USD");
@@ -141,7 +174,12 @@
 
     const nameInput = $("#minecraftName");
     if (nameInput) nameInput.value = "";
-    setCheckoutStatus("");
+    resetCheckoutButton();
+    setCheckoutStatus(
+      configured
+        ? "Next: enter your exact Minecraft username, then Stripe opens in this tab."
+        : "Checkout is wired, but the Store API URL is missing. Deploy the API before real buyers use this."
+    );
 
     backdrop.classList.add("open");
     backdrop.setAttribute("aria-hidden", "false");
@@ -169,8 +207,8 @@
 
   async function startCheckout() {
     const apiBaseUrl = getStoreApiBaseUrl();
-    if (!apiBaseUrl) {
-      setCheckoutStatus("Store checkout is not configured yet. Set meta.purchase.apiBaseUrl in assets/store.json.", true);
+    if (!checkoutIsConfigured()) {
+      setCheckoutStatus("Checkout is not live yet. Deploy the Store API and set assets/store.json meta.purchase.apiBaseUrl to the real HTTPS API URL.", true);
       return;
     }
 
@@ -201,15 +239,31 @@
       });
       const payload = await res.json().catch(() => ({}));
       if (!res.ok || !payload.url) {
-        throw new Error(payload.error || "Checkout failed. Please try again.");
+        throw new Error(payload.error || `Checkout API returned HTTP ${res.status}.`);
       }
       window.location.assign(payload.url);
     } catch (err) {
-      setCheckoutStatus(String(err?.message || err), true);
+      setCheckoutStatus(`Could not reach checkout. Make sure the Store API is deployed and configured. ${String(err?.message || err)}`, true);
       if (button) {
         button.disabled = false;
         button.textContent = "Checkout with Stripe";
       }
+    }
+  }
+
+  async function checkCheckoutHealth() {
+    const apiBaseUrl = getStoreApiBaseUrl();
+    if (!apiBaseUrl) {
+      setCheckoutNotice("Checkout is not live yet: the Store API URL is missing.", true);
+      return;
+    }
+
+    try {
+      const res = await fetch(`${apiBaseUrl}/api/health`, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setCheckoutNotice("Checkout system online. Purchases open secure Stripe Checkout and deliver automatically.");
+    } catch {
+      setCheckoutNotice("Checkout API is not reachable yet. Browsing works, but Buy will not open Stripe until the Store API is deployed.", true);
     }
   }
 
@@ -238,6 +292,7 @@
 
     renderChips(data.categories || []);
     render();
+    checkCheckoutHealth();
 
     $("#storeSearch")?.addEventListener("input", (e) => setQuery(e.target.value || ""));
   }

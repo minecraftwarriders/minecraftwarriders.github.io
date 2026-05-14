@@ -3,6 +3,7 @@
     "title": "Cosmetics Store",
     "subtitle": "All purchasable items are cosmetic-only. No gameplay advantages.",
     "purchase": {
+      "mode": "stripe",
       "apiBaseUrl": "https://store-api.minecraftwarriders.com",
       "methodLabel": "Secure Stripe checkout",
       "instructions": [
@@ -38,6 +39,7 @@
       "currency": "USD",
       "badge": "POPULAR",
       "description": "Gold name + [KNIGHT] tag + chat styling (cosmetic only).",
+      "delivery": "Granted through LuckPerms after Stripe confirms payment.",
       "includes": ["[KNIGHT] chat tag", "Gold name color", "Tab highlight"],
       "image": "../assets/images/castlehomeimage.png"
     },
@@ -49,6 +51,7 @@
       "currency": "USD",
       "badge": "BEST VALUE",
       "description": "Premium tag + animated-ish styling (still cosmetic only).",
+      "delivery": "Granted through LuckPerms after Stripe confirms payment.",
       "includes": ["[WARLORD] chat tag", "Name gradient style", "Tab + chat flare"],
       "image": "../assets/images/diamondblockcommandsimage.png"
     },
@@ -60,6 +63,7 @@
       "currency": "USD",
       "badge": "",
       "description": "Soft ember particles around your character.",
+      "delivery": "Unlocks the ember particle permission on the Paper server.",
       "includes": ["Aura toggle", "Color variants"],
       "image": "../assets/images/itemschestimage.png"
     },
@@ -71,6 +75,7 @@
       "currency": "USD",
       "badge": "",
       "description": "A tiny slime follows you (cosmetic only).",
+      "delivery": "Unlocks the baby slime pet permission on the Paper server.",
       "includes": ["Name your pet", "Hide/show toggle"],
       "image": "../assets/images/itemschestimage.png"
     }

@@ -22,9 +22,9 @@
       /* Store page layout (reuses existing card styles) */
       .store-grid {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-        margin-top: 14px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
       }
       @media (max-width: 980px) {
         .store-grid {
@@ -33,9 +33,15 @@
       }
       .store-note {
         color: var(--muted);
-        font-size: 12px;
+        font-size: 13px;
         line-height: 1.6;
         margin-top: 10px;
+      }
+      #storeCheckoutNotice {
+        border: 1px solid currentColor;
+        border-radius: 12px;
+        padding: 11px 13px;
+        background: rgba(255, 255, 255, 0.035);
       }
       .store-controls {
         margin-top: 14px;
@@ -47,11 +53,11 @@
       .store-controls .ctl {
         border: 1px solid var(--border);
         background: rgba(255, 255, 255, 0.03);
-        padding: 8px 10px;
-        border-radius: var(--radius);
+        padding: 12px 14px;
+        border-radius: 12px;
         color: var(--text);
         font: inherit;
-        font-size: 13px;
+        font-size: 15px;
         display: flex;
         gap: 10px;
         align-items: center;
@@ -65,7 +71,7 @@
         background: transparent;
         color: inherit;
         font: inherit;
-        font-size: 13px;
+        font-size: 15px;
       }
       .chip-row {
         display: flex;
@@ -77,9 +83,9 @@
         border: 1px solid var(--border);
         background: rgba(255, 255, 255, 0.03);
         color: var(--muted);
-        padding: 6px 10px;
-        border-radius: var(--radius);
-        font-size: 12px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        font-size: 13px;
         cursor: pointer;
         user-select: none;
         font-weight: 700;
@@ -94,9 +100,9 @@
         padding-left: 18px;
       }
       .checkout-form {
-        margin-top: 12px;
+        margin-top: 16px;
         display: grid;
-        gap: 8px;
+        gap: 10px;
       }
       .checkout-form label {
         font-size: 12px;
@@ -106,14 +112,46 @@
       .checkout-form input {
         border: 1px solid var(--border);
         background: rgba(255, 255, 255, 0.03);
-        border-radius: var(--radius);
+        border-radius: 10px;
         color: var(--text);
         font: inherit;
-        padding: 10px 12px;
+        padding: 12px 14px;
         outline: none;
       }
       .checkout-form input:focus {
         border-color: rgba(215, 178, 90, 0.45);
+      }
+      .store-steps {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .store-step {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.035);
+      }
+      .store-step strong {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--accent2);
+      }
+      .store-step span {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      .trust-row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      @media (max-width: 780px) {
+        .store-steps {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -156,13 +194,31 @@
               <div class="kicker">Official Store</div>
               <h1 id="storeTitle">Store</h1>
               <p id="storeSub">Cosmetic-only perks. No gameplay advantages.</p>
-              <div class="store-note">
+              <div class="trust-row">
                 <span class="pill good">COSMETIC ONLY</span>
-                <span class="pill" style="margin-left: 8px">No P2W</span>
+                <span class="pill">No P2W</span>
+                <span class="pill">Auto-delivery after payment</span>
               </div>
             </div>
             <div class="hero-art" aria-hidden="true">
               <img src="../assets/images/itemschestimage.png" alt="" />
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="store-steps" aria-label="How store purchases work">
+              <div class="store-step">
+                <strong>1. Pick a cosmetic</strong>
+                <span>Choose a rank, particle, pet, or visual perk. Everything here is cosmetic-only.</span>
+              </div>
+              <div class="store-step">
+                <strong>2. Enter your username</strong>
+                <span>Use your exact Minecraft name so the server can deliver to the right player.</span>
+              </div>
+              <div class="store-step">
+                <strong>3. Stripe confirms payment</strong>
+                <span>The Paper server pulls the paid order and grants the LuckPerms permission automatically.</span>
+              </div>
             </div>
           </section>
 
@@ -173,7 +229,8 @@
                 <input id="storeSearch" type="search" placeholder="Search cosmetics..." autocomplete="off" />
               </div>
             </div>
-            <!-- categories intentionally hidden for a cleaner storefront -->
+            <div id="storeCats" class="chip-row" aria-label="Store categories"></div>
+            <div id="storeCheckoutNotice" class="store-note" style="display: none"></div>
             <div id="storeError" class="store-note" style="color: var(--bad)"></div>
             <div id="storeEmpty" class="store-note" style="display: none">No cosmetics match your search.</div>
             <div class="store-grid" id="storeGrid"></div>
