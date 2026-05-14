@@ -42,7 +42,7 @@
     const player = [
       { key: "beginner", label: "Beginner's Guide", desc: "First steps after joining.", url: href("pages/wiki.html#beginners") },
       { key: "commands", label: "All Commands", desc: "Teleport, economy, social, and utility commands.", url: href("pages/wiki.html#commands") },
-      { key: "economy", label: "Economy & Trading", desc: "Shop, auction house, banking, and prices.", url: href("pages/wiki.html#cat-econ") },
+      { key: "economy", label: "Economy & Trading", desc: "Shop, auction house, banking, and prices.", url: href("pages/wiki.html#economy") },
     ];
 
     const button = document.createElement("button");
@@ -115,6 +115,32 @@
 
   buildMenu();
 
+  function buildFooter() {
+    if (document.querySelector(".site-footer")) return;
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
+      <footer class="site-footer">
+        <div class="site-footer-inner">
+          <div>
+            <strong>War Riders</strong>
+            <span>Survival network at panda.cloudns.nz</span>
+          </div>
+          <nav aria-label="Footer">
+            <a href="${href("index.html")}">Home</a>
+            <a href="${href("pages/wiki.html")}">Wiki</a>
+            <a href="${href("pages/items.html")}">Items</a>
+            <a href="${href("pages/store.html")}">Store</a>
+          </nav>
+        </div>
+      </footer>
+      <div class="copy-toast" role="status" aria-live="polite" data-copy-toast></div>
+    `
+    );
+  }
+
+  buildFooter();
+
   document.querySelectorAll("img").forEach((img) => {
     const markMissing = () => {
       img.hidden = true;
@@ -184,6 +210,7 @@
       const text = el.getAttribute("data-copy") || "";
       if (!text) return;
       const ok = await copyText(text);
+      showCopyToast(ok ? `Copied ${text}` : "Could not copy");
       const badge = el.querySelector("[data-copy-badge]");
       if (badge) {
         const prev = badge.textContent;
@@ -192,5 +219,14 @@
       }
     });
   });
+
+  function showCopyToast(message) {
+    const toast = document.querySelector("[data-copy-toast]");
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(showCopyToast.timer);
+    showCopyToast.timer = setTimeout(() => toast.classList.remove("show"), 1400);
+  }
 })();
 

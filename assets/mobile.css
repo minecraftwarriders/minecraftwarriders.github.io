@@ -9,6 +9,7 @@
     min-height: 64px;
     padding: 10px 12px;
     gap: 10px;
+    flex-wrap: wrap;
     background: rgba(12, 10, 7, 0.96);
     backdrop-filter: none;
   }
@@ -62,6 +63,7 @@
   }
 
   .tile-grid,
+  .join-grid,
   .store-grid,
   .items-grid,
   .store-steps,
@@ -71,9 +73,21 @@
   }
 
   .feature-strip,
+  .wiki-actions,
   .item-actions,
-  .modal .ft {
+  .modal .ft,
+  .controls-panel {
     display: grid;
+  }
+
+  .command-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ctl,
+  .ctl.search {
+    width: 100%;
+    min-width: 0;
   }
 
   .hero-actions .btn,
@@ -96,5 +110,13 @@
 
   .wiki-toc {
     display: none;
+  }
+
+  .site-footer-inner {
+    display: grid;
+  }
+
+  .site-footer nav {
+    justify-content: flex-start;
   }
 }
