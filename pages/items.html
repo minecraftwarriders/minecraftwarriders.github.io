@@ -376,12 +376,15 @@
             display: block;
         }
         .items-hero h1 {
-            font-size: clamp(34px, 5vw, 58px);
-            line-height: 1;
-            letter-spacing: -0.055em;
+            max-width: 820px;
+            font-family: var(--font-display);
+            font-size: clamp(42px, 6vw, 76px);
+            line-height: 0.92;
+            letter-spacing: -0.025em;
+            text-shadow: 0 3px 0 rgba(0, 0, 0, 0.42), 0 0 28px rgba(0, 0, 0, 0.55);
         }
         .items-hero p {
-            max-width: 62ch;
+            max-width: 68ch;
             color: var(--muted);
             font-size: 16px;
             line-height: 1.6;
@@ -441,12 +444,24 @@
             color: var(--muted) !important;
         }
         .price-box {
-            border-radius: 8px;
+            border-radius: 4px;
             background: rgba(0,0,0,0.16);
+        }
+        .items-page .controls-panel {
+            display: grid;
+            grid-template-columns: minmax(260px, 1fr) auto auto;
+        }
+        .items-page .ctl.search {
+            order: 0;
+        }
+        @media (max-width: 780px) {
+            .items-page .controls-panel {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body>
+<body class="art-page items-page">
     <div class="app">
       <header class="topbar">
         <div class="topbar-left">
@@ -477,54 +492,54 @@
         <main class="content">
           <div class="crumbs"><a href="../index.html">Home</a> › <span>Items</span></div>
 
-          <section class="hero-card">
+          <section class="hero-card page-hero items-hero-card">
             <div class="items-hero">
-              <div>
-                <h1>Item Prices</h1>
-                <p>Complete pricing guide for all items available on the server. Search, filter, and compare prices easily.</p>
+              <div class="kicker">Server Market</div>
+              <h1>Know the value before you trade.</h1>
+              <p>Search buy and sell prices across the server economy. Built for farmers, miners, shopkeepers, and anyone planning the next big build.</p>
+              <div class="controls-panel">
+                <div class="ctl search">
+                  <span style="color:var(--muted);">Search</span>
+                  <input type="search" id="searchInput" placeholder="Search items..." />
+                </div>
+                <div class="ctl">
+                  <select id="categoryFilter">
+                    <option value="">All</option>
+                    <option value="automation">Automation</option>
+                    <option value="blocks">Blocks</option>
+                    <option value="decoration">Decoration</option>
+                    <option value="dyes">Dyes</option>
+                    <option value="enchanting">Enchanting</option>
+                    <option value="farming">Farming</option>
+                    <option value="food">Food</option>
+                    <option value="miscellaneous">Miscellaneous</option>
+                    <option value="mobs">Mobs</option>
+                    <option value="music">Music</option>
+                    <option value="ores">Ores</option>
+                    <option value="potions">Potions</option>
+                    <option value="redstone">Redstone</option>
+                    <option value="spawneggs">Spawn Eggs</option>
+                    <option value="spawners">Spawners</option>
+                    <option value="workstations">Workstations</option>
+                    <option value="z_everythingelse">Everything Else</option>
+                  </select>
+                </div>
+                <div class="ctl">
+                  <select id="sortSelect">
+                    <option value="name">Name A-Z</option>
+                    <option value="buy-high">Buy high</option>
+                    <option value="buy-low">Buy low</option>
+                    <option value="sell-high">Sell high</option>
+                    <option value="sell-low">Sell low</option>
+                  </select>
+                </div>
               </div>
-              <div class="art"><img src="../assets/images/itemschestimage.png" alt="" /></div>
+              <div class="chip-row" id="categoryChips"></div>
+              <div class="items-count" id="itemsCount" style="margin-top:10px; color:var(--muted); font-size:12px;">Loading...</div>
             </div>
-            <div class="controls-panel">
-              <div class="ctl search">
-                <span style="color:var(--muted);">Search</span>
-                <input type="search" id="searchInput" placeholder="Search items..." />
-              </div>
-              <div class="ctl">
-                <select id="categoryFilter">
-                  <option value="">All</option>
-                  <option value="automation">Automation</option>
-                  <option value="blocks">Blocks</option>
-                  <option value="decoration">Decoration</option>
-                  <option value="dyes">Dyes</option>
-                  <option value="enchanting">Enchanting</option>
-                  <option value="farming">Farming</option>
-                  <option value="food">Food</option>
-                  <option value="miscellaneous">Miscellaneous</option>
-                  <option value="mobs">Mobs</option>
-                  <option value="music">Music</option>
-                  <option value="ores">Ores</option>
-                  <option value="potions">Potions</option>
-                  <option value="redstone">Redstone</option>
-                  <option value="spawneggs">Spawn Eggs</option>
-                  <option value="spawners">Spawners</option>
-                  <option value="workstations">Workstations</option>
-                  <option value="z_everythingelse">Everything Else</option>
-                </select>
-              </div>
-              <div class="ctl">
-                <select id="sortSelect">
-                  <option value="name">Name A-Z</option>
-                  <option value="buy-high">Buy high</option>
-                  <option value="buy-low">Buy low</option>
-                  <option value="sell-high">Sell high</option>
-                  <option value="sell-low">Sell low</option>
-                </select>
-              </div>
+            <div class="hero-art" aria-hidden="true">
+              <img src="../assets/images/war-riders-items-bg.png" alt="" />
             </div>
-
-            <div class="chip-row" id="categoryChips"></div>
-            <div class="items-count" id="itemsCount" style="margin-top:10px; color:var(--muted); font-size:12px;">Loading…</div>
           </section>
 
           <div class="items-grid" id="itemsGrid"></div>
@@ -805,6 +820,7 @@
         function setupNavbar() {
             function handleNavbarScroll() {
                 const navbar = document.getElementById('navbar');
+                if (!navbar) return;
                 if (window.scrollY > 100) {
                     navbar.classList.add('scrolled');
                 } else {

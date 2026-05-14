@@ -287,8 +287,10 @@
     const data = await res.json();
     state.data = data;
 
-    $("#storeTitle").textContent = data.meta?.title || "Store";
-    $("#storeSub").textContent = data.meta?.subtitle || "";
+    const title = $("#storeTitle");
+    const subtitle = $("#storeSub");
+    if (title && !title.dataset.staticTitle) title.textContent = data.meta?.title || "Store";
+    if (subtitle && !subtitle.dataset.staticSubtitle) subtitle.textContent = data.meta?.subtitle || "";
 
     renderChips(data.categories || []);
     render();

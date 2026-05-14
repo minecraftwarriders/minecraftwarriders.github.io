@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="./assets/desktop.css" media="(min-width: 781px)">
     <link rel="stylesheet" href="./assets/mobile.css" media="(max-width: 780px)">
 </head>
-<body>
+<body class="home-page">
     <div class="app">
       <header class="topbar">
         <div class="topbar-left">
@@ -60,14 +60,23 @@
         <main class="content">
           <div class="crumbs"><a href="./">Home</a> › <span>Server</span></div>
 
-          <section class="hero-card">
-            <div>
-              <div class="kicker">Minecraft War Riders</div>
-              <h1>Survival, war machines, and cosmetics.</h1>
-              <p>Join through the Bungee proxy, learn the server systems, compare shop prices, and unlock cosmetic-only perks without pay-to-win advantages.</p>
+          <section class="hero-card home-hero">
+            <div class="home-hero-copy">
+              <div class="kicker">Cross-Platform Minecraft Server</div>
+              <h1>War Riders is survival with machines, markets, and kingdoms.</h1>
+              <p>Java and Bedrock players can join the same world, build together, learn the server systems, compare shop prices, and unlock cosmetic-only perks without pay-to-win advantages.</p>
+              <div class="platform-row" aria-label="Supported platforms">
+                <span>Java Edition</span>
+                <span>Bedrock compatible</span>
+                <span>Bungee + Paper network</span>
+              </div>
+              <div class="server-address">
+                <span>Server Address</span>
+                <strong>panda.cloudns.nz</strong>
+              </div>
               <div class="stats">
                 <div class="stat"><strong>Server IP</strong> panda.cloudns.nz</div>
-                <div class="stat"><strong>Network</strong> Bungee + Paper</div>
+                <div class="stat"><strong>Platforms</strong> Java + Bedrock</div>
                 <div class="stat"><strong>Store</strong> Cosmetic-only</div>
               </div>
               <div class="hero-actions">
@@ -76,8 +85,15 @@
                 <a class="btn" href="./pages/wiki.html#beginners">Beginner Guide</a>
               </div>
             </div>
-            <div class="hero-art" aria-hidden="true">
-              <img src="./assets/images/castlehomeimage.png" alt="" />
+            <div class="world-card" aria-hidden="true">
+              <div class="world-card-top">War Riders</div>
+              <div class="world-card-title">Java + Bedrock</div>
+              <div class="world-card-grid">
+                <span>Survival</span>
+                <span>Economy</span>
+                <span>Machines</span>
+                <span>Cosmetics</span>
+              </div>
             </div>
           </section>
 
@@ -85,12 +101,12 @@
             <div class="join-grid" aria-label="How to join">
               <div class="join-step">
                 <div class="num">1</div>
-                <h3>Open Minecraft Java</h3>
-                <p>Use Multiplayer and add a new server. War Riders runs through the Bungee proxy.</p>
+                <h3>Open Minecraft</h3>
+                <p>Join from Java or Bedrock. War Riders brings supported players into the same network.</p>
               </div>
               <div class="join-step">
                 <div class="num">2</div>
-                <h3>Add the server IP</h3>
+                <h3>Add the server address</h3>
                 <p>Use <strong>panda.cloudns.nz</strong>. The copy buttons on this site put it on your clipboard.</p>
               </div>
               <div class="join-step">
@@ -131,8 +147,8 @@
             <div class="feature-strip">
               <div>
                 <span class="pill good">START HERE</span>
-                <h2>New player path</h2>
-                <p>Copy the IP, join the proxy, read the beginner guide, then use item prices and commands as you play.</p>
+                <h2>One world, more ways to join</h2>
+                <p>Copy the address, join from your platform, read the beginner guide, then use item prices and commands as you play.</p>
               </div>
               <div class="feature-actions">
                 <button class="btn primary" type="button" data-copy="panda.cloudns.nz">Copy panda.cloudns.nz</button>

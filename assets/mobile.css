@@ -34,7 +34,7 @@
     display: inline-flex;
   }
 
-  .search {
+  .topbar > .search {
     order: 3;
     flex: 1 0 100%;
     min-width: 0;
@@ -51,6 +51,37 @@
     grid-template-columns: 1fr;
     padding: 20px;
     border-radius: 6px;
+  }
+
+  .home-page::before {
+    background:
+      linear-gradient(180deg, rgba(8, 7, 6, 0.96) 0%, rgba(8, 7, 6, 0.78) 45%, rgba(8, 7, 6, 0.96) 100%),
+      url("./images/war-riders-voxel-bg.png") center top / auto 100vh no-repeat;
+  }
+
+  .home-hero {
+    min-height: 0;
+  }
+
+  .home-hero::before {
+    inset: 8px;
+  }
+
+  .home-hero h1 {
+    font-size: clamp(42px, 14vw, 62px);
+  }
+
+  .platform-row,
+  .stats {
+    display: grid;
+  }
+
+  .server-address {
+    width: 100%;
+  }
+
+  .world-card {
+    min-height: 230px;
   }
 
   .hero-card h1 {

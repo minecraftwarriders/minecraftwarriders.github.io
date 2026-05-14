@@ -9,6 +9,11 @@
     backdrop-filter: none;
   }
 
+  .home-page .topbar,
+  .art-page .topbar {
+    background: rgba(8, 7, 6, 0.9);
+  }
+
   .topnav {
     display: flex;
   }
@@ -21,12 +26,23 @@
     width: min(1120px, calc(100% - 40px));
   }
 
+  .home-page .shell {
+    width: min(1240px, calc(100% - 48px));
+  }
+
   .hero-card,
   .tile,
   .item-card,
   .feature-strip,
   .store-step {
     background: rgba(255, 255, 255, 0.035);
+  }
+
+  .home-page .home-hero,
+  .art-page .page-hero {
+    background:
+      linear-gradient(135deg, rgba(8, 7, 6, 0.9), rgba(8, 7, 6, 0.62)),
+      rgba(255, 255, 255, 0.035);
   }
 
   .hero-card {
