@@ -1,666 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Wiki - Minecraft War Riders</title>
-    
-    <!-- Meta tags -->
-    <meta property="og:title" content="Wiki - Minecraft War Riders">
-    <meta property="og:description" content="Complete guide to all plugins, commands, and features for Minecraft War Riders server">
-    <meta property="og:image" content="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
-    <meta property="og:url" content="https://minecraftwarriders.github.io/pages/wiki">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png">
-    
-    <!-- Shared CSS -->
-    <link rel="stylesheet" href="../assets/site.css">
+    <meta property="og:title" content="Wiki - Minecraft War Riders" />
+    <meta property="og:description" content="Commands, guides, and server systems for Minecraft War Riders." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png" />
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/minecraftwarriders/minecraftwarriders.github.io/main/assets/logo.png" />
+    <link rel="stylesheet" href="../assets/site.css" />
+    <link rel="stylesheet" href="../assets/desktop.css" media="(min-width: 781px)" />
+    <link rel="stylesheet" href="../assets/mobile.css" media="(max-width: 780px)" />
+    <script src="../assets/site.js" defer></script>
     <style>
-      /* Keep only tiny wiki-specific adjustments */
-      .wiki-legacy { display: none; }
-      .icon {
-        width: 16px;
-        height: 16px;
-        display: inline-block;
-        opacity: 0.9;
+      .wiki-hero {
+        display: grid;
+        gap: 20px;
       }
-      .muted { color: var(--muted); }
-
-        .sidebar::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .sidebar::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .sidebar::-webkit-scrollbar-thumb {
-            background: var(--glass-border);
-            border-radius: 4px;
-        }
-
-        .sidebar::-webkit-scrollbar-thumb:hover {
-            background: var(--glass-border-hover);
-        }
-
-        .search-container {
-            margin-bottom: var(--space-6);
-        }
-
-        .search-input {
-            width: 100%;
-            padding: var(--space-2) var(--space-3);
-            background: var(--dark-glass-bg);
-            border: 1px solid var(--dark-glass-border);
-            border-radius: var(--radius-lg);
-            color: var(--primary-100);
-            font-size: var(--text-xs);
-            transition: all var(--transition-fast);
-            box-sizing: border-box;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent-500);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .nav-section {
-            margin-bottom: var(--space-4);
-            width: 100%;
-        }
-
-        .nav-section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: var(--space-2) var(--space-3);
-            background: var(--dark-glass-bg);
-            border-radius: var(--radius-lg);
-            margin-bottom: var(--space-2);
-            cursor: pointer;
-            transition: all var(--transition-fast);
-            border: 1px solid var(--dark-glass-border);
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .nav-section-header:hover {
-            background: var(--glass-bg-hover);
-            border-color: var(--glass-border-hover);
-        }
-
-        .nav-section-title {
-            font-size: var(--text-sm);
-            font-weight: 600;
-            color: var(--primary-100);
-            margin: 0;
-            flex: 1;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .nav-section-icon {
-            margin-right: var(--space-2);
-            font-size: 1.2em;
-        }
-
-        .nav-section-toggle {
-            margin-left: auto;
-            transition: transform var(--transition-fast);
-            color: var(--primary-400);
-        }
-
-        .nav-section-toggle.expanded {
-            transform: rotate(90deg);
-        }
-
-        .nav-links {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-        }
-        
-        .nav-links li {
-            width: 100%;
-            margin-bottom: var(--space-1);
-        }
-
-        .nav-link {
-            display: block;
-            padding: var(--space-2) var(--space-3);
-            color: var(--primary-300);
-            text-decoration: none;
-            border-radius: var(--radius-md);
-            transition: all var(--transition-fast);
-            font-size: var(--text-xs);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .nav-link:hover {
-            background: var(--glass-bg);
-            color: var(--primary-100);
-            transform: translateX(4px);
-        }
-
-        .nav-link.active {
-            background: rgba(59, 130, 246, 0.18);
-            border: 1px solid rgba(59, 130, 246, 0.35);
-            color: white;
-            font-weight: 600;
-        }
-
-        .main-content {
-            margin-left: 320px;
-            padding: var(--space-6);
-            flex: 1;
-            min-width: 0;
-            max-width: none;
-        }
-        
-        /* Better content width management */
-        .section-card {
-            max-width: 1200px;
-            margin: 0 auto var(--space-6);
-        }
-        
-        /* Improve feature grid for wider screens */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-4);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        /* Better command grid layout */
-        .command-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-4);
-        }
-
-        .content-section {
-            display: none;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        .hero-section {
-            text-align: center;
-            padding: var(--space-12) 0;
-            margin-bottom: var(--space-8);
-        }
-
-        .hero-title {
-            font-size: var(--text-5xl);
-            color: var(--primary-100);
-            margin-bottom: var(--space-4);
-        }
-
-        .hero-description {
-            font-size: var(--text-lg);
-            color: var(--primary-400);
-            max-width: 600px;
-            margin: 0 auto var(--space-6);
-        }
-
-        .quick-actions {
-            display: flex;
-            gap: var(--space-4);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .section-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: var(--radius-xl);
-            padding: var(--space-6);
-            margin-bottom: var(--space-6);
-            transition: border-color var(--transition-fast), background var(--transition-fast);
-        }
-
-        .section-card:hover {
-            border-color: rgba(255, 255, 255, 0.14);
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .section-card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: var(--space-4);
-        }
-
-        .section-card-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(59, 130, 246, 0.18);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: var(--space-4);
-            font-size: 1.5em;
-        }
-
-        .section-card-title {
-            font-size: var(--text-2xl);
-            margin: 0;
-            color: var(--primary-100);
-        }
-
-        .command-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-4);
-            margin: var(--space-6) 0;
-        }
-
-        .command-card {
-            background: var(--dark-glass-bg);
-            border: 1px solid var(--dark-glass-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-4);
-            transition: all var(--transition-fast);
-        }
-
-        .command-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.14);
-        }
-
-        .command-syntax {
-            font-family: var(--font-mono);
-            font-size: var(--text-sm);
-            color: var(--success-400);
-            font-weight: 600;
-            margin-bottom: var(--space-2);
-            padding: var(--space-2);
-            background: rgba(16, 185, 129, 0.1);
-            border-radius: var(--radius-md);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-        }
-
-        .command-description {
-            color: var(--primary-400);
-            font-size: var(--text-sm);
-            line-height: 1.5;
-        }
-
-        .info-box {
-            padding: var(--space-4);
-            border-radius: var(--radius-lg);
-            margin: var(--space-4) 0;
-            border-left: 4px solid;
-        }
-
-        .info-box.tip {
-            background: rgba(16, 185, 129, 0.1);
-            border-color: var(--success-500);
-            color: var(--success-300);
-        }
-
-        .info-box.warning {
-            background: rgba(245, 158, 11, 0.1);
-            border-color: var(--warning-500);
-            color: var(--warning-300);
-        }
-
-        .info-box.important {
-            background: rgba(239, 68, 68, 0.1);
-            border-color: var(--error-500);
-            color: var(--error-300);
-        }
-
-        .info-box-title {
-            font-weight: 600;
-            margin-bottom: var(--space-2);
-            font-size: var(--text-base);
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-            margin-bottom: var(--space-6);
-            font-size: var(--text-sm);
-            color: var(--primary-400);
-        }
-
-        .breadcrumb-separator {
-            color: var(--primary-500);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-4);
-            margin: var(--space-6) 0;
-        }
-
-        .feature-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-4);
-            text-align: center;
-            transition: all var(--transition-base);
-            cursor: pointer;
-        }
-
-        .feature-card:hover {
-            border-color: rgba(255, 255, 255, 0.14);
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .feature-card-icon {
-            font-size: 2rem;
-            margin-bottom: var(--space-3);
-        }
-
-        .feature-card-title {
-            font-size: var(--text-lg);
-            font-weight: 600;
-            margin-bottom: var(--space-2);
-            color: var(--primary-100);
-        }
-
-        .feature-card-description {
-            font-size: var(--text-sm);
-            color: var(--primary-400);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 1024px) {
-            .wiki-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                display: none;
-            }
-
-            .main-content {
-                margin-left: 0;
-                max-width: 100%;
-                padding: var(--space-4);
-            }
-
-            .command-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .feature-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: var(--text-4xl);
-            }
-
-            .quick-actions {
-                flex-direction: column;
-            }
-
-            .section-card {
-                padding: var(--space-4);
-            }
-        }
-
-        /* Loading Animation */
-        .section-loading {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 200px;
-            flex-direction: column;
-            gap: var(--space-4);
-        }
-
-        .loading-spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(59, 130, 246, 0.3);
-            border-top: 3px solid var(--accent-500);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        /* Scroll to top button */
-        .scroll-to-top {
-            position: fixed;
-            bottom: var(--space-6);
-            right: var(--space-6);
-            width: 48px;
-            height: 48px;
-            background: var(--accent-500);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2em;
-            transition: all var(--transition-base);
-            box-shadow: var(--shadow-lg);
-            z-index: 100;
-        }
-
-        .scroll-to-top:hover {
-            background: var(--accent-600);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .scroll-to-top.visible {
-            display: flex;
-        }
-        
-        /* Image Placeholder Styles */
-        .image-placeholder {
-            background: var(--dark-glass-bg);
-            border: 2px dashed var(--glass-border);
-            border-radius: var(--radius-lg);
-            padding: var(--space-8);
-            text-align: center;
-            color: var(--primary-500);
-            margin: var(--space-4) 0;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .image-placeholder-icon {
-            font-size: 3rem;
-            margin-bottom: var(--space-2);
-        }
-        
-        .image-placeholder-text {
-            font-size: var(--text-sm);
-            font-weight: 500;
-        }
-        
-        /* Desktop enhancements for wide screens */
-        @media (min-width: 1400px) {
-            .main-content {
-                padding: var(--space-8) var(--space-12);
-            }
-            
-            .feature-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .command-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .hero-section {
-                padding: var(--space-16) 0;
-            }
-        }
-        
-        @media (min-width: 1800px) {
-            .section-card {
-                max-width: 1400px;
-            }
-            
-            .feature-grid {
-                max-width: 1400px;
-                grid-template-columns: repeat(4, 1fr);
-            }
-            
-            .command-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
-        /* Mobile Responsive Design */
-        @media (max-width: 1024px) {
-            .wiki-layout {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                top: 0;
-                left: 0;
-                border-right: none;
-                border-bottom: 1px solid var(--glass-border);
-                padding: var(--space-4);
-                z-index: auto;
-            }
-            
-            .main-content {
-                margin-left: 0;
-                padding: var(--space-4);
-            }
-            
-            .section-card {
-                max-width: none;
-            }
-            
-            .feature-grid {
-                max-width: none;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .wiki-layout {
-                padding-top: 70px;
-            }
-            
-            .sidebar {
-                max-height: 300px;
-                overflow-y: auto;
-            }
-            
-            .nav-section-header {
-                font-size: var(--text-sm);
-                padding: var(--space-2);
-            }
-            
-            .nav-link {
-                padding: var(--space-2) var(--space-3);
-                font-size: var(--text-xs);
-            }
-            
-            .hero-title {
-                font-size: var(--text-3xl);
-            }
-            
-            .hero-description {
-                font-size: var(--text-base);
-            }
-            
-            .feature-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-3);
-            }
-            
-            .command-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .quick-actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .btn {
-                width: 100%;
-            }
-            
-            .image-placeholder {
-                min-height: 150px;
-                padding: var(--space-6);
-            }
-            
-            .image-placeholder-icon {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .main-content {
-                padding: var(--space-3);
-            }
-            
-            .sidebar {
-                padding: var(--space-3);
-            }
-            
-            .section-card {
-                padding: var(--space-4);
-            }
-            
-            .hero-title {
-                font-size: var(--text-2xl);
-            }
-            
-            .section-card-title {
-                font-size: var(--text-xl);
-            }
-            
-            .image-placeholder {
-                min-height: 120px;
-                padding: var(--space-4);
-            }
-            
-            .image-placeholder-icon {
-                font-size: 1.5rem;
-            }
-            
-            .image-placeholder-text {
-                font-size: var(--text-xs);
-            }
-        }
+      .wiki-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .wiki-layout {
+        margin-top: 22px;
+      }
+      .wiki-main {
+        display: grid;
+        gap: 22px;
+      }
+      .wiki-section {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: clamp(18px, 3vw, 26px);
+        background: rgba(255, 255, 255, 0.035);
+      }
+      .wiki-section h2 {
+        margin: 0 0 8px;
+        font-size: clamp(24px, 3vw, 34px);
+        letter-spacing: -0.04em;
+      }
+      .wiki-section > p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+      .wiki-card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+        margin-top: 16px;
+      }
+      .wiki-card {
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.16);
+      }
+      .wiki-card strong {
+        display: block;
+        color: var(--accent2);
+        margin-bottom: 6px;
+      }
+      .wiki-card span {
+        display: block;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+      .command-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .command-row {
+        display: grid;
+        grid-template-columns: minmax(150px, 0.85fr) 1fr;
+        gap: 12px;
+        align-items: start;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 13px;
+        background: rgba(0, 0, 0, 0.14);
+      }
+      .command-row code {
+        color: var(--accent2);
+        font-family: var(--font-mono);
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .command-row span {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+      .wiki-note {
+        margin-top: 16px;
+        border-left: 3px solid var(--accent);
+        padding: 12px 14px;
+        background: rgba(215, 178, 90, 0.08);
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      @media (max-width: 780px) {
+        .wiki-actions {
+          display: grid;
+        }
+        .command-row {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="app">
       <header class="topbar">
         <div class="topbar-left">
-          <div class="badge">MC<br/>WR</div>
-          <div style="font-weight:800;">War Riders</div>
+          <div class="badge">MC<br />WR</div>
+          <div style="font-weight: 800">War Riders</div>
         </div>
         <nav class="topnav" aria-label="Top">
           <a data-nav href="../index.html">Home</a>
@@ -669,107 +128,162 @@
           <a data-nav href="./store.html">Store</a>
         </nav>
         <div class="search" role="search">
-          <span class="muted">🔎</span>
+          <span class="muted">Search</span>
           <input id="globalSearch" type="search" placeholder="Search commands, plugins..." autocomplete="off" />
           <span class="kbd">⌘K</span>
         </div>
         <div class="topbar-right">
-          <div class="avatar" aria-hidden="true"></div>
+          <button class="btn" type="button" data-copy="panda.cloudns.nz">
+            Copy IP <span class="kbd" data-copy-badge>IP</span>
+          </button>
         </div>
       </header>
 
       <div class="shell">
-        <aside class="sidebar" aria-label="Sidebar">
-          <div class="section-title">Navigation</div>
-          <a class="side-link" href="./wiki.html#overview"><span class="dot">▦</span>Overview</a>
-          <a class="side-link" href="./wiki.html#beginners"><span class="dot">⌁</span>Beginner’s Guide</a>
-          <a class="side-link active" href="./wiki.html#commands"><span class="dot">⚡</span>All Commands</a>
-
-          <div class="section-title">Categories</div>
-          <a class="side-link" href="./wiki.html#cat-essential"><span class="dot">⚡</span>Essential Plugins</a>
-          <a class="side-link" href="./wiki.html#cat-econ"><span class="dot">⛁</span>Economy & Trading</a>
-          <a class="side-link" href="./wiki.html#cat-social"><span class="dot">⬣</span>Social & Fun</a>
-          <a class="side-link" href="./wiki.html#cat-build"><span class="dot">⬢</span>Building & World</a>
-          <a class="side-link" href="./wiki.html#cat-qol"><span class="dot">⛭</span>Utilities & QoL</a>
-        </aside>
-
         <main class="content">
-          <div class="crumbs"><a href="./wiki.html#overview">Home</a> › <span>Commands</span></div>
+          <div class="crumbs"><a href="../index.html">Home</a> › <span>Wiki</span></div>
 
-          <section class="hero-card" id="commands">
+          <section class="hero-card wiki-hero" id="overview">
             <div>
-              <h1>All Commands Reference</h1>
-              <p>Complete list of every command available on the server, organized by category.</p>
-              <div class="stats" style="display:none;"></div>
+              <div class="kicker">Server Guide</div>
+              <h1>Everything players need, without the mess.</h1>
+              <p>
+                Start here for joining, core commands, economy tools, skills, trading, and the plugins that shape War Riders.
+              </p>
+              <div class="stats">
+                <div class="stat"><strong>IP</strong> panda.cloudns.nz</div>
+                <div class="stat"><strong>Start</strong> /spawn and /sethome</div>
+                <div class="stat"><strong>Shop</strong> /shop and item prices</div>
+              </div>
+              <div class="wiki-actions">
+                <button class="btn primary" type="button" data-copy="panda.cloudns.nz">Copy Server IP</button>
+                <a class="btn" href="#commands">View Commands</a>
+                <a class="btn" href="./items.html">Item Prices</a>
+              </div>
             </div>
-            <div class="hero-art" aria-hidden="true">
-              <img src="https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/1.20.4/assets/minecraft/textures/block/chiseled_bookshelf.png" alt="" />
+          </section>
+
+          <div class="wiki-layout">
+            <nav class="wiki-toc" aria-label="Wiki sections">
+              <a href="#overview">Overview</a>
+              <a href="#beginners">Beginner Guide</a>
+              <a href="#commands">Commands</a>
+              <a href="#plugins">Plugins</a>
+              <a href="#economy">Economy</a>
+              <a href="#building">Building</a>
+            </nav>
+
+            <div class="wiki-main">
+              <section class="wiki-section" id="beginners">
+                <h2>Beginner Guide</h2>
+                <p>Use this path when you first join. It gives players a clear route instead of making them hunt through every command.</p>
+                <div class="wiki-card-grid">
+                  <div class="wiki-card">
+                    <strong>1. Join the proxy</strong>
+                    <span>Add <code>panda.cloudns.nz</code> in Minecraft Java multiplayer.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>2. Set a home</strong>
+                    <span>Run <code>/sethome</code> once you find a base location you want to keep.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>3. Use the economy</strong>
+                    <span>Open <code>/shop</code>, check item prices, and use <code>/balance</code>.</span>
+                  </div>
+                </div>
+                <div class="wiki-note">Tip: after dying, try <code>/back</code> to return to your previous location.</div>
+              </section>
+
+              <section class="wiki-section" id="commands">
+                <h2>Core Commands</h2>
+                <p>The commands players use most often are grouped by what they are trying to do.</p>
+                <div class="command-list" data-command-list></div>
+              </section>
+
+              <section class="wiki-section" id="plugins">
+                <h2>Server Systems</h2>
+                <p>These are the main systems players will encounter while playing.</p>
+                <div class="wiki-card-grid">
+                  <div class="wiki-card">
+                    <strong>EssentialsX</strong>
+                    <span>Homes, warps, teleport requests, private messages, and economy basics.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>AuraSkills</strong>
+                    <span>Level skills naturally by mining, farming, fighting, fishing, and exploring.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>EconomyShopGUI</strong>
+                    <span>Server shop for buying and selling common resources.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>AutoSell Chests</strong>
+                    <span>Automated selling for farms and resource generation setups.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>BigDoors</strong>
+                    <span>Animated doors, gates, bridges, and large moving entrances.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>Social Plugins</strong>
+                    <span>Marriage, messaging, trading, and other player-to-player tools.</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="wiki-section" id="economy">
+                <h2>Economy & Trading</h2>
+                <p>Use the shop and price guide before making farms or trading with players.</p>
+                <div class="command-list">
+                  <div class="command-row"><code>/shop</code><span>Open the main server shop.</span></div>
+                  <div class="command-row"><code>/ah</code><span>Open the auction house.</span></div>
+                  <div class="command-row"><code>/pay [player] [amount]</code><span>Send money to another player.</span></div>
+                  <div class="command-row"><code>/worth [item]</code><span>Check the server value of an item.</span></div>
+                </div>
+              </section>
+
+              <section class="wiki-section" id="building">
+                <h2>Building & World</h2>
+                <p>War Riders is built around survival plus larger constructions and vehicles. Keep useful commands close while building.</p>
+                <div class="wiki-card-grid">
+                  <div class="wiki-card">
+                    <strong>WorldEdit</strong>
+                    <span>Powerful building tools for staff or permitted builders.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>Movecraft</strong>
+                    <span>Ships, vehicles, and war machines depending on server rules.</span>
+                  </div>
+                  <div class="wiki-card">
+                    <strong>Animated Architecture</strong>
+                    <span>Moving structures like portcullises, bridges, and doors.</span>
+                  </div>
+                </div>
+              </section>
             </div>
-          </section>
-
-          <section class="section" id="cat-essential">
-            <h2>🌐 Teleportation &amp; Movement</h2>
-            <div class="tile-grid" data-tiles="teleport"></div>
-          </section>
-
-          <section class="section" id="cat-econ">
-            <h2>💰 Economy &amp; Trading</h2>
-            <div class="tile-grid" data-tiles="economy"></div>
-          </section>
-
-          <section class="section" id="cat-social">
-            <h2>👥 Social &amp; Communication</h2>
-            <div class="tile-grid" data-tiles="social"></div>
-          </section>
-
+          </div>
         </main>
       </div>
     </div>
 
     <script>
-      const COMMANDS = {
-        teleport: [
-          { cmd: "/spawn", desc: "Teleport to spawn" },
-          { cmd: "/home [name]", desc: "Go to your home" },
-          { cmd: "/sethome [name]", desc: "Set your home location" },
-          { cmd: "/tpa [player]", desc: "Request teleport to player" },
-          { cmd: "/back", desc: "Return to last location" },
-          { cmd: "/warp [name]", desc: "Go to warp location" }
-        ],
-        economy: [
-          { cmd: "/balance", desc: "Check your balance" },
-          { cmd: "/shop", desc: "Open the server shop" },
-          { cmd: "/ah", desc: "Open auction house" }
-        ],
-        social: [
-          { cmd: "/msg [player] [message]", desc: "Private message" },
-          { cmd: "/marry [player]", desc: "Propose marriage" },
-          { cmd: "/list", desc: "Online players" }
-        ]
-      };
+      const COMMANDS = [
+        ["/spawn", "Teleport to the server spawn."],
+        ["/home [name]", "Go to one of your homes."],
+        ["/sethome [name]", "Save your current location as a home."],
+        ["/tpa [player]", "Ask to teleport to another player."],
+        ["/back", "Return to your previous location."],
+        ["/warp [name]", "Travel to a public server warp."],
+        ["/balance", "Check your money."],
+        ["/shop", "Open the server shop."],
+        ["/skills", "Open your skill progress menu."],
+        ["/msg [player] [message]", "Send a private message."],
+        ["/marry [player]", "Send a marriage proposal."],
+        ["/list", "See online players."]
+      ];
 
-      function renderTiles() {
-        document.querySelectorAll("[data-tiles]").forEach((grid) => {
-          const key = grid.getAttribute("data-tiles");
-          const items = COMMANDS[key] || [];
-          grid.innerHTML = items
-            .map(
-              (i) => `
-              <div class="tile">
-                <div class="left">
-                  <div class="cmd">${escapeHtml(i.cmd)}</div>
-                  <div class="desc">${escapeHtml(i.desc)}</div>
-                </div>
-                <div class="chev">›</div>
-              </div>
-            `,
-            )
-            .join("");
-        });
-      }
-
-      function escapeHtml(s) {
-        return String(s)
+      function escapeHtml(value) {
+        return String(value)
           .replaceAll("&", "&amp;")
           .replaceAll("<", "&lt;")
           .replaceAll(">", "&gt;")
@@ -777,752 +291,26 @@
           .replaceAll("'", "&#039;");
       }
 
+      function renderCommands(items = COMMANDS) {
+        const target = document.querySelector("[data-command-list]");
+        if (!target) return;
+        target.innerHTML = items
+          .map(([cmd, desc]) => `<div class="command-row"><code>${escapeHtml(cmd)}</code><span>${escapeHtml(desc)}</span></div>`)
+          .join("");
+      }
+
       function setupSearch() {
         const input = document.getElementById("globalSearch");
         if (!input) return;
         input.addEventListener("input", () => {
           const q = input.value.trim().toLowerCase();
-          document.querySelectorAll(".tile").forEach((t) => {
-            const txt = t.textContent.toLowerCase();
-            t.style.display = !q || txt.includes(q) ? "" : "none";
-          });
+          const filtered = COMMANDS.filter(([cmd, desc]) => `${cmd} ${desc}`.toLowerCase().includes(q));
+          renderCommands(filtered);
         });
       }
 
-      renderTiles();
+      renderCommands();
       setupSearch();
     </script>
-    <script src="../assets/site.js" defer></script>
-
-                <div class="feature-grid">
-                    <div class="feature-card" onclick="showSection('essentials')">
-                        <div class="feature-card-icon">⚡</div>
-                        <div class="feature-card-title">EssentialsX</div>
-                        <div class="feature-card-description">Core server commands for teleportation, economy, and communication</div>
-                    </div>
-                    
-                    <div class="feature-card" onclick="showSection('auraskills')">
-                        <div class="feature-card-icon">⚡</div>
-                        <div class="feature-card-title">AuraSkills</div>
-                        <div class="feature-card-description">Advanced skill system with 10+ skills and progression rewards</div>
-                    </div>
-                    
-                    <div class="feature-card" onclick="showSection('economy')">
-                        <div class="feature-card-icon">🏪</div>
-                        <div class="feature-card-title">Economy Shop</div>
-                        <div class="feature-card-description">Buy and sell items through our comprehensive shop system</div>
-                    </div>
-                    
-                    <div class="feature-card" onclick="showSection('autosell')">
-                        <div class="feature-card-icon">📦</div>
-                        <div class="feature-card-title">AutoSell Chests</div>
-                        <div class="feature-card-description">Automated selling system for farms and resource gathering</div>
-                    </div>
-                    
-                    <div class="feature-card" onclick="showSection('auctionhouse')">
-                        <div class="feature-card-icon">🏦</div>
-                        <div class="feature-card-title">Auction House</div>
-                        <div class="feature-card-description">Player-to-player trading marketplace</div>
-                    </div>
-                    
-                    <div class="feature-card" onclick="showSection('bigdoors')">
-                        <div class="feature-card-icon">🚪</div>
-                        <div class="feature-card-title">BigDoors</div>
-                        <div class="feature-card-description">Create massive animated doors and gates</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Beginner's Guide Section -->
-            <section class="content-section" id="beginners">
-                <div class="breadcrumb">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
-                    <span class="breadcrumb-separator">›</span>
-                    <span>Beginner's Guide</span>
-                </div>
-
-                <div class="section-card">
-                    <div class="section-card-header">
-                        <div class="section-card-icon">🎯</div>
-                        <h1 class="section-card-title">Beginner's Guide</h1>
-                    </div>
-                    
-                    <p>Welcome to Minecraft War Riders! This guide will help you get started with the essential commands and systems.</p>
-                    
-                    <div class="info-box important">
-                        <div class="info-box-title">First Time Joining?</div>
-                        When you first join the server, you'll start with basic permissions and $1000 in your account. Use <code>/spawn</code> to teleport to the main hub area.
-                    </div>
-
-                    <h3>Essential Commands to Remember</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/spawn</div>
-                            <div class="command-description">Teleport to the server spawn point</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/home</div>
-                            <div class="command-description">Teleport to your home (if set)</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/sethome [name]</div>
-                            <div class="command-description">Set a home at your current location</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/shop</div>
-                            <div class="command-description">Open the main server shop GUI</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/balance</div>
-                            <div class="command-description">Check your current money balance</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/skills</div>
-                            <div class="command-description">Open your skills progression menu</div>
-                        </div>
-                    </div>
-
-                    <div class="info-box tip">
-                        <div class="info-box-title">💡 Pro Tip</div>
-                        Use <code>/back</code> after dying to return to your death location and collect your items!
-                    </div>
-                </div>
-            </section>
-
-            <!-- EssentialsX Section -->
-            <section class="content-section" id="essentials">
-                <div class="breadcrumb">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
-                    <span class="breadcrumb-separator">›</span>
-                    <span>EssentialsX</span>
-                </div>
-
-                <div class="section-card">
-                    <div class="section-card-header">
-                        <div class="section-card-icon">⚡</div>
-                        <h1 class="section-card-title">EssentialsX</h1>
-                    </div>
-                    
-                    <p>EssentialsX provides the core functionality for the server including teleportation, economy, and communication systems.</p>
-
-                    <h3>🌐 Teleportation Commands</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/spawn</div>
-                            <div class="command-description">Teleport to the server spawn point</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/tpa [player]</div>
-                            <div class="command-description">Request to teleport to another player</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/tpahere [player]</div>
-                            <div class="command-description">Request a player to teleport to you</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/tpaccept</div>
-                            <div class="command-description">Accept a teleport request</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/back</div>
-                            <div class="command-description">Return to your last location</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/top</div>
-                            <div class="command-description">Teleport to the highest block</div>
-                        </div>
-                    </div>
-
-                    <h3>🏠 Homes & Warps</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/home [name]</div>
-                            <div class="command-description">Teleport to your home</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/sethome [name]</div>
-                            <div class="command-description">Set a home at your current location</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/delhome [name]</div>
-                            <div class="command-description">Delete a home location</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/homes</div>
-                            <div class="command-description">List all your home locations</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/warp [name]</div>
-                            <div class="command-description">Teleport to a server warp location</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/warps</div>
-                            <div class="command-description">List all available server warps</div>
-                        </div>
-                    </div>
-
-                    <h3>💰 Economy Commands</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/balance</div>
-                            <div class="command-description">Check your current money balance</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/pay [player] [amount]</div>
-                            <div class="command-description">Send money to another player</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/baltop</div>
-                            <div class="command-description">See the richest players on the server</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/worth [item]</div>
-                            <div class="command-description">Check the server buy/sell value of an item</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- AuraSkills Section -->
-            <section class="content-section" id="auraskills">
-                <div class="breadcrumb">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
-                    <span class="breadcrumb-separator">›</span>
-                    <span>AuraSkills</span>
-                </div>
-
-                <div class="section-card">
-                    <div class="section-card-header">
-                        <div class="section-card-icon">⚡</div>
-                        <h1 class="section-card-title">AuraSkills</h1>
-                    </div>
-                    
-                    <p>AuraSkills provides a comprehensive skill system where you can level up various abilities by playing the game naturally.</p>
-
-                    <h3>📊 Skill Commands</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/skills</div>
-                            <div class="command-description">Open your skills menu and see your progress</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/skills [skill]</div>
-                            <div class="command-description">View details for a specific skill</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/skills top [skill]</div>
-                            <div class="command-description">See the top players in a specific skill</div>
-                        </div>
-                        
-                        <div class="command-card">
-                            <div class="command-syntax">/stats</div>
-                            <div class="command-description">View your stat bonuses from skills</div>
-                        </div>
-                    </div>
-
-                    <h3>🏆 Available Skills</h3>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <div class="feature-card-icon">⛏️</div>
-                            <div class="feature-card-title">Mining</div>
-                            <div class="feature-card-description">Level up by mining blocks and ores - increases mining speed and luck</div>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-card-icon">🌾</div>
-                            <div class="feature-card-title">Farming</div>
-                            <div class="feature-card-description">Grow and harvest crops to gain experience - bonus crop drops</div>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-card-icon">⚔️</div>
-                            <div class="feature-card-title">Fighting</div>
-                            <div class="feature-card-description">Battle mobs and players to increase combat skills - more damage</div>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-card-icon">🪓</div>
-                            <div class="feature-card-title">Foraging</div>
-                            <div class="feature-card-description">Chop trees and collect wood - faster tree cutting</div>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-card-icon">🎣</div>
-                            <div class="feature-card-title">Fishing</div>
-                            <div class="feature-card-description">Catch fish and underwater treasures - better fishing luck</div>
-                        </div>
-                        
-                        <div class="feature-card">
-                            <div class="feature-card-icon">🏃</div>
-                            <div class="feature-card-title">Agility</div>
-                            <div class="feature-card-description">Movement-based skill - increased movement speed</div>
-                        </div>
-                    </div>
-
-                    <div class="info-box tip">
-                        <div class="info-box-title">💡 Skill Benefits</div>
-                        Higher skills give you better stats, special abilities, and increased money from related activities!
-                    </div>
-                </div>
-            </section>
-
-            <!-- All Commands Section -->
-            <section class="content-section" id="commands-all">
-                <div class="breadcrumb">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
-                    <span class="breadcrumb-separator">›</span>
-                    <span>All Commands</span>
-                </div>
-
-                <div class="section-card">
-                    <div class="section-card-header">
-                        <div class="section-card-icon">⚡</div>
-                        <h1 class="section-card-title">All Commands Reference</h1>
-                    </div>
-                    
-                    <p>Complete list of every command available on the server, organized by category.</p>
-
-                    <h3>🌐 Teleportation & Movement</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/spawn</div>
-                            <div class="command-description">Teleport to spawn</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/home [name]</div>
-                            <div class="command-description">Go to home</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/sethome [name]</div>
-                            <div class="command-description">Set home</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/tpa [player]</div>
-                            <div class="command-description">Request teleport to player</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/back</div>
-                            <div class="command-description">Return to last location</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/warp [name]</div>
-                            <div class="command-description">Go to warp</div>
-                        </div>
-                    </div>
-
-                    <h3>💰 Economy & Trading</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/balance</div>
-                            <div class="command-description">Check money balance</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/shop</div>
-                            <div class="command-description">Open server shop</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/ah</div>
-                            <div class="command-description">Open auction house</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/pay [player] [amount]</div>
-                            <div class="command-description">Send money to player</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/sell [item]</div>
-                            <div class="command-description">Sell items to server</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/worth [item]</div>
-                            <div class="command-description">Check item value</div>
-                        </div>
-                    </div>
-
-                    <h3>⚡ Skills & Progression</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/skills</div>
-                            <div class="command-description">Open skills menu</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/stats</div>
-                            <div class="command-description">View stat bonuses</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/aach list</div>
-                            <div class="command-description">Open achievements</div>
-                        </div>
-                    </div>
-
-                    <h3>👥 Social & Communication</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/msg [player] [message]</div>
-                            <div class="command-description">Private message</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/marry [player]</div>
-                            <div class="command-description">Propose marriage</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/list</div>
-                            <div class="command-description">Online players</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Banking Section -->
-            <section class="content-section" id="bankplus">
-                <div class="breadcrumb">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
-                    <span class="breadcrumb-separator">›</span>
-                    <span>Banking</span>
-                </div>
-
-                <div class="section-card">
-                    <div class="section-card-header">
-                        <div class="section-card-icon">🏦</div>
-                        <h1 class="section-card-title">Banking System</h1>
-                    </div>
-                    
-                    <p>Manage your wealth with our comprehensive banking system. Store money securely, earn interest, and manage transactions with ease.</p>
-                    
-                    <div class="image-placeholder">
-                        <div class="image-placeholder-icon">🏦</div>
-                        <div class="image-placeholder-text">Banking GUI Screenshot</div>
-                    </div>
-
-                    <h3>💰 Banking Commands</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/bank balance</div>
-                            <div class="command-description">Check your current bank balance</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/bank deposit &lt;amount&gt;</div>
-                            <div class="command-description">Deposit money into your bank account</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/bank withdraw &lt;amount&gt;</div>
-                            <div class="command-description">Withdraw money from your bank account</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/bank interest</div>
-                            <div class="command-description">Check your current interest rate and next payout</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/bank history</div>
-                            <div class="command-description">View your transaction history</div>
-                        </div>
-                    </div>
-
-                    <div class="image-placeholder">
-                        <div class="image-placeholder-icon">⌨️</div>
-                        <div class="image-placeholder-text">Command Usage Examples</div>
-                    </div>
-
-                    <div class="info-box tip">
-                        <div class="info-box-title">💡 Banking Tips</div>
-                        Keep most of your money in the bank to earn interest. Only withdraw what you need for immediate purchases. Your banked money is protected even if you die!
-                    </div>
-                </div>
-            </section>
-
-            <!-- Trading Section -->
-            <section class="content-section" id="tradeplus">
-                <div class="breadcrumb">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
-                    <span class="breadcrumb-separator">›</span>
-                    <span>Trading</span>
-                </div>
-
-                <div class="section-card">
-                    <div class="section-card-header">
-                        <div class="section-card-icon">🛒</div>
-                        <h1 class="section-card-title">Trading System</h1>
-                    </div>
-                    
-                    <p>Buy and sell items with other players through our comprehensive trading system. Manage shops, auctions, and direct player trades.</p>
-                    
-                    <div class="image-placeholder">
-                        <div class="image-placeholder-icon">🏪</div>
-                        <div class="image-placeholder-text">Trading Hub Screenshot</div>
-                    </div>
-
-                    <h3>🏪 Shop Commands</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/shop create</div>
-                            <div class="command-description">Create a new shop at your location</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/shop info</div>
-                            <div class="command-description">Get information about a shop</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/shop remove</div>
-                            <div class="command-description">Remove your shop</div>
-                        </div>
-                    </div>
-
-                    <h3>🤝 Trading Commands</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/trade &lt;player&gt;</div>
-                            <div class="command-description">Send a trade request to another player</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/trade accept</div>
-                            <div class="command-description">Accept an incoming trade request</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/trade decline</div>
-                            <div class="command-description">Decline a trade request</div>
-                        </div>
-                    </div>
-
-                    <div class="image-placeholder">
-                        <div class="image-placeholder-icon">📊</div>
-                        <div class="image-placeholder-text">Market Trends Graph</div>
-                    </div>
-
-                    <div class="info-box tip">
-                        <div class="info-box-title">💡 Trading Tips</div>
-                        Research market prices before making trades. Always use secure trading windows for valuable items. Check the <a href="items.html" style="color: var(--accent-400);">Items page</a> for current market prices.
-                    </div>
-                </div>
-            </section>
-
-            <!-- Auction House Section -->
-            <section class="content-section" id="auctionhouse">
-                <div class="breadcrumb">
-                    <span onclick="showSection('home')" style="cursor: pointer;">Home</span>
-                    <span class="breadcrumb-separator">›</span>
-                    <span>Auction House</span>
-                </div>
-
-                <div class="section-card">
-                    <div class="section-card-header">
-                        <div class="section-card-icon">🏛️</div>
-                        <h1 class="section-card-title">Auction House</h1>
-                    </div>
-                    
-                    <p>Buy and sell rare items through competitive bidding. Find unique treasures and make profitable deals in our dynamic auction system.</p>
-                    
-                    <div class="image-placeholder">
-                        <div class="image-placeholder-icon">🏛️</div>
-                        <div class="image-placeholder-text">Auction House GUI Screenshot</div>
-                    </div>
-
-                    <h3>🏛️ Basic Commands</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/auction help</div>
-                            <div class="command-description">Display all auction commands and help information</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/auction browse</div>
-                            <div class="command-description">Browse all current auctions</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/auction info [id]</div>
-                            <div class="command-description">Get detailed information about a specific auction</div>
-                        </div>
-                    </div>
-
-                    <h3>💰 Bidding & Selling</h3>
-                    <div class="command-grid">
-                        <div class="command-card">
-                            <div class="command-syntax">/auction bid &lt;amount&gt; [id]</div>
-                            <div class="command-description">Place a bid on an auction</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/auction start &lt;startprice&gt;</div>
-                            <div class="command-description">Start an auction with the item in your hand</div>
-                        </div>
-                        <div class="command-card">
-                            <div class="command-syntax">/auction mybids</div>
-                            <div class="command-description">View all your current bids</div>
-                        </div>
-                    </div>
-
-                    <div class="image-placeholder">
-                        <div class="image-placeholder-icon">🎬</div>
-                        <div class="image-placeholder-text">Auction Process Step-by-Step Guide</div>
-                    </div>
-
-                    <div class="info-box important">
-                        <div class="info-box-title">⚠️ Important Rules</div>
-                        Auctions cannot be canceled once bidding starts. Payment is automatically processed when auctions end. Items and money are held in escrow during auctions.
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()">
-        ↑
-    </button>
-
-    <script>
-        // Navigation functionality
-        function showSection(sectionId) {
-            // Hide all sections
-            const sections = document.querySelectorAll('.content-section');
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show selected section
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
-            
-            // Update active nav links
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            const activeLink = document.querySelector(`a[href="#${sectionId}"]`);
-            if (activeLink) {
-                activeLink.classList.add('active');
-            }
-            
-            // Scroll to top of content
-            document.querySelector('.main-content').scrollTop = 0;
-            window.scrollTo(0, 0);
-        }
-
-        // Toggle navigation sections
-        function toggleNavSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            const toggle = section.previousElementSibling.querySelector('.nav-section-toggle');
-            
-            if (section.style.display === 'none') {
-                section.style.display = 'block';
-                toggle.classList.add('expanded');
-            } else {
-                section.style.display = 'none';
-                toggle.classList.remove('expanded');
-            }
-        }
-
-        // Search functionality
-        function setupSearch() {
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', function(e) {
-                const query = e.target.value.toLowerCase();
-                const navLinks = document.querySelectorAll('.nav-link');
-                
-                navLinks.forEach(link => {
-                    const text = link.textContent.toLowerCase();
-                    const listItem = link.parentElement;
-                    
-                    if (text.includes(query) || query === '') {
-                        listItem.style.display = 'block';
-                    } else {
-                        listItem.style.display = 'none';
-                    }
-                });
-            });
-        }
-
-        // Navbar scroll effect
-        function handleNavbarScroll() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        }
-
-        // Scroll to top functionality
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        function handleScrollToTop() {
-            const scrollToTopBtn = document.getElementById('scrollToTop');
-            if (window.scrollY > 300) {
-                scrollToTopBtn.classList.add('visible');
-            } else {
-                scrollToTopBtn.classList.remove('visible');
-            }
-        }
-
-        // Mobile navigation functionality
-        function setupMobileNavigation() {
-            const mobileToggle = document.getElementById('mobileMenuToggle');
-            const navLinks = document.getElementById('navLinks');
-            
-            if (mobileToggle && navLinks) {
-                mobileToggle.addEventListener('click', function() {
-                    navLinks.classList.toggle('active');
-                    mobileToggle.classList.toggle('active');
-                });
-                
-                // Close menu when clicking on links (mobile)
-                navLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', function() {
-                        navLinks.classList.remove('active');
-                        mobileToggle.classList.remove('active');
-                    });
-                });
-            }
-        }
-        
-        // Handle URL hash changes
-        function handleHashChange() {
-            const hash = window.location.hash.substring(1);
-            if (hash && document.getElementById(hash)) {
-                showSection(hash);
-            }
-        }
-        
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', function() {
-            setupSearch();
-            setupMobileNavigation();
-            
-            window.addEventListener('scroll', handleNavbarScroll);
-            window.addEventListener('scroll', handleScrollToTop);
-            window.addEventListener('hashchange', handleHashChange);
-            
-            // Handle initial hash or show home section
-            const initialHash = window.location.hash.substring(1);
-            if (initialHash && document.getElementById(initialHash)) {
-                showSection(initialHash);
-            } else {
-                showSection('home');
-            }
-        });
   </body>
 </html>
