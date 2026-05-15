@@ -8,7 +8,7 @@
   }
 
   function currentKey() {
-    if (page === "pay.html") return "pay";
+    if (page === "cart.html" || page === "pay.html") return "cart";
     if (page === "store.html" || page === "store-success.html" || page === "store-cancel.html" || page === "cosmetic.html") return "store";
     if (page === "coins.html" || page === "coin.html") return "coins";
     if (page === "items.html") return "items";
@@ -40,7 +40,7 @@
       { key: "items", label: "Item Prices", desc: "Search buy/sell values.", url: href("pages/items.html") },
       { key: "store", label: "Cosmetic Store", desc: "Trails, pets, hats, tags, and no P2W.", url: href("pages/store.html") },
       { key: "coins", label: "Coins", desc: "How coins work and where to buy bundles.", url: href("pages/coins.html") },
-      { key: "pay", label: "Pay", desc: "Review your current order.", url: href("pages/pay.html") },
+      { key: "cart", label: "Cart", desc: "Review your items and checkout.", url: href("pages/cart.html") },
     ];
     const player = [
       { key: "beginner", label: "Beginner's Guide", desc: "First steps after joining.", url: href("pages/wiki.html#beginners") },
@@ -135,7 +135,7 @@
             <a href="${href("pages/items.html")}">Items</a>
             <a href="${href("pages/store.html")}">Store</a>
             <a href="${href("pages/coins.html")}">Coins</a>
-            <a href="${href("pages/pay.html")}">Pay</a>
+            <a href="${href("pages/cart.html")}">Cart <span class="cart-count" data-cart-count>0</span></a>
           </nav>
         </div>
       </footer>
@@ -145,6 +145,27 @@
   }
 
   buildFooter();
+
+  function readCartCount() {
+    try {
+      const items = JSON.parse(localStorage.getItem("warRidersOrderItems") || "[]");
+      return Array.isArray(items) ? items.filter(Boolean).length : 0;
+    } catch {
+      return 0;
+    }
+  }
+
+  function updateCartCounts() {
+    const count = readCartCount();
+    document.querySelectorAll("[data-cart-count]").forEach((el) => {
+      el.textContent = String(count);
+      el.style.display = count ? "inline-grid" : "none";
+    });
+  }
+
+  updateCartCounts();
+  window.addEventListener("storage", updateCartCounts);
+  window.addEventListener("war-riders-cart-change", updateCartCounts);
 
   document.querySelectorAll("img").forEach((img) => {
     const markMissing = () => {

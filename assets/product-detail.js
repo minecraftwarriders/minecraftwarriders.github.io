@@ -24,10 +24,16 @@
     return categories.find((category) => category.id === product.category)?.label || product.category || "Cosmetic";
   }
 
-  function goToPay() {
+  async function goToCart(event) {
     if (!state.product?.id) return;
+    const button = event?.currentTarget;
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Added";
+    }
     window.WarRidersCart?.add?.(state.product.id);
-    window.location.assign("./pay.html");
+    await window.WarRidersCart?.animateAdd?.(button, state.product.image);
+    window.location.assign("./cart.html");
   }
 
   function renderMissing() {
@@ -54,7 +60,6 @@
     const price = fmtMoney(product.price, product.currency || "USD");
     const coinPrice = Number(product.coinPrice);
     const coinText = Number.isFinite(coinPrice) ? `${coinPrice.toLocaleString()} coins in-game` : "";
-    const includes = Array.isArray(product.includes) ? product.includes : [];
     const image = product.image || "../assets/images/war-riders-store-bg.png";
     const label = categoryLabel(product, categories);
     const shortLabel = String(label || "Cosmetic").replace("Chat Tags", "Tag");
@@ -93,39 +98,17 @@
           </div>
           <p class="product-description">${escapeHtml(product.description || "A cosmetic unlock for your player.")}</p>
           <div class="product-actions">
-            <button id="productPayButton" class="btn primary" type="button">Pay</button>
+            <button id="productCartButton" class="btn primary" type="button">Add to Cart</button>
+            <a class="btn" href="./cart.html">View Cart</a>
             <a class="btn" href="./store.html">Back to Store</a>
           </div>
-          <div class="product-delivery">Pay takes this item to the order page, where you can review everything and add more before checkout.</div>
+          <div class="product-delivery">Add this item to your cart, then review everything together before checkout.</div>
           ${coinText ? `<div class="product-coin-price">${escapeHtml(coinText)}</div>` : ""}
         </aside>
       </section>
-
-      <section class="product-feature-row" aria-label="Cosmetic details">
-        <div class="product-feature">
-          <div class="product-feature-mark">MC</div>
-          <strong>In-Game Style</strong>
-          <span>Made to feel like it belongs in Minecraft.</span>
-        </div>
-        <div class="product-feature">
-          <div class="product-feature-mark">TYPE</div>
-          <strong>${escapeHtml(shortLabel)}</strong>
-          <span>${escapeHtml(includes[0] || "Cosmetic unlock")}</span>
-        </div>
-        <div class="product-feature">
-          <div class="product-feature-mark">OK</div>
-          <strong>Order Confirmed</strong>
-          <span>Added to your player automatically.</span>
-        </div>
-        <div class="product-feature">
-          <div class="product-feature-mark">COIN</div>
-          <strong>Coin Option</strong>
-          <span>${escapeHtml(coinText || "Available in the store")}</span>
-        </div>
-      </section>
     `;
 
-    $("#productPayButton")?.addEventListener("click", goToPay);
+    $("#productCartButton")?.addEventListener("click", goToCart);
   }
 
   async function init() {

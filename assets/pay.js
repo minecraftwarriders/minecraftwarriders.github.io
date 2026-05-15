@@ -49,6 +49,13 @@
     return groups;
   }
 
+  function discardUnknownCartItems() {
+    const known = new Set(state.products.map((product) => product.id));
+    const current = cartIds();
+    const cleaned = current.filter((id) => known.has(id));
+    if (cleaned.length !== current.length) window.WarRidersCart?.write?.(cleaned);
+  }
+
   function setStatus(message, isError = false) {
     const el = $("#payStatus");
     if (!el) return;
@@ -109,7 +116,7 @@
   async function startCheckout() {
     const productIds = cartIds().filter((id) => findProduct(id));
     if (!productIds.length) {
-      setStatus("Your order is empty.", true);
+      setStatus("Your cart is empty.", true);
       return;
     }
 
@@ -128,9 +135,9 @@
     const button = $("#payButton");
     if (button) {
       button.disabled = true;
-      button.textContent = "Opening payment...";
+      button.textContent = "Opening checkout...";
     }
-    setStatus("Opening secure payment...");
+      setStatus("Opening secure checkout...");
 
     try {
       const res = await fetch(`${apiBaseUrl}/api/create-checkout-session`, {
@@ -147,7 +154,7 @@
       setStatus(`Payment is not available right now. ${String(err?.message || err)}`, true);
       if (button) {
         button.disabled = false;
-        button.textContent = "Pay";
+        button.textContent = "Checkout";
       }
     }
   }
@@ -156,6 +163,7 @@
     const response = await fetch("../assets/store.json", { cache: "no-store" });
     state.data = await response.json();
     state.products = state.data.products || [];
+    discardUnknownCartItems();
 
     const add = new URLSearchParams(window.location.search).get("add");
     if (add) window.WarRidersCart?.add?.(add);
@@ -166,6 +174,7 @@
     });
     $("#clearOrder")?.addEventListener("click", () => {
       window.WarRidersCart?.clear?.();
+      window.dispatchEvent(new CustomEvent("war-riders-cart-change"));
       render();
     });
 

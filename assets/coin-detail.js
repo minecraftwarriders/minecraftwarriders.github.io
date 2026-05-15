@@ -37,10 +37,16 @@
     `;
   }
 
-  function goToPay() {
+  async function goToCart(event) {
     if (!state.product?.id) return;
+    const button = event?.currentTarget;
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Added";
+    }
     window.WarRidersCart?.add?.(state.product.id);
-    window.location.assign("./pay.html");
+    await window.WarRidersCart?.animateAdd?.(button, state.product.image);
+    window.location.assign("./cart.html");
   }
 
   function renderProduct(product) {
@@ -50,8 +56,6 @@
     const image = product.image || "../assets/images/war-riders-store-bg.png";
     const price = fmtMoney(product.price, product.currency || "USD");
     const coins = Number(product.coins || 0).toLocaleString();
-    const includes = Array.isArray(product.includes) ? product.includes : [];
-
     document.title = `${product.name} - Minecraft War Riders Coins`;
     target.innerHTML = `
       <div class="crumbs"><a href="../index.html">Home</a> › <a href="./coins.html">Coins</a> › <span>${escapeHtml(product.name)}</span></div>
@@ -86,37 +90,15 @@
           </div>
           <p class="product-description">${escapeHtml(product.description || "A War Riders coin bundle.")}</p>
           <div class="product-actions">
-            <button id="coinPayButton" class="btn primary" type="button">Pay</button>
+            <button id="coinCartButton" class="btn primary" type="button">Add to Cart</button>
+            <a class="btn" href="./cart.html">View Cart</a>
             <a class="btn" href="./coins.html">Back to Coins</a>
           </div>
-          <div class="product-delivery">Pay takes this bundle to the order page, where you can review everything and add more before checkout.</div>
+          <div class="product-delivery">Add this bundle to your cart, then review everything together before checkout.</div>
         </aside>
       </section>
-
-      <section class="product-feature-row" aria-label="Coin bundle details">
-        <div class="product-feature">
-          <div class="product-feature-mark">COIN</div>
-          <strong>${escapeHtml(coins)} Coins</strong>
-          <span>${escapeHtml(includes[0] || "Coin bundle")}</span>
-        </div>
-        <div class="product-feature">
-          <div class="product-feature-mark">SKIN</div>
-          <strong>Cosmetic Store</strong>
-          <span>Spend coins on style, not power.</span>
-        </div>
-        <div class="product-feature">
-          <div class="product-feature-mark">OK</div>
-          <strong>Order Confirmed</strong>
-          <span>Coins are added to your player automatically.</span>
-        </div>
-        <div class="product-feature">
-          <div class="product-feature-mark">SAVE</div>
-          <strong>Never Expires</strong>
-          <span>Keep them until you choose something.</span>
-        </div>
-      </section>
     `;
-    $("#coinPayButton")?.addEventListener("click", goToPay);
+    $("#coinCartButton")?.addEventListener("click", goToCart);
   }
 
   async function init() {
